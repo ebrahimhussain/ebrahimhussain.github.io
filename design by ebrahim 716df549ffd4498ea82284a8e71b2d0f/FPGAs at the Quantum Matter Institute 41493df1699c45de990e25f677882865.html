@@ -1,0 +1,725 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>FPGAs at the Quantum Matter Institute</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="41493df1-699c-45de-990e-25f677882865" class="page sans"><header><h1 class="page-title">FPGAs at the Quantum Matter Institute</h1><p class="page-description"></p></header><div class="page-body"><p id="0df5bc78-e711-4552-95ae-939b9676a2e3" class="">This post has a little longer outline than usual. If you want to skip to just the FPGA content, click <em><em><em><em>here</em></em></em></em>.</p><hr id="ee32e8c6-75f3-46cf-a5fa-2ffbc11fa188"/><p id="46528685-d782-4651-af41-0d5fc4add2e9" class="block-color-yellow_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>Project Photos:</mtext></mrow><annotation encoding="application/x-tex">\text{Project Photos:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">Project Photos:</span></span></span></span></span></span><span>﻿</span></span> </p><hr id="39e54c90-695d-46c7-a0a1-e487121afc01"/><figure id="d079d10d-54ff-4841-995e-690a7db57c4d" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled.png"><img style="width:2553px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled.png"/></a></figure><hr id="8cfe8d45-aab8-48f4-b320-71802a93145a"/><figure id="0f1524ef-fdc3-4185-9b3a-26f8005768ff" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%201.png"><img style="width:2490px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%201.png"/></a></figure><hr id="2240fe8e-02a4-45fc-b875-c1aff20a8434"/><figure id="721a94fb-07ba-43de-a63d-f21a4f30526b" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%202.png"><img style="width:2533px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%202.png"/></a></figure><hr id="ad8eb34e-9048-4a5a-b267-2a72ed882da1"/><p id="b9e1234a-4add-44c0-9cb6-ff51623cace6" class="block-color-yellow_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>Practicing:</mtext></mrow><annotation encoding="application/x-tex">\text{Practicing:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">Practicing:</span></span></span></span></span></span><span>﻿</span></span> </p><ol type="1" id="25f7b202-f145-44c1-b3ea-9a06554ad253" class="numbered-list" start="1"><li>RTL Design and DSP Simulation (Verilog in Vivado, MATLAB)</li></ol><ol type="1" id="3190b131-bc2a-42a0-acb7-a27d2ae6d30e" class="numbered-list" start="2"><li>Server-Client Networking (C, Python)</li></ol><ol type="1" id="aa7cbf10-374e-4f3d-a789-6d72b64105e9" class="numbered-list" start="3"><li>Control Theory, Signal Processing, Circuit Design</li></ol><ol type="1" id="d1c706b1-6f64-4ffc-809a-d79613bd8f54" class="numbered-list" start="4"><li>Measurements and Data Collection (SR780)</li></ol><p id="5a0ca18e-ed7a-442f-ad01-1e42e9ce448e" class="block-color-yellow_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>History + Outline: </mtext></mrow><annotation encoding="application/x-tex">\text{History + Outline: }</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">History + Outline: </span></span></span></span></span></span><span>﻿</span></span></p><p id="5c896897-74ff-42e0-b21d-99331cbed8c0" class="">This page highlights some of the interesting work and things I’ve designed for my project with <a href="https://grex.ubc.ca/current-grex-institutes/stewart-blusson-quantum-matter-institute">Stewart Blusson Quantum Matter Institute</a> (SBQMI, or QMI) at <a href="https://www.ubc.ca/">UBC</a>. In short, I am developing FPGA control loop applications entirely from scratch to lock a femtosecond enhancement cavity. Along the way I’ve had the chance to dip into areas of signal processing, control theory, circuit design, server-client networking, and more!</p><p id="f8cbeca6-6f35-4355-b425-680013875cc6" class="">
+</p><p id="bed1d32b-a3e8-4561-b6d2-bc8263b9d2a1" class="">Here’s some brief context helping to introduce the project better. Of course you can simply minimize this section and skip right to the takeaway (pink) and the actual work that follows.</p><details open=""><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">Context</summary><div class="indented"><p id="1b1e0259-d631-4876-8034-56f153f21c7e" class="">
+<strong><strong><strong><strong><strong><strong><strong><strong>ARPES:</strong></strong></strong></strong></strong></strong></strong></strong></p><hr id="d13a30c7-4251-4517-8523-46a0240098dc"/><p id="b0e39aed-0614-483e-8aac-63b079328624" class=""><a href="https://en.wikipedia.org/wiki/Angle-resolved_photoemission_spectroscopy">Angle-resolved photoemission spectroscopy</a> refers to the technique of characterizing a sample’s surface on a nanometer scale, revealing atomic properties of the material.</p><div id="fc530a85-0848-434b-b82d-faa73058b124" class="column-list"><div id="ccd1e8a9-091c-47ee-8e77-42e94d694a9e" style="width:31.25%" class="column"><p id="bbacdeb8-ea02-4bdd-8a02-eb890868051b" class="">To do so, a highly focused photon source is pointed at the sample. By the photo-electric effect, electrons are knocked off the surface of the sample. </p><p id="f3dedc42-c828-44cb-a351-563c48e68743" class="">
+</p><p id="4d74ea0e-e78b-4a4f-b1d0-7b4564f815b7" class="">The energy, momentum, and ejection angle <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi></mrow><annotation encoding="application/x-tex">\theta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span></span></span></span></span><span>﻿</span></span> of these electrons are measured in an <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>electron spectrometer</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em>, helping researchers study the <a href="https://en.wikipedia.org/wiki/Electronic_band_structure">band structures</a> of such samples. </p></div><div id="adcbbcc9-2da9-44fa-8a3a-4c52b056e489" style="width:68.75%" class="column"><figure id="244753a8-bf75-4e6a-a660-0b7231f429cc" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/ARPES_setup_-_ultraviolet_source_-_sample_holder_-_electron_analyzer.svg.png"><img style="width:1920px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/ARPES_setup_-_ultraviolet_source_-_sample_holder_-_electron_analyzer.svg.png"/></a></figure><p id="c7694fa6-65f0-426c-af56-acda67411973" class="">
+</p></div></div><hr id="8841168e-b6d2-498a-a351-d97e4155f079"/><p id="51cf2e49-2f18-4159-83e4-c9b2abeceea5" class="block-color-teal">Photo 1 (top left) in the<strong> Project Photos </strong>section is the tr-ARPES setup from the outside.</p><p id="bd6a3f89-a42b-4dd2-abf6-ddddc0662bee" class="">
+</p><p id="c52060dc-9258-455c-9fc4-a22556b1b380" class=""><strong><strong><strong><strong>XUV:</strong></strong></strong></strong></p><hr id="4fba55eb-beca-45dd-8477-acda0881e8b8"/><p id="9f8c23c1-3187-462a-b820-621ba3715eb1" class="">The first step in this ARPES process then is to derive some photon source, which provides the ionization energy to knock electrons off the sample.; our lab uses an XUV (extreme ultra-violet) source.  XUV pulses are generated by <a href="https://en.wikipedia.org/wiki/High_harmonic_generation">HHG</a>, which involves <em>using a strong laser pulse to hit gas particles, which emit XUV light.</em></p><figure id="eec02c7a-12c9-4e14-bf94-d33a3428d63b" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%203.png"><img style="width:919px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%203.png"/></a></figure><p id="3a67da3f-6cee-4bf4-a03b-bd04da0127fd" class="">Unfortunately the type of laser you require to generate high power XUV pulses by HHG are not available, so we must use something called an <strong><strong><strong>enhancement cavity</strong></strong></strong>.</p><hr id="b984bbf8-bd26-457d-aefe-ed55410047fb"/><p id="fdf0bd7d-4e46-4342-aa89-71cd94b7d2e9" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Enhancement Cavities:</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><hr id="71da15f1-406f-4909-aab9-29aec0b6845a"/><p id="d200bb09-a749-4ad9-accf-314d4dbcaa21" class="">An enhancement cavity builds up high-power lasers pulses from an incident, lower-intensity laser. 
+In our spectroscopy scheme, it sits between the a low power laser source, and before HHG. This cavity is shown by the <strong>red beams</strong> above (they make a bow-tie shape). It’s also drawn here:</p><figure id="0cb552c5-e3eb-4000-8bce-16d996ce31c4" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%204.png"><img style="width:1346px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%204.png"/></a></figure><p id="153d957b-f4c4-4cbf-9f2a-1066aabf3575" class="">Simply put, if a laser pulse completes a round trip within the cavity <strong><strong><strong><strong><strong><strong><strong><strong>exactly </strong></strong></strong></strong></strong></strong></strong></strong>when a new incident laser pulse enters the cavity, they will <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>constructively interfere </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>and now the light in the cavity has increased. This is the “resonance condition”, and we often say that the laser is <strong><strong><strong><strong><strong><strong><strong>locked </strong></strong></strong></strong></strong></strong></strong>in this state.</p><hr id="2449323f-c1a2-41f2-97de-38a5bfb2db57"/><p id="47d9f4ce-bd5c-4b5c-be38-472c1ce58760" class=""><strong><strong><strong><strong><strong><strong><strong>Introducing the Project:</strong></strong></strong></strong></strong></strong></strong></p><hr id="180a9e79-fc5b-401a-b462-d4b58f6a6e95"/><p id="abbbfe33-9124-4e5c-b8c8-cf2c60b819f7" class="">The simplest way to satisfy the resonance condition is to change the length of the cavity by changing the spacing of the mirrors. Simply do this until a resonance is reached, right? So, can’t we just perform some calculations, find the required cavity spacing, and then glue all the mirrors in place once we observe increased light building up?</p><p id="ba577a04-8480-4f24-9d3e-b5bbf0fc87f5" class="">Well, of course not, or I wouldn’t be writing this! Since the <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>spacing of the mirrors must be adjusted on a nm level</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>, external effects such as vibrations of the building, thermal expansion of the mirrors, and even speaking beside the laser table cause the system to fall out of resonance (called <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>losing lock</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>). </p><p id="30ac12a6-c474-43df-ad9f-bbc51f8b9523" class="">Instead what we do is place our mirrors on linear PZT actuators, and put together some system to <em><em><em>dynamically </em></em></em>change the mirror spacing as required.</p><hr id="c15cfd1d-3d71-45b2-a591-1366acc285ef"/></div></details><p id="d187b549-4861-4a4b-b794-066b1af52806" class="">
+</p><p id="0c609454-478e-48b1-a363-b2a80beaf25f" class="block-color-purple_background"><strong>Takeaway</strong>: <em>We need a way to dynamically adjust the spacing of the mirrors (i.e. the length of the cavity) to hold onto the resonance, even under perturbations. </em></p><p id="ef82440a-6502-4674-b03b-c9843ebd60a1" class="block-color-purple">This sounds like a job for <strong>control loops</strong> … unless you wanted to describe how virtually indetectable vibrations of a building, varying temperatures, and sound waves travelling the room would affect the system.</p><p id="5789a6bb-a462-4cce-bb51-3b8c60e22b17" class="">
+</p><p id="302fbc35-d07c-471a-a9d4-56dde794f0d6" class="">Okay, so we’re using a control loop to change the length of the cavity to hold onto a resonance. Every control loop needs an error signal, and in this case we use the <a href="https://en.wikipedia.org/wiki/Pound%E2%80%93Drever%E2%80%93Hall_technique">Pound-Drever-Hall</a> technique to generate one (shown below), to understand if we decrease or increase the length of the cavity to hold onto the resonance. Most commonly these control loops are done with analog circuits. Layers of integrators, multipliers, adders, and filters come together with mixers and phase shifters to create a traditional laser locking system. Speaking of such a system, here’s the one at QMI:</p><p id="7e8bf96e-09c4-4183-8d6e-1ad87631eea2" class="">
+</p><figure id="584d56d8-75fd-423d-835a-c7b58efe1943" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%205.png"><img style="width:1427px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%205.png"/></a></figure><p id="d439ae1b-89c8-40ef-aea4-5d6b2b144fb9" class="">
+</p><ol type="1" id="5e33a7c0-377e-48f8-9f5d-1a6e54396a7b" class="numbered-list" start="1"><li>On the left side is the laser table which, among many other things, generates the PDH error signal. It’s populated with mirrors, lenses, filters, and more, giving it the appearance of a skyscraper-filled city.</li></ol><ol type="1" id="abe5f97f-0fd7-4469-b176-105ba7f811fb" class="numbered-list" start="2"><li>Boxed in pink is the enhancement cavity itself, where the laser light accumulates and builds up power.</li></ol><ol type="1" id="8db4e15f-b30d-48d9-a91e-068c0243f736" class="numbered-list" start="3"><li>Finally, and most importantly, are the locking electronics and control loop tower boxed in green, which puts everything all together. It takes <em><em><em>in </em></em></em>the PDH error signal and <em><em><em><em><em><em><em>outputs</em></em></em></em></em></em></em> signals which adjust the spacing of the enhancement cavity mirrors. In between lie all the analog integrators, mixers, and modulators I described earlier.</li></ol><p id="1b2fc4b7-04a4-4182-b80b-0259a1aa1821" class="">
+</p><p id="f687db5a-f3c2-417a-afd8-d1df7a7f8be0" class="block-color-pink_background"><strong>The focus of my work </strong>is to digitize as much of the analog locking electronics and control loop subsystems onto an <strong>FPGA</strong></p><p id="83fc22da-f1ce-4452-a33a-424fbdf995f1" class="block-color-pink">There are many reasons as to why an FPGA control loop would be preferred over an analog one, such as … 
+- much easier to modify, upgrade, maintain, and troubleshoot
+- precisely tune loop parameters (gains, thresholds, offsets) rather than using knobs / switches
+- remotely monitor and work with the cavity, rather than being required to be present at all times</p><p id="4d112b46-2fda-442b-8028-31ea7853bc19" class="block-color-pink">… alongside many other nice-to-haves, like reduced space.</p><p id="21e2a921-e770-4249-b714-ee18001bf974" class="">
+</p><p id="aedd0d3e-6ebb-4732-99bc-70dee203ef15" class="">The idea of FPGAs being used for locking cavities is not new. However, since everything about this project was built <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>from scratch</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>, my supervisor and I were able to learn a lot about using these devices, and also their pitfalls in comparison to analog locking electronics, which is somewhat undiscussed in other existing packages.</p><p id="43bfbc1a-efca-4091-81e3-5242389e61e9" class="">
+</p><p id="5f904daa-e0d4-478c-b44b-4a9b1903a122" class="">The rest of this page will serve as an image gallery with brief explanations, providing little snapshots into what I’ve explored.</p><p id="966545ea-cde6-4261-bf9c-e6a1a085026c" class="">
+</p><hr id="4002d56a-4c22-4414-adb7-30b2a45e2180"/><p id="a28a5c3e-e010-4664-8886-7a707afa6b53" class="block-color-yellow_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>Table of Contents:</mtext></mrow><annotation encoding="application/x-tex">\text{Table of Contents:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord text"><span class="mord">Table of Contents:</span></span></span></span></span></span><span>﻿</span></span> </p><ol type="1" id="74b4d2c1-bd4b-4a0a-ac9b-09ee6eaa0404" class="numbered-list" start="1"><li>FPGA Block Designs</li></ol><ol type="1" id="c8423afc-e47a-4262-b235-74cea768b078" class="numbered-list" start="2"><li>Server-Client Networking</li></ol><ol type="1" id="de92ed9d-88a8-4543-b4b9-9827cd4c0d0f" class="numbered-list" start="3"><li>FIR and CIC Filters</li></ol><ol type="1" id="5770ebfe-718c-4bc9-9ab8-140140f11b17" class="numbered-list" start="4"><li>PID Motor Control</li></ol><hr id="64952bff-df51-4783-9953-4cab3a263763"/><h2 id="59c97543-6a53-4ded-a53a-224bab722f0a" class="">1. FPGA Block Designs</h2><p id="44cfc7b6-ddbe-454a-b36b-f34943d4085c" class="">
+</p><p id="103f126f-a02f-4f00-9259-83a58cb88929" class="">This project is built entirely from scratch, using Verilog (in Vivado). The Red Pitaya board we use in this project has a whole library of user-built applications, and can also be programmed using MATLAB, Python, LabVIEW, and more. While these are simpler to work with, I found it more valuable to work from scratch — we were able to push our system as hard as we needed it, and even exceeded limits advertised by Red Pitaya with writing custom RTL.</p><p id="c6537b2b-ffa7-425e-a107-0d16174efce8" class="">
+</p><p id="9eb02a8b-1b86-45ff-90a4-6e24d4f5752a" class="">Learning about TCL scripting → synthesis → implementation → timing analysis → bitstream generation has taught me about design rules and principles when working with FPGAs, and now I feel more comfortable using newer, more advanced hardware design languages.</p><p id="4e64e186-f774-4694-8f9b-7900237ab9d6" class="">
+</p><p id="1518d80b-041e-49cb-b56c-5abdfa8fc80b" class=""><strong><strong><strong><strong><strong>XADC:</strong></strong></strong></strong></strong></p><p id="545a3aac-5b9a-4523-b449-fcbe87199ba4" class="">Here’s the block design of our processing system and XADC core, which interfaces with the Zynq 7010’s internal slower ADC running at 1 MSP/s…</p><figure id="e7e1442d-864c-42ec-9643-824bf84fca51" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%206.png"><img style="width:1568px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%206.png"/></a></figure><p id="88a4b1dc-ea7d-45a8-8d6f-6f11484e47a1" class="">… expanding the <code>rp_xadc</code> module (pink) reveals the <code>xadc_wiz.v</code> and the associated <code>drp_communicator.v</code>. Our communicator module uses the DRP (dynamic reconfiguration port) on the XADC which allows us to calibrate, configure channels, and read data from internal hardware registers which store ADC data.</p><figure id="04b5f4ed-4348-4637-b9a6-a5ed32cbb89b" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%207.png"><img style="width:1798px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%207.png"/></a></figure><p id="35171340-036c-499b-9344-ed31ff77ddf9" class="">
+</p><p id="b0c01c4e-20e6-4708-ab58-bb5ae24112f2" class=""><strong><strong><strong><strong>Scope:</strong></strong></strong></strong></p><p id="5804c5ca-02ec-4ea0-a616-bd74e490bb39" class="">Here’s the FPGA scope, which uses a dual-port BRAM to write trace data from the FPGA <code>fpga_scope.v</code>, and is read by an <code>axi_bram_reader</code> for the CPU-side to access from.</p><figure id="3c4ebf74-9583-410e-98ee-fd0820b9f32e" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%208.png"><img style="width:1813px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%208.png"/></a></figure><p id="11b93d01-49b6-46f0-ac95-86750a081284" class="">
+</p><p id="8d245505-cb27-4404-8223-4dca387c6f8a" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Analog IO:</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="29e31845-46e9-4cc6-864d-b55611cb2f5a" class="">Here’s the output scaling bit-manipulating blocks used to output to the slow PWM DAC outputs (100 KSP/s) and the fast DAC outputs (125 MSP/s):</p><figure id="ededa58f-59dc-4181-9fa5-c822d5e890a4" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%209.png"><img style="width:1672px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%209.png"/></a></figure><p id="dea8accc-ca2b-47b8-8301-6549a3689219" class="">
+</p><p id="05270f37-113d-42f1-bbc7-5d08dc6e394d" class=""><strong><strong><strong><strong>FIR:</strong></strong></strong></strong></p><p id="47542194-f49e-4f91-bc6b-562c66791a92" class="">And here’s a small FIR filter example I made, which you can find more about in the FIR development post under <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>3. FIR and CIC Filters</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>. </p><figure id="f8d3e29e-12a3-4248-824e-1f91635d4ac2" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/image_(1).png"><img style="width:2000px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/image_(1).png"/></a></figure><p id="41168b96-3e79-4472-a18b-8059c3c32c71" class="">
+</p><h2 id="ed97c169-f09d-4933-8c48-548d21e42919" class="">2. Server-Client Networking</h2><p id="ed07fe3c-9d56-4845-82c2-31798f8f23d2" class="">
+</p><p id="dcc049e1-6410-468f-903f-9d14a33742e2" class="">In previous FPGA projects, I’ve used a Basys-3 FPGA, which uses Xilinx Artix-7. This is nice, but because it’s <em><em><em><em>only</em></em></em></em> an FPGA, interacting with the system needs to be done with physical buttons and switches, and reading data from it comes just from LED or seven segment displays:</p><div id="68a2e081-da0c-4537-8dbc-c888a4821e60" class="column-list"><div id="cbd7b78e-938a-49ff-a4ea-cb9b5a2c8e2f" style="width:50%" class="column"><figure id="95b71dce-a17d-4159-b80c-b712df172ebe" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2010.png"><img style="width:716px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2010.png"/></a></figure></div><div id="2d7cdd3c-58da-40cd-bacb-a13a6f55c766" style="width:49.99999999999999%" class="column"><figure id="d2cbe6d8-42e5-4b5e-9c1e-a764bbf963f4" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/IMG_8557.jpg"><img style="width:720px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/IMG_8557.jpg"/></a></figure></div></div><hr id="15cb7fc1-8ab8-4e49-a460-7546338dcb08"/><p id="08bf3d7e-6c72-40e1-9a48-babab3398ea1" class="">However, for a large platform this gets out of scale really quickly. The Red Pitaya board we use in this project has a Zynq-7010, which has both an FPGA <em><em><em><em>and </em></em></em></em>an ARM Cortex A9. These two are interconnected, so data can be written/read to the FPGA from the CPU side.</p><p id="57bb724d-7a15-417f-a484-a374c13f9469" class="">
+</p><p id="d8b81e56-833c-48e5-83e9-bc8ee9104225" class="">On the A9 is a python server file waiting for incoming update commands, which is unpacked into a set of binary data which is written to physical memory that is shared with the FPGA. The FPGA accesses this data at a specific memory address, and writes it to its local data registers.</p><p id="d55f4ef0-f873-486f-8fa9-ed48e65c62f7" class="">
+</p><p id="7112b1c2-2646-4e10-83e6-09f4607c4d99" class="">To connect to this server, I also wrote a python client file that has a GUI for users to modify system parameters. The client file is a multithreaded program running a GUI thread, and a data socket thread. These two talk with each other through a set of thread-safe queues to send data packets, scope traces, and coefficients between each other. Here’s what it all looks like for the user:</p><p id="ecb64193-6d9a-4eae-a33e-9fb3cdbe91ee" class="">
+</p><figure id="82bcdaf2-ce90-4fcf-a78f-836eafaf697b" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(7).png"><img style="width:1514px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(7).png"/></a></figure><p id="af7d6bc9-384b-440f-8f1c-82ccef2b60de" class="">
+</p><p id="d66458c8-8e5b-4dbe-89b3-c31339dcd318" class="">An incoming JSON packet indicates to the server the type, value, and location for a new coefficient / constant to be stored. In this case I’m trying to change the output DAC gains on channel A and channel B. Using a lookup table this gets converted into an address (0x2d, 0x2f), and the <em><em><em><em><em><em><em><em><em><em>quantized </em></em></em></em></em></em></em></em></em></em>data is placed into memory:</p><p id="21d1a6a6-f5b6-4285-96c6-e9798ac7d226" class="">
+</p><figure id="24fbac79-02a7-48eb-a3d7-685c017a0ddf" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2011.png"><img style="width:914px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2011.png"/></a></figure><p id="c8b5e787-b883-453b-8445-1fd10881e691" class="">
+</p><p id="b4758a1c-a985-436b-a7e8-ea1c445db10b" class="">And for designing the server, client, their data sharing, and how the scope will pull data asynchronously while the user can still key in coefficients, we have notes. Lots and lots of notes.</p><figure id="8d00001b-fb1d-489b-83e8-d6e90d9c9947" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2012.png"><img style="width:2555px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2012.png"/></a></figure><figure id="0f3eb8be-6683-4daa-9e3f-25b545efffac" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2013.png"><img style="width:2545px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2013.png"/></a></figure><h2 id="5524eae5-e379-4184-9ebb-968aa1e326a7" class="">3. FIR and CIC Filters</h2><p id="3658ac91-8c73-4f15-9b70-c57a95b9cd3e" class="block-color-yellow">These are more <strong><strong><strong><strong><strong><strong><strong><strong>precise </strong></strong></strong></strong></strong></strong></strong></strong>development posts which have extra walkthroughs:</p><figure class="block-color-yellow_background callout" style="white-space:pre-wrap;display:flex" id="7df5ddb6-e6d3-4d05-a2ad-929767e93ebd"><div style="font-size:1.5em"><span class="icon">📃</span></div><div style="width:100%"><strong><strong><strong><strong><strong><strong><strong><strong>Subpages</strong></strong></strong></strong></strong></strong></strong></strong><figure id="85a6af26-7664-4c4b-94e8-f6a7ac3b0ecc" class="link-to-page"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc.html">FPGA FIR Development </a></figure><figure id="55cbf505-bc97-476c-a2e6-06997894ef0e" class="link-to-page"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/FPGA%20CIC%20Development%2055cbf505bc97476ca2e606997894ef0e.html">FPGA CIC Development</a></figure></div></figure><p id="5a183f7b-9ccc-4839-b8fe-4720b28ce5ad" class="">
+</p><p id="dc0690cd-215d-4016-b97a-99bd0d84e7c7" class="">One of our first projects before starting any laser locking was trying to get a simple runtime-adjustable FIR / CIC filter chain working. </p><p id="bfe28de1-2955-420a-83d7-7c62691c11e4" class="">
+</p><p id="0eb864c2-e285-4cde-8370-b230a84f4b31" class="">They ended up working really nicely for our purposes — here’s an example of a bandpass filter with 31 taps, with a maximum bandwidth of ~100 kHz. The left is the theoretical response plotted by a MATLAB tool (available in FIR development post), and the right is the experimental response. They’re essentially identical!</p><div id="f51d05da-e97b-45b9-83f2-e3ae4c13184f" class="column-list"><div id="21383f71-86f5-4df2-a1e3-ea87fe400ab6" style="width:50%" class="column"><figure id="eee9f1ff-c2cb-4598-9623-8dedffbb1abf" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(8).png"><img style="width:985px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(8).png"/></a></figure></div><div id="da234e95-8896-4419-8622-c8180823b506" style="width:50%" class="column"><p id="d94c2127-1269-4f49-b35b-714ff3aa8c52" class="">Transfer Function (orange = 0 dB)</p><figure id="42347114-63ac-407d-8470-2e108f991b35" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(9).png"><img style="width:1113px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(9).png"/></a></figure><p id="abe7b3dc-7870-4477-b7bd-4d421525c16b" class="">Transfer Function (orange = x1 gain)</p><figure id="ea516460-e783-4a2d-bec1-f34b143814e7" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(10).png"><img style="width:1114px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(10).png"/></a></figure></div></div><p id="37078969-cf83-43a2-97dd-cc15d7a1491d" class="">
+</p><p id="d0f31941-565d-4cb0-b71e-392289475710" class="">Normally we use the Analog Discovery 2 for quick and dirty testing, but for applications where we need to study crosstalk, noise floors, transfer functions, and frequency responses, we use the SR780 Signal Analyzer made by Stanford Research Systems:</p><figure id="bc636bbc-2010-45d0-a0ee-f33bbcd0c4e5" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/IMG_2756.jpg"><img style="width:2468px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/IMG_2756.jpg"/></a></figure><p id="cd894b5b-9ec5-4be6-9229-477e3753ad60" class="">
+</p><p id="59141c19-ef88-447a-ac30-ad6536af72d0" class="">Anyways, here’s how the filter and associated infrastructure are configured in the block design:</p><figure id="93104557-9834-4ddd-943c-91bd39289400" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/image_(2).png"><img style="width:2000px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/image_(2).png"/></a></figure><p id="4f19bdb8-39b3-44ae-9d93-db637b0e0dd3" class="">
+</p><div id="eb0bc98e-a594-47e8-9fea-4470cf0e8a55" class="column-list"><div id="78630029-20bc-4fed-9bed-0695f2a73475" style="width:31.25%" class="column"><p id="6ba6f631-b844-4be0-9264-a5cefb4539e4" class="">The CIC development mainly involved creating a tool to help analyze the frequency response and worst-case passbands in MATLAB:</p><p id="33c42adb-68fe-4b35-805d-1f3b0491ea12" class="">
+</p></div><div id="c13fb7c3-056f-41a6-a876-aed63a9e38ae" style="width:68.75%" class="column"><figure id="c644cfe9-a92e-45e5-84ee-07063c4eeef6" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(11).png"><img style="width:688px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(11).png"/></a></figure></div></div><p id="4b76d89b-7d76-440b-b773-085ab832ebcf" class="">
+</p><p id="7019a223-43a3-4020-ac80-c47e0e63c108" class="">I want to give credit to <a href="https://tomverbeure.github.io/2020/09/30/Moving-Average-and-CIC-Filters.html">this page</a> I used as a reference, which was a really nice visual step-through of designing and simulating a CIC down-sampler … and more notes!</p><div id="fdac4d9e-fa6c-4de8-bc9e-364a37adbe90" class="column-list"><div id="8622667c-c855-43df-8b01-d79697ee993c" style="width:50%" class="column"><figure id="d83f612a-1806-4c5a-bdc5-af698de93c81" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/2CCFC375-2EB3-4ED2-8900-76EF2354EBFA.jpeg"><img style="width:1260px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/2CCFC375-2EB3-4ED2-8900-76EF2354EBFA.jpeg"/></a></figure></div><div id="89e8537b-e1ac-4114-9f66-17bca64e68e7" style="width:50%" class="column"><figure id="c86ee097-3a74-4b8b-86a4-dcf0d2c92eeb" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/F6DF47CF-5DC3-4244-8D4F-B39E49C93BEB.jpeg"><img style="width:1355px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/F6DF47CF-5DC3-4244-8D4F-B39E49C93BEB.jpeg"/></a></figure></div></div><h2 id="7834f269-7634-42fa-ae6a-f66b7b53b380" class="">4. PID Motor Control</h2><p id="764f6699-0501-4438-9a13-f07d3b23f3d7" class="">In ENPH 259, we make a closed-loop motor speed controller. In short, a motor has a rotary disk on it with 10 holes along the circumference, creating a break-beam. Every rotation, 10 pulses of light reach the phototransistor. By measuring the amount of pulses within a certain period of time we measure some factor of speed (rotations / period). This is converted to an analog value and then passed into a <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>difference amplifier </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>— the output of this is then fed back to the motor, creating a closed loop.</p><figure id="178600c6-4594-4a3d-b2d5-0ea9a1541352" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2014.png"><img style="width:876px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2014.png"/></a></figure><p id="b49dbb30-b72e-4bc2-8401-a7d5f71ebb96" class="">
+</p><p id="6461f17a-56cf-46aa-937a-c5ec004d8c91" class="">Here’s the circuit built and powered (motor not shown), and the LED bar indicates the speed. </p><figure id="efde1e9e-0598-4b51-bfca-dbdc2e1e40d7" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/259board.jpg.png"><img style="width:960px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/259board.jpg.png"/></a></figure><p id="c23cffe7-ec53-498a-a4d5-c1832e306b03" class="">
+</p><p id="e2fddfde-41ac-45d6-bfd1-01a8a91890a6" class="">To get more acquainted with the FPGA and it’s DSP and analog IO capabilities, one “mini project”  we set out to complete was to replace the difference amplifier with an FPGA PID controller. I put together the proportional and integrator blocks:
+</p><figure id="e5a640b3-472e-40ad-abfe-30e539f29c48" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(13).png"><img style="width:1086px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(13).png"/></a></figure><p id="e07e68db-6d81-4ee0-80c0-505145df74ab" class="">
+</p><p id="ffadca82-cc1c-44c9-9cde-b70601338288" class="">The error and setpoint values come into the FPGA, and the output of the controller goes to the current-controlling transistor. From the top its hooked up like this:</p><figure id="8ada1dfc-bdb9-4d08-ac34-382460b8e293" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2015.png"><img style="width:1312px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2015.png"/></a></figure><p id="e45a0910-cb1d-4fac-9278-f5a8641abced" class="">The motor board still does the speed measurement, but now that analog signal is passed into one of the FPGA inputs  — this is the process variable. The AD2 is outputs a DC setpoint variable which passes into the second FPGA input.</p><p id="f3fe01af-9eef-4fbd-9ae0-76df4727cf35" class="">
+</p><p id="a6f8bcd6-1ba5-4310-a8a9-179eced8f5cb" class="">The error = process - setpoint is passed into the FPGA PID and then comes out on an analog output. This is buffered using the output buffer and this signal is given back to the motor board’s current-controlling transistor.</p><p id="3d7ca4ec-07b9-4674-9ab3-cf2becc7204e" class="">
+</p><p id="58bd644c-8a43-4331-812e-a2617bb215e9" class="">If we try just using P gain on the FPGA, we see that the process voltage (speed we’re driving the motor at) never reaches the setpoint voltage (voltage corresponding to the speed to drive at). In other words the P control isn’t doing enough to eliminate the steady state error.</p><p id="485b1ae7-36ff-4156-a212-17766c20d3d3" class="">
+</p><figure id="92847958-e6fc-4d33-a58d-06028075cfb5" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/68F24917-922E-4968-9052-D0A4E7ACF447.jpeg"><img style="width:916px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/68F24917-922E-4968-9052-D0A4E7ACF447.jpeg"/></a></figure><p id="bbffb2de-ba8b-4dad-b114-76a024be32bf" class="">
+</p><p id="9563817c-f4fc-43c5-8cbe-f185bbd21d33" class="">Here’s another representation, with the setpoint being the orange trace and the blue trace is the process variable.</p><figure id="f5b4ff1f-06aa-4735-a882-951b7eb95229" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2016.png"><img style="width:1071px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2016.png"/></a></figure><p id="a9b41460-9a9a-4d7f-bcd7-4296076b0e7b" class="">
+</p><p id="95c79ebc-e1de-4906-9d69-ba07f5c5cb5e" class="">But now, if we add some integrator gain, we get curves like this, with the average steady state error being driven to 2mV!</p><figure id="515b651d-f071-4d31-9a0e-5c8551c20453" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(14).png"><img style="width:748px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled_(14).png"/></a></figure><p id="9c103208-fd27-4db5-bd9c-3ebc0168c436" class="">
+</p><p id="35f41ea3-fc80-4423-9fb2-0c02f2e7dace" class="">Here’s another curve showing the step response of the PID controller — of course, this is completely untuned, but it’s somewhat satisfying seeing these curves which you see in textbooks all the time come to life in a real control loop.</p><figure id="22646555-514e-4d34-9a37-56d48a78fcf2" class="image"><a href="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2017.png"><img style="width:1473px" src="FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865/Untitled%2017.png"/></a></figure><p id="6263579c-d47d-443a-b746-14f72a3b264b" class="">
+</p><p id="2a939040-458e-421a-9222-b109d5bd6284" class="">Overall, this short mini tangent in our exploration of FPGAs and using a PID to control a motor’s speed was successful, and it was from here where we started diving more into the real laser cavity work to follow.</p></div></article></body></html>

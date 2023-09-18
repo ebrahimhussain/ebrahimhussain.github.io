@@ -1,0 +1,772 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ENPH 253 2023 — Robots &amp; Racing</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="558ce5b0-2201-445b-bfb9-0ecc678c156c" class="page sans"><header><h1 class="page-title">ENPH 253 2023 — Robots &amp; Racing</h1><p class="page-description"></p></header><div class="page-body"><hr id="95f2fb1f-58fb-4247-83ac-813d8bdcb5b0"/><p id="c4855186-77f2-47f4-976a-b41886e70f92" class="block-color-yellow_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>Project Photos:</mtext></mrow><annotation encoding="application/x-tex">\text{Project Photos:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">Project Photos:</span></span></span></span></span></span><span>﻿</span></span> </p><hr id="e8759de9-2166-4bf5-b6f7-59a63caf6a53"/><figure id="82fc853d-216b-4298-8dc3-5c14aed21c33" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/coverphoto.png"><img style="width:939px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/coverphoto.png"/></a></figure><hr id="190ba376-ba28-4cfa-a0d8-f64efc6a9b28"/><figure id="f41301e0-065b-4302-a83f-f1c19683a6ec" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/coverphoto2.png"><img style="width:2547px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/coverphoto2.png"/></a></figure><hr id="e3e94dbd-ae60-4632-b27d-9520a024a4b5"/><p id="106b626a-8f13-442b-a337-286bc7a6af82" class="block-color-yellow_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>Practicing:</mtext></mrow><annotation encoding="application/x-tex">\text{Practicing:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">Practicing:</span></span></span></span></span></span><span>﻿</span></span> </p><ol type="1" id="294e582a-6de8-4215-b9dc-8cb898f033ba" class="numbered-list" start="1"><li>Project Management + Advanced Problem Solving</li></ol><ol type="1" id="555566cf-e1c2-4f5f-80d4-2cb56459ac6d" class="numbered-list" start="2"><li>Rapid Prototyping, Manufacturing + CAD (Onshape)</li></ol><ol type="1" id="ac40e227-6954-4900-bb63-8ff861ef51ed" class="numbered-list" start="3"><li>Soldering, Electronics + PCB Design</li></ol><ol type="1" id="536c5610-98d2-41cd-a510-4af38dd7f47c" class="numbered-list" start="4"><li>Troubleshooting (noise issues, signal integrity, software + hardware)</li></ol><p id="97fca42b-4355-4a01-a375-61261a2c2e93" class="block-color-yellow_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>History + Outline: </mtext></mrow><annotation encoding="application/x-tex">\text{History + Outline: }</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">History + Outline: </span></span></span></span></span></span><span>﻿</span></span></p><p id="8b86875d-54a8-48c5-93f9-712f827f139a" class="">Over the 2023 Summer Term, spanning from July 4 to August 10, myself, Trevor Daykin, Amr Sherif, and Dhruv Arun were a team of 4 in the annual ENPH 253 robot competition. While the final robot iteration photos above are very similar, the path to this design was anything but straightforward. In this post, I outline my series of ideas, decisions, and work that led my team to success. In the end we were able to take home a 2nd-place finish.</p><p id="fabbe7ec-a7f7-4475-a71e-3625bd8f12d9" class="block-color-pink_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>Context:</mtext></mrow><annotation encoding="application/x-tex">\text{Context:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord text"><span class="mord">Context:</span></span></span></span></span></span><span>﻿</span></span> </p><p id="662e2a19-dcc8-4aca-a628-8aa6c92023dd" class="">ENPH 253, more commonly referred to as “robot summer”, is a course led by the Engineering Physics (ENPH) Project Lab at UBC. It is an autonomous robot competition which all 2nd year ENPH students must compete in to progress to their 3rd year of ENPH (ignoring the rare exceptions).</p><p id="aaf442aa-abba-4a30-9599-8374550b03a8" class="block-color-pink">
+</p><p id="23c33495-3789-4e46-bc9d-0b974583803b" class="block-color-default">What’s special about this competition is that <strong>students design everything from scratch</strong>:</p><ol type="1" id="2e181d31-c6fa-4e33-b316-a93b8f1ef05b" class="block-color-default numbered-list" start="1"><li>Mechanical parts are all laser-cut, 3D-printed, waterjet sliced, and more.</li></ol><ol type="1" id="77e84336-c542-4897-863e-425fea5efd82" class="block-color-default numbered-list" start="2"><li>All electrical circuits must be soldered to and wired by hand. Moreover, no pre-made motor drivers can be purchased.</li></ol><ol type="1" id="01f6d436-f37c-4e68-81a6-fc6130ebe67f" class="block-color-default numbered-list" start="3"><li>Given the new theme each year, students must write new code.</li></ol><p id="1ecbab95-b184-429c-8e1f-3561344b85e3" class="block-color-pink">
+</p><p id="ff1e01eb-5d52-4ce4-ad86-a7701d2f53d4" class="">Though the competition theme changes each year, the general structure of the course remains the same — teams consist of 4 students each, resulting in ~16 teams each year. Every team works ~6 weeks in the lab — which is open 10 A.M to 9 P.M every weekday — to design and rapidly prototype a <strong><strong><strong>fully autonomous </strong></strong></strong>robot capable of scoring “points”. In this year’s competition, which was a race between two robots at a time, points were obtained by picking up prizes, driving laps, and ziplining. After those 6 weeks complete, the competition is held in a world-cup style bracket system to ultimately declare a winner.</p><p id="021319d2-46d8-4d1b-b449-de00d600cca6" class="">
+</p><hr id="b82ab770-838e-43b3-9189-3ef22fc47949"/><h1 id="4b96c5e1-307b-4885-a179-e4242dce02bb" class="">1. Competition Theme + Rules</h1><p id="a2712af1-b8e7-428a-ad42-5053ace9e7e9" class="">Across previous years, the general competition idea was as follows: each team’s robot has a couple minutes on a set track filled with paths, collectibles, and obstacles. Each of these individual runs is called a “heat”. Increased travelling, collecting, and obstacle avoidance lead to more points scored in a heat. This sort of competition style never greatly rewarded speed, and so the final robots would slowly inch their way along the track, taking as much time as they could.</p><p id="aa02ed9c-097c-40b6-a16e-c1ee5d35efb4" class="">
+</p><p id="06a60bbe-e6a3-4070-9c9b-f305b0a37939" class="block-color-red"><strong>In a drastic change of theme</strong>, this year’s competition involved <strong>racing</strong>! Alongside paths, collectibles, and obstacles, now it was <strong>two robots on the same track at a time, in the same heat. </strong>Now, instead of one path going from start-to-end, it was a loop — faster robots who could complete more laps within a heat would gain more points.</p><p id="8ad173ce-04f2-40c9-86d6-ca487148731a" class="">
+</p><p id="3adaf68d-df1a-47bf-9f6e-9ceaf1e730fd" class="">Here is a top-down view of the competition surface. The blue line is a tape track which robots can use to follow around the course, but they are not required to follow it. Both robots line up at either START(1) or START(2), and they would both begin running at the end of a countdown.</p><p id="8e35ecf8-603e-441c-8d5d-34a04e7e2ce3" class="">
+</p><figure id="7f261428-0429-4f13-adff-d48de8b5e0cb" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled.png"><img style="width:1299px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled.png"/></a></figure><p id="f3e987ba-5d24-44e0-ba19-a1682c0d50a6" class="">
+</p><p id="3b6840bd-2c03-4c0c-9c19-f1437b4628d1" class="">For a sense of scale, here’s our close-to-final robot driving under Rainbow Road from START(1).</p><p id="999db8a1-1e8f-46b0-b7bd-51a5487c9dec" class="">
+</p><figure id="8e09307b-69d3-4a0d-b279-b2f9ee640325" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/robot-travelling.gif"><img style="width:1918px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/robot-travelling.gif"/></a></figure><p id="7710338e-c3ea-421b-89bb-c5ca7884b802" class="">
+</p><p id="906fff9f-2111-493a-b3bb-70a614b585ec" class=""><strong>A summary of important rules for the reader to be familiar with:</strong></p><ol type="1" id="c0e39161-63cc-48fc-a640-4b6c705bd53f" class="numbered-list" start="1"><li>Heats are 2 minutes long.</li></ol><ol type="1" id="684f1690-52c6-45d3-83f5-c0aeab35a8ac" class="numbered-list" start="2"><li>Robot score points by picking up prize blocks (labelled “Bonus”) on the track, coins (labelled “Coin”) on the zipline, or by completing a lap. Blocks and coins are worth 1 point each, while a lap is worth 3.</li></ol><ol type="1" id="a119fbad-093c-429e-ae03-57bbdbcbab48" class="numbered-list" start="3"><li> Regardless of START(1) or START(2), a lap is counted when a robot completes the following in order:<ol type="a" id="1f5853a9-3f08-455a-9be9-669bbbd91a9d" class="block-color-default numbered-list" start="1"><li>crosses over the finish line</li></ol><ol type="a" id="55f84965-9e47-4ac5-95f9-4ee756859052" class="block-color-default numbered-list" start="2"><li>goes up the ramp (blue, top right) and either jumps down on the left side of Rainbow Road, or loops around to START(2)</li></ol><ol type="a" id="714d7efa-442d-4a51-a0c9-88a14630199e" class="block-color-default numbered-list" start="3"><li>travels under Rainbow Road from the left and crosses the finish line again</li></ol></li></ol><ol type="1" id="686c6410-0b32-4371-b442-08c55369ecde" class="numbered-list" start="4"><li>A magnetic “bomb” is placed on the track, which has the same footprint as a regular Bonus / prize block. Each robot is also allowed to drop <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>one extra </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>bomb on the track at any time throughout the heat.<ol type="a" id="82bb9a0c-d321-40bc-8032-89f896612e70" class="block-color-red_background numbered-list" start="1"><li>Any robot that <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>picks up a bomb, or tips it on its side</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> has “detonated” the bomb, and they must restart, and also lose -3 points from any existing block / coin points.</li></ol></li></ol><p id="f549728e-ee72-4395-a598-5c37b9c1d146" class="">
+</p><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6faec3dc-f6d2-453b-8231-8be9f3fc01f6"><div style="font-size:1.5em"><span class="icon">📃</span></div><div style="width:100%">For those who may ask, here’s a scan of the rules made August 23, 2023:<figure id="bb2caf30-e377-46f1-a78c-6e9b076fa020"><div class="source"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/enph2532023-rules.pdf">enph2532023-rules.pdf</a></div></figure></div></figure><hr id="bc4fe1e4-a402-4fe6-bcf0-9922045a3389"/><h1 id="bd371339-b9ea-4c56-b383-06eee8bf70a9" class="">2. Initial Team Ideas</h1><p id="3c8a3ec3-77af-41dc-89a9-b758b1968eaf" class="">While there were countless ways to go about scoring points, from the start we knew we wanted to take a very simple and routine approach. Almost immediately our team decided that we would follow the tape track and pick blocks up while avoiding bombs. Jumping off Rainbow Road, ziplining, or cutting over the rocks (to the right of the finish line) could be unpredictable, even if all software, mechanical, and electrical aspects were perfected.</p><p id="50ad4b80-38c8-4652-b1c9-da0921bd4515" class="">
+</p><p id="8ff8fe2a-8fdd-4b6c-8587-8a03df8c6783" class="">Still, <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>autonomously </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>driving and picking up blocks, while somehow avoiding bombs is no easy task, especially when there’s another robot on the track. Here is the first design we set out to create:</p><p id="9bd323e6-3ace-4c0b-a0ff-ae97a8cfc20f" class="">
+</p><figure id="7784279d-b557-44a6-a822-3077af345d3d" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%201.png"><img style="width:1362px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%201.png"/></a></figure><p id="e6bb2d08-e8ad-4464-a9e3-4f45f7ed8e41" class="">
+</p><p id="150f00ef-3d6a-45e5-b5b1-7e07296cd216" class="">In this design, the robot would drive around the track, and blocks would make their way to the extended side wings, where they would be picked up. What was more of a statement in this design though, was how it would navigate.</p><p id="20344a96-9fda-440a-91e5-e0ac7a4234ec" class="">
+</p><p id="a7bb6d4f-f2f8-4a96-84e5-5849b7066e5f" class="">There are two primary methods to turn a robot, shown below: <a href="https://www.researchgate.net/figure/Two-kinds-of-steering-methods_fig1_261192572">[image source]</a></p><figure id="fe82d880-134d-43a8-aff6-f1bba96d6b25" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/steering.png"><img style="width:672px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/steering.png"/></a></figure><p id="29a1f988-9734-4551-a127-440cf3da4125" class="">
+</p><p id="c6178a56-6b2c-412d-9e1c-b40d490669fc" class="">The first, called Ackerman-steering, is the type of steering you’d see in a car, where the back wheels drive at some speed, while the front wheels point in the direction of the turn.</p><p id="0c41a1ee-f362-4997-a0d6-5e904089badc" class="">The second, called differential-steering, is where the back wheels turn at different speeds to shift the car left or right. The diagram above shows four wheels, but it can also be done with two — one on each side — and some sort of pivoting caster (like a grocery cart’s front wheels). The caster we used is circled in red in the design images above.</p><p id="6481d6dc-76bb-4ae0-b867-45697fb813f5" class="">
+</p><p id="17439548-ebfc-42f1-967c-ebf42d2b3446" class="">Choosing an appropriate steering type was the first point of discussion for teams, because it determines the placement of motors, electronics, pickup mechanisms, and everything else around it. With the right geometry, mechanical design, and tuning, Ackermann steering is plenty faster than differential. This is likely why every team chose it — <strong><strong><strong><strong><strong><strong><strong><strong><strong>except us</strong></strong></strong></strong></strong></strong></strong></strong></strong>. Given the short time frame of the development period, we were certain that if spent more time perfecting Ackermann, which is  harder to implement than differential, we may not have time to integrate block pickup and bomb avoidance. </p><p id="26e15170-37e6-4020-b570-cd0fd1b24ba4" class="">
+</p><p id="25db6d29-befd-4879-aa5f-1620c7dc2d82" class="">Speaking of that, here is how our wings were going to integrate with our driving:</p><figure id="95fbe8e4-9eb5-4a28-84d7-b7f87b603064" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%202.png"><img style="width:848px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%202.png"/></a></figure><p id="804429df-816e-4635-b4f6-7a835aef9483" class="">The idea was that, as the robot drove around, both blocks and bombs would make their way to the wings as the robot followed the tape. In the event of a block, the wings would fold up and push it into some catchment area as shown: </p><figure id="b36e6112-f31d-4acb-8958-724cc9af751f" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%203.png"><img style="width:1145px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%203.png"/></a></figure><p id="152b5c77-5842-4e82-91a8-31de6b20e1a8" class="">In the event of a bomb, the wings would instead fold back rather than closing forward. As the robot continues to drive forward, the bomb will slide along the edge of the wing and passively be pushed away to the side:</p><figure id="2375ff32-7e2f-44a9-ad3a-49aa8dbb3282" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%204.png"><img style="width:1230px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%204.png"/></a></figure><p id="4f55ac87-9585-4e58-b42b-ab234be937ed" class="">With all this in mind, we set out to get our first working chassis built.</p><h1 id="3689932f-d2fa-4258-8aa9-3219cc258504" class="">3. Fundamentals and First Laps</h1><p id="13045d55-709e-4eda-8cb5-ee6e4e42b5c0" class="">To start, we decided to build a simple line-follower, which we could later adjust and add on to moving forward. To do so, I had to build our <strong>motor drivers, tape-following sensors, and microcontroller boards.</strong></p><h2 id="2b5fe1d7-b162-41e2-afab-3aaf2f705b35" class="">a) H-Bridge Motor Drivers</h2><p id="91553db4-6e04-4c64-9592-649b0835904b" class="">The H-Bridge is a relatively simple circuit used to control the <strong><strong><strong><strong><strong><strong><strong><strong><strong>polarity </strong></strong></strong></strong></strong></strong></strong></strong></strong>of the voltage across a load, in our case, a motor. Alongside having control over the speed by PWM, the H-bridge gives us control over the motor’s rotation direction. This is especially important in differential-steering, where in some cases one wheel must spin backward and the other forward to complete a sharp turn. Here is a simple <strong><strong><strong><strong><strong><strong><strong>dual H-bridge </strong></strong></strong></strong></strong></strong></strong>schematic of the motor boards on the robot.</p><figure id="45d6553f-c491-4fe7-805d-3613d6d7f7f9" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/dual-hbridge.png"><img style="width:2279px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/dual-hbridge.png"/></a></figure><div id="79e001d1-c798-4521-870b-982724a3dc92" class="column-list"><div id="293f9eed-5cf4-4426-91ab-16212ef4319e" style="width:50%" class="column"><p id="84dbbf35-6163-4f9b-81b2-79ff47f6b2fd" class="">For those interested, here’s a step through of how the final H-Bridge board is derived.</p></div><div id="858f6677-c96f-42d3-a98c-24a21a68b406" style="width:50%" class="column"><figure id="df675d37-dee1-4008-bf13-e249fd644571" class="link-to-page"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571.html">H-Bridge Step-Through</a></figure></div></div><p id="ecd478a5-555b-460c-bc36-88b490a541a3" class="">With that understood, I put together our first dual H-Bridge driver on a 5 cm x 7 cm prototype board.</p><p id="dd230e0a-dec7-43a8-84ca-07d98fd428ef" class="">
+This is about as compact as it can get without making a PCB, just due to the large physical footprints of the MOSFETS and ICs.</p><p id="a86b2823-a518-42e0-9c52-50299fc92409" class="">Before I even started soldering however, it’s important to note that for this circuit (and every other one in the course), I started out by drawing out how all components would be laid out and wired together:</p><figure id="4a048191-a642-4ca0-b2dd-4c400c84c68e" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/47C96162-9610-46A9-84CC-B56211A25EF2.jpeg"><img style="width:1822px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/47C96162-9610-46A9-84CC-B56211A25EF2.jpeg"/></a></figure><p id="f9f60c0b-66e3-4f95-9cf2-da40df8c57e0" class="">This still isn’t the full story, because some wires need to be specifically routed in order so that they don’t block the path of other wires, when the time comes to fit them in. So the next step was breaking down this image into a set of steps (like a Lego instruction manual).</p><figure id="1a12e9bb-0162-405f-83b8-b98b8fd5a9db" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/0B699A82-0467-4C8E-BA01-723112C1B3ED.jpeg"><img style="width:1770px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/0B699A82-0467-4C8E-BA01-723112C1B3ED.jpeg"/></a></figure><p id="76d9abd6-3d60-4126-987d-3bcaf8caa0c8" class="">You can see how in the background of each step (slightly grayed out) is the original <strong><strong>full </strong></strong>image drawn which I showed just before. As we move through the instructions, it eventually becomes fully populated in the correct order. </p><p id="942a75dc-215c-48a0-ab76-5554d74c1d35" class="">
+</p><p id="5157b97f-ea53-4adb-93c8-e91c757956ac" class="">Here’s the final hand-made board:</p><figure id="96c16650-f1b4-4b6f-aead-c7d855df91ae" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%205.png"><img style="width:1777px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%205.png"/></a></figure><p id="e2c20c23-c680-4721-ad9f-acd218747fe7" class="">
+</p><p id="bc1860d4-d3ec-4461-9e87-334cd29afb8a" class="">Trying to fit 2 H-Bridges like this into such a small footprint has diminishing returns, and I probably could have avoided half these steps if I had chosen a slightly-larger board (which wouldn’t have made a difference in the final robot). Moreover, it’s virtually impossible to troubleshoot a board like this due to the layers of wires routed over and under each other. Still, it was still pretty fun to make, and a good demonstration of my skills.</p><p id="272e2dde-0da9-48e8-a437-cc8ce6228c78" class="">
+Soon after, I made a PCB-version of this board, which we used for the rest of the course:</p><figure id="8ee64947-8ab0-48d0-943d-b243128fe37a" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%206.png"><img style="width:1053px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%206.png"/></a></figure><p id="09dfbe9a-8bdd-4649-8876-8a940c3c138c" class="">H-Bridge PCB Layout:</p><figure id="9b6738b2-8dab-45a1-87f3-ccfad7a1a4dd" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/DC96486B-1031-4E2F-B8E5-47FBDE4A5B00.jpeg"><img style="width:1844px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/DC96486B-1031-4E2F-B8E5-47FBDE4A5B00.jpeg"/></a></figure><p id="f3df7d85-e2af-459a-a2d5-8c3d1ce6815f" class="">Layout-wise it’s almost identical to the hand-made one, but with mounting holes, probe points, and of course no visible wiring.</p><p id="cb042152-8d18-4be1-9122-13ff4f60b056" class="">
+</p><p id="ef6b1716-675e-4a05-a392-468577233747" class="">Putting the two boards side-by-side, the hand-made one is a little smaller, but then again it can’t be mounted without glue so I much more prefer the PCB.</p><figure id="78b5a3f7-551d-48e1-bc9b-4b4f21cf7008" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%207.png"><img style="width:2374px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%207.png"/></a></figure><p id="b2c17a37-2f10-4b1e-b691-665b1725ed96" class="">
+</p><h3 id="1c642290-88a0-4de7-982d-fcc54514120d" class="">b) Control Boards and Tape Following Sensors </h3><p id="b492a47c-0846-459c-86b6-0de110b35baf" class="">Okay, that was a lot of rambling for just an H-Bridge. Luckily the microcontroller and tape following boards are much simpler. Here’s the unpopulated Blue-Pill/microcontroller board, and the tape sensor board.</p><figure id="5b0f8154-972f-4a3b-b774-ada25707e80f" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%208.png"><img style="width:2060px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%208.png"/></a></figure><p id="0a1a9c81-cf88-44ed-b230-c936719a9ca2" class="">BP Board PCB Layout:</p><figure id="ef632faa-99a9-409a-ba85-a2907935306d" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%209.png"><img style="width:882px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%209.png"/></a></figure><p id="8ee7d030-1826-49d6-a320-3ee4bace8b11" class="">This is somewhat overkill and wasn’t really required in the end, but I designed this board pretty early on before any other sensor / peripheral decisions were made. So it just made sense to be safe and provide the possibility to house two microcontrollers. It has:</p><ul id="18ce2c79-576b-4e1a-bc00-c413e2475f9d" class="bulleted-list"><li style="list-style-type:disc"> x3 SONAR ports</li></ul><ul id="bba5092b-f205-45a9-8372-e3a87ae37d1b" class="bulleted-list"><li style="list-style-type:disc"> x4 I2C ports (two of them tied together <em><em><em>if </em></em></em>the microcontrollers need to talk to each other)</li></ul><ul id="6c4578b6-9837-420d-8e3e-99aefee79378" class="bulleted-list"><li style="list-style-type:disc"> x6 AIO available for tape sensors,</li></ul><ul id="451bbf3e-1963-4b7f-99f7-3b25b61f44f8" class="bulleted-list"><li style="list-style-type:disc">x3 servo ports</li></ul><ul id="60dcf1ed-3e64-4da2-b59b-a21a58fe3f69" class="bulleted-list"><li style="list-style-type:disc">a UART port for serial monitor, power selection</li></ul><ul id="a55d74bd-e665-4914-a2c0-dc66a114a4d8" class="bulleted-list"><li style="list-style-type:disc">2 2-wide PWM ports for two H-Bridges</li></ul><ul id="d407e3db-a052-4eaf-b083-c20173eb8c72" class="bulleted-list"><li style="list-style-type:disc">voltage level selectors for I2C, Sonar, and Tape Sensors</li></ul><p id="f5c328f8-302f-4465-9bf1-ebfaed88fa53" class="">and leaves the remainder of the pins free for switches, LEDS, hall-sensors, and anything else.</p><p id="2d7aa0c7-492a-4f9a-bf8e-1051b45aafe6" class="">
+</p><div id="f5c4cfcc-4d1b-4140-8427-e1d33f520ac4" class="column-list"><div id="5132e595-8c29-4544-bfa8-1444b51d5397" style="width:50%" class="column"><p id="7745b66c-4b5d-445d-aaf6-b5345bae7812" class="">For the tape-sensor board, Dhruv made the schematic and I made the PCB layout and soldered it together. It uses surface-mount resistors which was needed since the tape sensors sit very low to the ground. Here’s a video of it on a servo mount made by Trevor:</p></div><div id="30eb76ba-9adf-4c60-8ea1-6e916f65158f" style="width:50%" class="column"><figure id="c9bef176-38d8-4547-93b8-6c0af76e6634" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(10).gif"><img style="width:672px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(10).gif"/></a></figure></div></div><p id="7e1e9cc6-11aa-4bc7-a286-b331d74af8d7" class="">
+</p><p id="c493b20d-345d-4957-bd02-5a30824ef483" class="">
+</p><h3 id="29111528-84d3-4165-8af9-2bdfd16ecfe0" class="">c) PID Algorithm</h3><p id="8aebb0e0-8324-4f47-bb5f-cc59d18d9598" class="">The PID is probably the simplest part of code of the entire robot, but I wanted to share how I thought about converting tape-sensor data to an error function.</p><p id="fe350597-af35-47a9-82de-1149d78128d2" class="">
+</p><p id="ea06d372-2b28-4b28-8049-0fd6cffe509a" class="">Instead of computing each sensor value and referencing a lookup table, I decided to treat each sensor value as a <strong><strong><strong><strong><strong><strong>force </strong></strong></strong></strong></strong></strong>on a seesaw. Then, simply let the displacement be the net torque on it! Of course, if the robot is completely off the line, then just reference the magnitude of the previous displacement to know whether you are too left, or too right.</p><p id="1740bd33-e4e5-4182-a437-9c16c85d00b0" class="">
+</p><p id="e7c2a048-318a-48d6-9b0d-143bd05971ec" class="">That’s basically what I’m doing here — writing it in code is much simpler than doing it mathematically though. The key part is the <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mo>∑</mo><mi>S</mi><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo><mi>N</mi><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo></mrow><mrow><mo>∑</mo><mi>S</mi><mo stretchy="false">[</mo><mi>n</mi><mo stretchy="false">]</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{\sum S[n]N[n]}{\sum S[n]}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.530014em;vertical-align:-0.520007em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0100069999999999em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop op-symbol small-op mtight" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span><span class="mopen mtight">[</span><span class="mord mathnormal mtight">n</span><span class="mclose mtight">]</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485007em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop op-symbol small-op mtight" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span><span class="mopen mtight">[</span><span class="mord mathnormal mtight">n</span><span class="mclose mtight">]</span><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">[</span><span class="mord mathnormal mtight">n</span><span class="mclose mtight">]</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.520007em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><span>﻿</span></span> which is simply the average. N is the location of each sensor and S is the associated sensor values.</p><figure id="39e4045b-d4b3-4ce4-aef4-1f686461afd7" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2010.png"><img style="width:1114px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2010.png"/></a></figure><p id="55be4725-51b9-4c7c-b334-137546aa3c08" class="">
+</p><div id="283d0d18-0ac8-426a-b1f4-0d7c73d21f2a" class="column-list"><div id="51a3b80e-42f9-4363-ac29-bf48f60a6b29" style="width:50%" class="column"><p id="8e197a2b-ad56-4f5e-979a-2090deae3d5e" class="">You can find the <a href="https://www.desmos.com/calculator/4zlgnq8wji">Desmos here</a>, and play around with the <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi></mrow><annotation encoding="application/x-tex">\phi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">ϕ</span></span></span></span></span><span>﻿</span></span>, which is the displacement of the sensor array off the line. The purple line represents the error function value, and the dots are the sensor locations.</p></div><div id="a8baa60c-3106-4bd2-90a0-798a34cf1b86" style="width:50%" class="column"><figure id="973d3580-90b6-4e20-ba2f-947d4875c3a0" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(3).gif"><img style="width:720px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(3).gif"/></a></figure></div></div><p id="a0aca808-035a-4c9e-a101-d6729546fa0b" class="">
+</p><p id="eb9edd4a-e955-4222-a1d0-ffc6240eb101" class="">One interesting way of doing it like this is it becomes convenient to introduce <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>nonlinearities </em></em></em></em></em></em></em></em></em></em></em></em></em></em></em>into the transfer function through the R[n] array. Trevor and I played around with this a little and found that a non-linear transfer function for differential steering can often result in smoother and more responsive driving than a linear one.</p><p id="b81976b0-b8d7-4908-833b-056ea2ac3405" class="">
+</p><p id="9d8a6edb-a6ee-44be-8998-9713336d124f" class="">This makes intuitive sense for tape-following, because you don’t really <em>care </em>about minor deviations off the line, but once your tape sensors are close to leaving the line entirely, you now have a higher error to correct yourself quickly, or to take a sharp turn.</p><p id="fefa96d1-2edd-423c-af74-85f724124fa7" class="">
+</p><p id="b91baa8e-5d5e-4937-b0f3-92522760f738" class="">The final “non-traditional” part Trevor and I implemented was <strong><strong><strong><strong><strong><strong><strong><strong><strong>filtering </strong></strong></strong></strong></strong></strong></strong></strong></strong>the derivative of our error function, so that the PID equation is <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>out</mtext><mo>=</mo><msub><mi>K</mi><mi>p</mi></msub><mi>e</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>K</mi><mi>i</mi></msub><mo>∫</mo><mi>e</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>+</mo><msub><mi>K</mi><mi>d</mi></msub><mtext>lowpass(</mtext><mfrac><mi>d</mi><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mi>e</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{out} = K_pe(t) + K_i\int e(t) + K_d\text{lowpass(}\frac{d}{dt}e(t))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.61508em;vertical-align:0em;"></span><span class="mord text"><span class="mord">out</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord mathnormal">e</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.11112em;vertical-align:-0.30612em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-symbol small-op" style="margin-right:0.19445em;position:relative;top:-0.0005599999999999772em;">∫</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">e</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.2251079999999999em;vertical-align:-0.345em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord text"><span class="mord">lowpass(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span><span class="mord mathnormal mtight">t</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal">e</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">))</span></span></span></span></span><span>﻿</span></span>. To understand why, consider the following error function e(t), in red:</p><figure id="e313450e-8fc3-45b6-90b4-499e042ce329" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2011.png"><img style="width:1169px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2011.png"/></a></figure><p id="c7bdbdaf-c8c6-4bf1-8bcf-615b7e01fdac" class="">
+</p><p id="cc02f41e-0f09-4547-b5ee-e5d7ee9b1bde" class="">This error function simply means the robot’s displacement off the line has changed. It looks like a step rather than a smooth change because these signals are being processed inside the microcontroller, in thee <strong><strong><strong><strong><strong><strong><strong><strong><strong>discrete </strong></strong></strong></strong></strong></strong></strong></strong></strong>time domain.</p><p id="44f1bf8b-1ea3-4874-b24d-59adec5b199d" class="">
+</p><p id="a2fbfab2-7e55-419d-9e0b-42d22a799e89" class="">If we then compute the almost-discrete-derivative as <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>error - prevError</mtext></mrow><annotation encoding="application/x-tex">\text{error - prevError}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="mord text"><span class="mord">error - prevError</span></span></span></span></span></span><span>﻿</span></span>, we’d get an impulse, as shown in blue. This isn’t that useful because it means the derivative term in the PID equation only lasts for one loop iteration, which is on the order of <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">μ</span></span></span></span></span><span>﻿</span></span>s — that’s not nearly enough time for it to do much useful work. A solution to this is to <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>low-pass filter (LPF)</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> the differentiated error signal, shown in green. In an electrical context, this green signal represents the <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>discharging of a capacitor</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em>, but instead we’re doing it in software using a first-order IIR filter:</p><figure id="749884b7-7d8c-4206-be9f-64fc2f6658f6" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>LPF</mtext><mo stretchy="false">(</mo><mfrac><mi>d</mi><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mi>e</mi><mo stretchy="false">[</mo><mi>t</mi><mo stretchy="false">]</mo><mo stretchy="false">)</mo><mo>=</mo><mi>y</mi><mo stretchy="false">[</mo><mi>t</mi><mo stretchy="false">]</mo><mo>=</mo><mi>k</mi><mo>⋅</mo><mi>y</mi><mo stretchy="false">[</mo><mi>t</mi><mo>−</mo><mn>1</mn><mo stretchy="false">]</mo><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>k</mi><mo stretchy="false">)</mo><mrow><mo fence="true">(</mo><mfrac><mrow></mrow><mrow></mrow></mfrac><mi>e</mi><mo stretchy="false">[</mo><mi>t</mi><mo stretchy="false">]</mo><mo>−</mo><mi>e</mi><mo stretchy="false">[</mo><mi>t</mi><mo>−</mo><mn>1</mn><mo stretchy="false">]</mo><mfrac><mrow></mrow><mrow></mrow></mfrac><mo fence="true">)</mo></mrow><mo separator="true">,</mo><mi>k</mi><mo>∈</mo><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{LPF}(\frac{d}{dt}e[t]) = y[t] = k\cdot y[t-1] + (1-k)\left(\frac{}{}e[t]-e[t-1]\frac{}{}\right), k\in(0,1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.05744em;vertical-align:-0.686em;"></span><span class="mord text"><span class="mord">LPF</span></span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal">e</span><span class="mopen">[</span><span class="mord mathnormal">t</span><span class="mclose">])</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mopen">[</span><span class="mord mathnormal">t</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mopen">[</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.8359999999999999em;vertical-align:-0.686em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size2">(</span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.677em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord mathnormal">e</span><span class="mopen">[</span><span class="mord mathnormal">t</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathnormal">e</span><span class="mopen">[</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.677em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size2">)</span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span></div></figure><p id="16f87ae9-df53-4af1-af8b-6bacf13686ed" class="">Of course there are other ways to do this, and I guess you could choose any decaying function (maybe an average?). All that I’m trying to do is keep the effect of the derivative for longer, so that the <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mi>d</mi></msub></mrow><annotation encoding="application/x-tex">K_d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">d</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> term comes into play.</p><p id="5540631d-73b8-477c-94c1-928c94b0c1b6" class="">
+</p><p id="eda4db01-583f-4aa2-95ec-7f9b9a984daa" class="">The motivation to try something like this is somewhat arbitrary, but we gave it a shot and it had a <strong>significant positive impact on the smoothness of the robot’s tape following at high speeds</strong>.</p><h3 id="4939e00e-0fb0-4bec-9e95-0b42128db09e" class="">d) Final Run</h3><div id="9aec0b4a-622e-4714-adbb-557bb6c068dc" class="column-list"><div id="dce5d1c6-ee73-48fc-918c-4697777a1d2a" style="width:50%" class="column"><p id="9ac1df79-9d8d-4067-96fe-3ed82a9ab582" class="">With all the basics sorted, we put the motors, H-bridges, microcontrollers, tape-sensors, and PID code together for the first prototype. Here you can see one of the populated BP boards as well.</p><p id="1f11709f-66ff-4bda-b2bb-c684c1b97785" class="">
+</p><p id="69a41af4-b2ec-4b52-8fa1-151b9ee1723a" class="">I’m really proud of the pace we were able to do this at, since we were the first team to get on the track and tape follow in the first week of the course.</p></div><div id="23d67848-501a-4aa3-bcf1-c4e6263b28e4" style="width:50%" class="column"><figure id="4865c718-0425-48ff-a53e-d14c8c1bd93d" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/IMG_5046.jpg"><img style="width:480px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/IMG_5046.jpg"/></a></figure></div></div><figure id="915226b5-c4bd-4b44-b263-4f80af41eb40" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(9).gif"><img style="width:672px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(9).gif"/></a></figure><p id="bce3c704-2b2b-4bb6-a9c9-7a60d13175bf" class="">
+</p><p id="20f188b4-5c06-4000-8679-dc8b17d5985e" class="">We fail on rainbow road since this was our first time testing, and the colors interfered with the tape sensor, but we all start somewhere!</p><h1 id="39452819-b93c-4498-bd99-23511b0502d7" class="">3. Block Pickup and Redesigns</h1><h3 id="49bbedd4-0b26-4a1b-b431-77c169329dfa" class="">a) Side Wings:</h3><p id="b5dcdb77-eacc-4c82-a5eb-568aeb0d7867" class="">After having spent some time on PID tuning and driving the base chassis around, it was time to start implementing the “wings” that would pick up the blocks themselves. </p><p id="f9def860-cf05-41fa-9fff-529beb981d25" class="">
+</p><p id="2351cf56-7621-4785-b6ac-13b6fe5ae0c8" class="">There isn’t much to talk about here — we mainly just changed some CAD, wrote some code, and re-assembled the same differential-driving chassis with some acrylic wings. Here’s a video of 1) blocks being picked up at a standstill, and 2) having the robot line follow the tape track while picking up 2 blocks.</p><div id="13aa6ae7-fd67-4711-b94d-4b7bb0deeed5" class="column-list"><div id="fd6721bb-416b-439d-9543-f5e8f2f3a47b" style="width:31.25%" class="column"><figure id="3c1dc0d2-974f-47ea-89f4-55cf2c28ffa7" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(1).gif"><img style="width:384px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(1).gif"/></a></figure></div><div id="a1a701ce-a652-4718-b33b-bae82416700a" style="width:68.75%" class="column"><figure id="4574b72a-0786-4c1f-94a4-f1be00905260" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif.gif"><img style="width:672px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif.gif"/></a></figure></div></div><p id="79ecc708-55c8-4bbc-a5b2-349b8e2c268d" class="">This is pretty nice and very close to our mock-ups shown in the design proposal … but it looks nothing like the final robot. Why is that?</p><p id="45a5033d-1517-4881-bd74-e7e7cef3f861" class="">
+</p><p id="97ac4a25-f422-4635-813e-a74d860cde3d" class="">It turns out that, unfortunately, the front nose cone often knocked blocks that were placed ahead of it on the track, before the wings even had a chance to come in contact with them. In all honesty, the video shown above was a pretty big fluke, and subsequent test runs did not go as well.</p><p id="313a3904-80c0-451e-858a-ca665aa47d37" class="">
+</p><p id="141f1bcd-9f35-4e18-ab15-0a303b99d58b" class="">This was a huge surprise to us, because we had tested the possibility of blocks tipping or being pushed away by a front nose piece in the first week, using a simple cardboard nose and sliding it along the floor. And while there didn’t seem to be any problems <em>then</em>, actually running the robot made us realize that <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>the jittery motion of the robot which is inherent to differential steering </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>would “bat” the blocks far away from the tape track.</p><p id="81565f6a-c700-418e-9d17-8449fc622b79" class="">
+</p><p id="86c01751-b83d-46d9-864f-0d914ab33d52" class="">Geometrically, since differential steering steers from the back, tiny oscillations back and forth lead to large swinging of the front nose cone. Meanwhile, with Ackermann steering, the steering happens in the front, so the nose wiggles less.</p><p id="3b253442-794a-4980-a736-9129e6b76eec" class="">
+</p><p id="f6bb26f2-0701-4802-b642-b9b9e81662d2" class="">To try and fix this, we tried redoing the nose cone shape, adding guards on the side, and dampening the front with foam, all to no avail. Does this mean we had made the wrong decision in the debate of Ackermann vs. Differential? Maybe, but it didn’t mean we had to switch. Since we put our block-pickup mechanism together pretty quickly, we decided to explore a different pickup mechanism which didn’t have this fault.</p><p id="c6361ccd-ae3e-4bac-9ae2-654c2313be29" class="">
+</p><h3 id="93b5f814-48e4-4f28-8d44-2cc71ee27943" class="">b) Front Roller</h3><p id="f0c59a95-b9b5-4ffb-a718-26acc1147343" class="">Several other teams had shown that a front, inwards-spinning roller also worked for picking up these light blocks. We decided to adopt that which led us to this re-design:</p><p id="7985fcad-85cc-4384-b4e6-f63abfabf7fd" class="">
+</p><figure id="782965f1-ac70-448b-a88f-c499bda28c96" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/image_(6).jpg"><img style="width:2000px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/image_(6).jpg"/></a></figure><p id="58f11a11-5fa9-434b-ace5-654e0c2445ae" class="">
+</p><p id="b40b1616-c383-4d6d-99bc-21f76606dcc8" class="">This looks like an entirely new build, but the back is essentially identical to the winged-robot, and we’ve just widened up the front so that we could connect some side panels which hold a light yellow motor and the spinner itself. The middle region between the front spinner and the back wheels is simply a hollow container for block storage.</p><h1 id="78089367-03db-485b-ba1e-1741857d4f6c" class="">4. Bomb Detection</h1><p id="19de2b7e-797a-47e0-bfdb-acb3ef667855" class="">In most previous competition, fake or “trap” objects placed on the track, which would penalize the team if their robot picked them up, had magnets embedded in them. In our competition, it was the “bomb”, with the same physical footprint as a regular gray prize block, but a magnet below one of the faces.</p><p id="1efc7b42-c808-4810-a167-5579381c8c23" class="">
+</p><p id="6d33645e-5039-4da9-8453-c9a49f72486e" class="">ENPH 253 provides hall-effect sensors which students can use to detect such magnetic fields, but they’re often very unreliable, need to placed in the right orientation, don’t work when they quickly pass by a magnet, and must be extremely close to the magnet source to detect anything.</p><p id="b78e8ab3-6450-4839-ae97-b4b954972d55" class="">
+</p><p id="75e1d93b-799c-4c18-af79-69635db43f19" class="">My idea was to use a <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>magnetometer</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>, which is normally used to detect orientation with respect to the Earth’s magnetic field. These devices must be extremely sensitive, which means that as a prominent external magnet approaches it, it’s reading spikes greatly — which a microcontroller can detect! Before I get into the details, here it is in action:</p><p id="b0bded68-cc22-40a4-b474-34abf84abbe7" class="">
+</p><figure id="cf49356f-53a8-43da-8120-7c081b7f806a" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(2).gif"><img style="width:720px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(2).gif"/></a></figure><p id="c36f48cd-c73b-4f32-81f5-5eb28f20e327" class="">
+</p><p id="85337407-9caf-4fe7-954c-f11be9ede817" class="">It doesn’t hesitate to pick up the gray (prize) blocks, but stops spinning as a bomb (black/orange) approaches. In fact, this detection happens from <em>quite far away</em> — it just looks slower than it is because the spinner has some inertia, and it takes time for it to come to a complete halt.</p><p id="74ea1b97-3113-4a39-a9c2-8d0a264b2e1a" class="">
+</p><p id="5f835535-813f-4624-bf99-c365987468da" class="">This is such a reliable and powerful method that it almost feels like cheating. But it’s not, which is why I wouldn’t be surprised if the future competition “trap” items must be detected in some other way.</p><p id="50a8c5fd-8b88-4722-925c-11f28ff5e48d" class="">
+</p><p id="ae154192-dce1-4c34-bd8c-391e4cc76162" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>How it works:</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="82d7c32c-2550-4dc0-be80-f3e92a97420c" class="">The magnetometer used is the QMC5883L/HMC5883L magnetometer, which communicates over I2C with the Blue-Pill. It passes through the following a first-order low-pass IIR + moving average filter chain, and then by checking if the derivative of that filter output is greater than a certain threshold, we can determine if a bomb is near / approaching.</p><p id="d8d8d3b6-6801-4165-92d1-181376cab2e8" class="">
+</p><figure id="c605a55b-afc9-48e5-b182-eff92bb3aee2" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2012.png"><img style="width:1585px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2012.png"/></a></figure><p id="5a361669-8df6-47e1-bca9-e9ec2e84dd5c" class="">
+</p><p id="1c6e1514-86ad-46d9-b732-3d5a192b8774" class="">With this configuration, each magnetometer has about a ~10 cm detection radius, but the width of the collection area was about ~16  cm, so we needed one on either side of the robot to cover the whole range:</p><figure id="6fb9e964-836c-4e65-862f-bfe34b82be1f" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2013.png"><img style="width:576px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2013.png"/></a></figure><p id="6b528475-b5fa-4c10-b428-06d1780a356e" class="">
+</p><p id="1d4ad61d-0369-406e-b09a-03da49ed2473" class="">They’re placed under and a little forward of the spinner, hidden behind the navy-blue 3d-printed covers to prevent damage:</p><figure id="38ba4bbb-ca57-4b26-86ad-a9ebd1e77f97" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2014.png"><img style="width:1817px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2014.png"/></a></figure><p id="28fc9f63-a345-4049-9ed0-ec76b2fe5a3a" class="">With two identical magnetometers communicating over I2C however, they have the same bus address. We <em><em><em><em><em><em><em>do </em></em></em></em></em></em></em>have two microcontrollers, so we <em>could </em>connect one magnetometer its own Blue-Pill … instead we decided to use a TCA9584A I2C multiplexer controlled by one Blue-Pill to switch between the two sensors. With this configuration, each Blue Pill is <strong>completely independent</strong> — one handles the driving, and the other handles the bomb detection and the spinner.</p><p id="80539f72-b455-43d5-bb19-e91056c5bcd3" class="">
+</p><p id="7adffc8b-6de5-4ee5-ba82-739709684462" class="">I should mention that the detection range has a little bit of a dead-band in the center (just in front of where the two ranges above overlap), but as the front end of the robot oscillates, this dead-band is swept across back and forth several times, and the bomb is always detected.</p><h1 id="674d386d-dda3-47af-a14f-233e1319a541" class="">5. Driving Zones</h1><p id="9a9030d4-1964-4cda-98b3-c118b8de63c5" class="">One nicety that Dhruv and I worked on was implementing <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>driving zones</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>, which allowed us to better tune for speed and PID values (if a region had more sharp turns, we could increase P). In principle this is really simple to implement — we just store a 2D array of P, I, D, speed, and motor frequency (for torque adjustments) values. Here are the zones …</p><p id="77308844-bc62-4c62-a678-3caab58dfecd" class="">
+</p><figure id="65bd9988-9f7a-4f91-89fc-a6073b7a5165" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/isolation_(4)_(1).png"><img style="width:960px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/isolation_(4)_(1).png"/></a></figure><p id="b320601b-7875-4e92-8c8b-b4be35f5fd65" class="">… and here’s that array:</p><figure id="838bae5d-ceb1-4020-8a52-e87028919b30" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2015.png"><img style="width:752px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2015.png"/></a></figure><p id="c8f01ffd-406c-4883-9785-b210af0801c9" class="">
+</p><p id="ac05bdf3-95dd-4c01-8d50-0ead7a6ce6a9" class="">Each row in this array corresponds to which zone we’re in. Now we just use a long ugly list of if-statements to update our zones:</p><p id="f3f58b2f-7cf0-4b55-bdc8-6f97dce86957" class="">
+</p><figure id="f8ee85da-d8d7-460b-bffe-524f5f5835a7" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2016.png"><img style="width:665px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2016.png"/></a></figure><p id="9e484cf8-40ac-44bf-bb2d-fef3c03cdd51" class="">
+</p><p id="5b51075e-5c45-46fa-91e3-d29fa98d4c32" class="">These if-statements increment our state around the track if a) we’re at some state, and b) if a physical marker on the track indicates a defined change that <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>can only happen in that state</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>. For example, if we’re in the <code>BRIDGE</code> state, but we see that we’re no longer under an object, we update the state to <code>EXITING_BRIDGE</code>:</p><figure id="0b052fc9-2be1-455c-bf6b-52e61cac638d" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2017.png"><img style="width:720px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2017.png"/></a></figure><p id="6f214f09-8cf9-45ec-85d1-838ea42e66df" class="">
+</p><h3 id="b85bf268-374d-4142-9440-5ac630f11598" class="">a) Measuring Changes</h3><p id="f9a45bce-73c8-4be8-bd9f-bf54446e8fb0" class="">To understand our position on the track, we use sensors to look for identifiable physical track markers.</p><p id="30568346-e3d1-48bb-b7a7-2885fbc22ffe" class="">
+</p><p id="5be698e1-28e1-4b50-b742-3230c890ec10" class="">The first sensor we use is a HC-SR04 ultrasonic distance sensor to detect the <strong><strong><strong><strong><strong><strong><strong>bridge </strong></strong></strong></strong></strong></strong></strong>and the <strong><strong><strong><strong><strong><strong><strong>archway. </strong></strong></strong></strong></strong></strong></strong>The distance value appreciably changes when the robot …</p><ol type="1" id="3a06cd30-36f0-4573-85bb-3f375bde7c1a" class="numbered-list" start="1"><li>enters the bridge</li></ol><ol type="1" id="e5c3b672-d313-42d3-8e4b-fc6cedfed39e" class="numbered-list" start="2"><li>exits the bridge</li></ol><ol type="1" id="ede9e5fb-72d6-4325-9356-77f4fafd1419" class="numbered-list" start="3"><li>enters the small archway</li></ol><ol type="1" id="f1bb2b4d-e4f4-4b5e-8169-97834f64339c" class="numbered-list" start="4"><li>exits the small archway</li></ol><p id="e0b2243b-4142-4065-bacb-2c817d32b7a9" class="">
+</p><p id="0fa9f0d6-3c28-489c-9834-734f790b4fd0" class="">We map these changes to states <code>ENTERING_BRIDGE</code>, <code>BRIDGE</code>, <code>EXITING BRIDGE</code>, <code>PRE</code> (for pre-archway), and <code>POST</code> (for post-archway) </p><p id="dd998483-81b7-488d-9211-39049af05cf6" class="">
+</p><figure id="c0018246-7eb3-4d48-95db-d53210e3ecc4" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2018.png"><img style="width:1328px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2018.png"/></a></figure><p id="20d84d67-ef32-42ad-a1f4-29fe1625668b" class="">
+</p><p id="8e5bb0ff-0bb8-4e74-aae9-b89cfdf8c14b" class="">This sensor alone maps out the entire track from the start to right before the upwards ramp. But that leaves us to detect the up-ramp itself, rainbow road, and the down-ramp. To do so, I suggested we use physical switches located at the front of the robot:</p><p id="e16e89dc-ce01-4522-9eeb-f224c978637d" class="">
+</p><figure id="1ab0c820-f5d6-423f-96e6-3c6b3fbb986c" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2019.png"><img style="width:1336px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2019.png"/></a></figure><p id="42c406d5-67f3-4421-ae0e-d3dc11bdc826" class="">These are angled precisely and are slightly flexible so that they’re free to flap around and scrape along the surface of the track, but they physically click when the robot …</p><ol type="1" id="5c0d3384-3d68-45ee-b557-dee2a605d87c" class="numbered-list" start="1"><li>starts going up when it reaches the upwards ramp</li></ol><ol type="1" id="e72e368b-7fcd-4b76-a662-63f8922dde11" class="numbered-list" start="2"><li>starts going up rainbow road</li></ol><ol type="1" id="f146f53d-f64d-4ab7-9c12-25a449c30b97" class="numbered-list" start="3"><li>starts going down the rainbow road arch</li></ol><ol type="1" id="ee86e7a8-2291-45ec-8bbb-f3f64fba85ac" class="numbered-list" start="4"><li>comes off the end of the downwards ramp</li></ol><p id="fc607cb8-4115-42c4-8467-5d5811419368" class="">
+</p><p id="38c69d6e-20a2-4c8c-b97c-dd938b238db0" class="">This clicking allows us to map the rest of the track into zones <code>UP_RAMP</code>, <code>UP_RAINBOW</code>, <code>DOWN_RAINBOW</code>, and <code>TURN</code>, which is the first state (since coming off the downwards ramp means we’re at START(2), which has a sharp turn.</p><p id="09528172-edf2-4de6-9186-6e443fe23190" class="">
+</p><div id="1e837d97-8afc-4982-90e0-d889080b7ced" class="column-list"><div id="a934a89a-443f-461d-9992-ebd91efcbae9" style="width:43.75%" class="column"><p id="44ce68c6-f567-4f21-b429-01daf92b5a46" class="">And that gives us the final mapping of the track which I showed previously. The transition from TURN → START is simply handled by a timer, which ventures into the unfortunate region of hardcoding, but it’s what we had to do.</p></div><div id="1fccc6ec-b743-4138-b6bb-2f3bf57377fb" style="width:56.25%" class="column"><figure id="015a601b-0694-4728-88d2-2b3f7c5b9c6e" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/isolation_(4).png"><img style="width:960px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/isolation_(4).png"/></a></figure></div></div><p id="09e4a6ab-6484-4268-af09-4a111cc805bc" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Note: Bomb Drop</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="0a27959d-7609-4e2c-aedd-959a9a4ee7fc" class="">Unfortunately, we didn’t save any videos of our bomb dropped in action, but we did use it throughout the competition. One benefit of using zones is that our robot can drop the bomb in 9 different spots on the track based on the team we’re competing against. </p><h3 id="badaff4c-c7dd-479f-a20f-26878a5bf63b" class="">b) Bridge Handling</h3><p id="27aa21db-90a7-42f9-aa3e-c47cd9d3f237" class="">Implementing zones also helped solve one of our largest problems — the finish line. To us, the finish line is a nice indicator that a robot has fully completed a lap. But to the robot, the checkered black and white marks look like a complete mess, giving you an arbitrary error value. If you approached the line head on, you’d likely be able to cross the finish line just because you’re already aligned — but if you’re the slightest bit angled, you can be misled by the tape and ram into the side of the track:
+</p><figure id="065e811e-316d-4ab6-a186-e28c3e8d165d" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(5).gif"><img style="width:672px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(5).gif"/></a></figure><p id="52a1f0c8-c6ae-490a-b2d4-810485a711d2" class="">
+</p><p id="a26ac323-657e-409c-9d6d-c483a6c8586c" class="">This is an issue that almost all teams faced at one point, but I’m not sure anybody fully solved. For us, the trivial solution would just be to slow down when we come under the bridge, so that we’re not wobbling as much and can align ourselves better. However, since the bridge (and the junction) is a big point of contention in the race, slowing down here is unfavorable and could possibly lead to collision.</p><p id="b99f1899-291c-48fb-a0d2-1d550bf8c0e3" class="">
+</p><p id="2f8196c8-7a0e-4a33-8832-d53d5d8d3918" class="">Trevor had the interesting idea that, for when we’re under the bridge, perform PID with the <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>error being the displacement off the middle of the archway</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em>. And this is not a bad idea in theory because regardless of what the tape sensors see, we can use the sonar to check the height of the bridge that we’re under, and then correct accordingly:</p><p id="7d0102d4-5528-4486-af25-c1efc04cff8c" class="">
+</p><figure id="a1a61808-439f-4bc9-960f-f4b59f72a536" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2020.png"><img style="width:1819px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2020.png"/></a></figure><p id="62d42558-9c73-4625-a51a-e642a614999f" class="">
+</p><p id="d75838d4-6a4a-48a5-8e26-719ea8816613" class="">Unfortunately, this doesn’t work entirely because the archway is symmetrical, and so with one sensor, equal distances away from the line, whether it be left or right, will look identical to the distance sensor. This is shown by the same colored arrows, where two different positions under the bridge can <em><em><em><em>alias </em></em></em></em>into the same distance reading, so the PID won’t know whether to go left or to go right.</p><p id="019b9a37-b5af-4a0e-8dc5-34e16d97fb4a" class="">
+</p><p id="54e115c6-1eec-4529-b25c-956cb05a10e9" class="">However, this got me thinking about using physical indicators on the track, and so I suggested we do the following:</p><figure id="1b7474f4-d9b6-4c9a-a41e-7c3cf038c8e2" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2021.png"><img style="width:2499px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2021.png"/></a></figure><p id="2bd3f483-547b-48f2-ac40-a9489ae51791" class="">
+</p><p id="4fc084e6-dead-4107-8794-0cabd8cf8c3c" class="">Here I’ve indicated the side wall of the ramp in orange, and the centerline in red, which are spaced ~54 cm apart on the track. If we’ve exited the bridge and we’re on the centerline, that means we weren’t misled by the tape. So how can we ensure we stay close to this line?</p><p id="27332bb8-da84-4d3c-8ada-f5bb25280433" class="">
+</p><p id="a6954d27-ccf4-4d2d-9ebc-6e4000dac8e9" class="">Simply place a distance sensor on the left side of the robot, so that as it exits the bridge, it reads the distance between it and the ramp wall. If that value is less than 54 cm, we’re too close to the wall (above the center line), so we need to shift right. Otherwise, if the value is greater than 54 cm, we’re too far away from the wall (below the center line), so we need to shift left. This way we can ignore the arbitrary error value  from the tape track and overwrite it with the error <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo stretchy="false">[</mo><mi>t</mi><mo stretchy="false">]</mo><mo>=</mo><mtext>dist</mtext><mo>−</mo><mn>54</mn></mrow><annotation encoding="application/x-tex">e[t]= \text{dist}-54</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">e</span><span class="mopen">[</span><span class="mord mathnormal">t</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord text"><span class="mord">dist</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">54</span></span></span></span></span><span>﻿</span></span>. </p><p id="6076f7d0-38f5-49e2-a8d2-bbc90b55d228" class="">
+</p><p id="76b0c574-a01f-4f69-a30b-6aa5a47d0474" class="">Here you can see an extreme case of that process in action, where we approach the finish line at a horrible angle, but the distance sensor reads that we’re too close to the left wall, and so it forces the robot to turn right.</p><p id="b787281a-fed9-4c87-8d96-5411bcdda5a5" class="">
+</p><figure id="6cb618e0-ad73-42a9-af48-9c94cc557e53" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(6).gif"><img style="width:672px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(6).gif"/></a></figure><p id="2f634bc0-9e41-4c20-946e-f6acc587ef48" class="">
+</p><p id="d876a25a-bf40-415e-9355-c390b9d31a6b" class="">There is room for one more optimization though. If we’re exiting the bridge and we see that we’re too far away from the ramp wall, there’s no <em><em><em><em><em><em><em>reason </em></em></em></em></em></em></em>to shift left, because a little in front of you is the track anyways. So what we do is say that in this case, just keep driving forward until you hit the tape again:</p><figure id="f446105e-3895-49c9-9ab3-a288ecbc55ae" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2022.png"><img style="width:2547px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2022.png"/></a></figure><p id="132dc2dd-9d2c-4fcf-a93f-accfb12ec505" class="">This minor cut doesn’t look like much, but if we’re going to correct our orientation with respect to ramp wall when we exit the bridge, there’s no point doing <em><em><em><em>any </em></em></em></em>PID while we’re under the bridge, since we’ll be fixed by the time we leave it. So the final optimization we do is simply drive <strong><strong><strong><strong><strong><strong><strong><strong><strong>straight at full speed </strong></strong></strong></strong></strong></strong></strong></strong></strong>under the bridge. If we end up too close to the ramp, we shift right until we hit tape (shown in red), but if we end up too far away, we just keep going straight since we’re bound to hit tape in front:</p><p id="90342262-7eba-45e5-8c50-58099d2f7b8f" class="">
+</p><figure id="665fa391-afc9-4ffb-9bce-d70bdfc9016e" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2023.png"><img style="width:2186px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2023.png"/></a></figure><p id="c50e2aec-39d0-45b7-b56a-650c4dc09c54" class="">
+</p><p id="9bbad6d1-d816-40ff-bef8-7f205c49e190" class="">The blue cut is a time save of about ~1s, and while it <em><em><em><em><em><em>looks </em></em></em></em></em></em>like the red path would add time, because we’re driving at a faster speed during this bridge region, we don’t end up losing any time at all.</p><p id="ff80e436-5df1-4d28-b551-7ab5231ac523" class="">
+</p><p id="c7f82a1f-76ba-4767-9c93-27c548ad85ba" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Note: VL53L0X Laser Distance Sensor</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><div id="00578a86-76dd-4cf6-8521-6435c32e7364" class="column-list"><div id="44281b60-fff7-4c3f-8064-73f8a67858aa" style="width:50%" class="column"><p id="5df40178-43c0-4bb7-965f-c50a9ae12a5f" class="">This scheme requires the distance reading between the ramp wall and the robot to be precise, so we use the VL53L0X laser distance sensor. It communicates over I2C and can give readings on the mm scale — it’s also very tiny which is why you can’t see it in any of the videos, but it’s mounted on the <em><em><em><em><em><em><em><em><em><em>left side </em></em></em></em></em></em></em></em></em></em>of the robot (the side which faces the ramp wall as the robot exits the bridge).</p></div><div id="307cbe55-ebc2-4ce8-94ec-cc50bc87bb41" style="width:50%" class="column"><figure id="9835343e-ed03-4724-b757-06b09c0fbd78" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/6116c7Q9kS._AC_UF8941000_QL80_.jpg"><img style="width:894px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/6116c7Q9kS._AC_UF8941000_QL80_.jpg"/></a></figure></div></div><h1 id="97538412-411c-4d39-a0fc-6e04e3983fd7" class="">6. CAD + Run</h1><p id="f3d155cd-15a3-4adc-9c7a-491c4cd702d4" class="">Amr and Trevor did most of the CAD and machining throughout the course, but I was able to help them with some parts like the battery holders, motor shaft, side walls, and some other minor parts here and there. Since we went through lots of redesigns through the course, I pulled a few all-nighters with them so they could print / laser cut and assemble the parts in the morning.</p><figure id="c506ff57-4738-4342-84d3-4b9be40cda46" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2024.png"><img style="width:890px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2024.png"/></a></figure><div id="678d6701-3016-4f05-ab1a-b6c1e1992eec" class="column-list"><div id="db5f7f5c-2948-4e6c-a27e-d1aa49e6b365" style="width:31.25%" class="column"><p id="5265853d-7f1e-4759-ba59-ebed363524a8" class="">We projected the CAD window onto a whiteboard, and our workflow consisted of one of us actually designing it, and the other two labelling points on the whiteboard of what to adjust, cut, modify, or extrude. Here you can see Amr on his designing shift while Trevor and I tell him what to do 😅</p></div><div id="5236a860-163c-45ad-a6b6-34ee68fe0fa3" style="width:68.75%" class="column"><figure id="d59de653-6c9d-4ef9-b31d-b225eb0e4291" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2025.png"><img style="width:1745px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/Untitled%2025.png"/></a></figure></div></div><p id="46db5f58-04b7-41c8-8b9a-fb8eedbaeafb" class="">
+</p><hr id="f7ab2055-0128-4291-99fc-23d33410ea94"/><p id="5e65e9ef-c428-4c91-912f-d5815d223e20" class="">
+</p><p id="0cd2c679-d662-44f7-a2eb-e30deab96e06" class="">And before I finish off here’s a demonstration of a ~16 second lap, without the shortcut being taken.</p><p id="fefb26d9-3a92-43f1-a5e7-c28bc362e9a3" class="">
+</p><figure id="b633b1e0-6c1a-4d76-b884-ad90f172e03d" class="image"><a href="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(8).gif"><img style="width:672px" src="ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c/ezgif.com-video-to-gif_(8).gif"/></a></figure><p id="5daa4df5-b483-4018-b95b-5bf3a337a472" class="">
+</p><p id="e29f26b8-d0cb-4c80-846e-b6e195b5c6fe" class="">I’m currently going through some of the live competition footage to see if I can find a clip of our <strong><strong><strong><strong><strong>full </strong></strong></strong></strong></strong>robot operation, where we’d drive around, pick up blocks, and drop bombs.</p><h1 id="327837f2-3075-4093-90c6-79101dff4a14" class="">7. Conclusion</h1><p id="951cd260-7648-474d-8fe2-f9f506160edd" class="">… and we’re at the end.  I’ve been asked about my experience lots and about “how to win robot summer”. And of course, 2nd place isn’t a win, but here’s what I can say. And to any future ENPH 253 students who bothered to scroll this far, I would say this section is more important than anything I’ve written above.</p><p id="98e61ccd-da22-4c88-b910-879e9757a20b" class="">
+</p><p id="a47cef23-8242-4043-a91c-8559dffe1323" class="">The simple answer is that the competition changes every year, and then so does the strategy, which is extremely crucial for your success. That doesn’t mean there’s one way to win, it just means that you should choose something <em><em><em><em><em><em><em><em><em><em><em><em><em>maintainable. </em></em></em></em></em></em></em></em></em></em></em></em></em>If something seems overcomplicated while you’re planning, it will certainly get worse once you actually have to design, implement, test, and debug it. Problems will come up that you can’t even imagine.</p><p id="8cda85a6-e2aa-4674-b4c7-8a3aa51cbe37" class="">
+</p><p id="2fe0ac8a-d10a-468c-915d-ea1139f5527d" class=""><em>“Does that mean I should choose the simplest strategy?  Won’t I learn more if I try to do something complex?”</em> No, and no. If you choose the easy way out, you can certainly do well, but you’ll end up learning almost nothing. If you try to do too much, the mere 6 weeks you have (and trust me, time flies) to build such a complicated robot will have you making poor design choices, rushing manufacturing, and being unable to test thoroughly. In fact I argue that you’ll learn <em><em><em><em><em><em><em><em><em><em>even less </em></em></em></em></em></em></em></em></em></em>than those who take the easy way out. So of course you should try something <em><em><em>new</em></em></em>, but if it gets too hard down the line, always be prepared to change up your plans and simplify.</p><p id="c33ba88f-5cb9-4794-93de-c19894215390" class="">
+</p><p id="c2c705fb-090e-479b-8027-35e23186caa0" class="">Now, strategy and solutions are different. Within your appropriately-chosen strategy, you will come across various roadblocks in this course, and then I say the solution to those mini problems should be as simple as possible. When trying to detect the ramps, we wasted time with gyroscopes, level detectors, and even color sensing for rainbow road. But the simplest solution, and the most consistent one, was to just place some switches at the front and wait for them to click. ENPH 253 is about rapid design, and the longer you take on one thing will affect <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>everything else </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>you have to work on.</p><p id="20e6bc31-8f28-43eb-8499-ebb0ae535817" class="">
+</p><p id="86b20a42-1425-4761-8b22-d201fc012eda" class="">Then comes the engineering — it’s hard to perform well with an amazing strategy, but bad design. Don’t just build things that work, build things that will <em><em><em>last</em></em></em>. Try not to overcomplicate the software, keep your circuits clean, and build your robot in a way that’s easy to test, modify, and assemble. I can’t count how many times we assembled half the robot, only to realize we couldn’t tighten a nut because of how hard it was to reach. </p><p id="87e48b59-d025-400e-959a-4736b20293ce" class="">
+</p><p id="312b5fe8-6757-4784-b886-4159e879995f" class="">But once you’ve done all that, it’s competition day. From what I’ve seen this year, and in talking to peers who competed in this competition <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>anything above top 4 was unpredictable</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>. If you ran the competition multiple times, those who get knocked out early would likely get knocked out again. But if the semi-finals were ran again, I can think of countless ways in which we get 3rd, 1st, or 4th. I went into ENPH 253 hungry to win, but I soon realize that everyone has <strong><strong><strong><strong><strong><strong><strong><strong>brilliant</strong></strong></strong></strong></strong></strong></strong></strong> ideas that never even crossed my mind. And especially when two vastly different robots race, if they both work <strong><strong><strong><strong><strong><strong><strong><strong><strong>consistently</strong></strong></strong></strong></strong></strong></strong></strong></strong>, it’s almost impossible to tell who will win.  </p><p id="767e0021-3c52-4176-900e-d464f61e979b" class="">
+</p><p id="270a2b3b-591a-40a1-88b9-40e21ee5ea17" class="">In ENPH 253, I don’t think any robot was the “best”. If your robot has a theoretical statistic of 80 in pickup, and 20 in speed (80+20=100), you will almost always beat a team with 70 in pickup, and 10 in speed. But will you win against a team of 50 in pickup, and 50 in speed (50+50 is also 100)? And these are just two factors — in reality your robot has statistics in speed, block pickup, bomb avoidance, IR following, zipline mounting, jumping, collision detection, lap consistency, and more. </p><p id="04c5ee8b-8d29-466a-9a60-36cda06e2e55" class="">
+</p><p id="803d2811-133c-4286-8f66-6e9131593438" class="">In my opinion, the best you can do is try a section of it all — think and work on speed, block pickup, bomb avoidance, IR following, zipline mounting, jumping, collision detection, lap consistency, and more. We didn’t do all of them, and neither did any other team. Those who did more on the list, weren’t as good as other teams who focused on a fewer handful. So who is better? In fact you’ll never really know, because it can come down to something that’s out of <strong><strong><strong><strong><strong>both </strong></strong></strong></strong></strong>team’s hands — like the placement of blocks, or the lighting in the competition room.</p><p id="2c7b037f-5e4e-452b-aea6-c03fd753bdbf" class="">
+</p><p id="b8c4ed2c-8abf-424b-814b-4f4805d98bac" class="">The only thing that you, and the rest of your peers will be able to agree on, is what you were able to accomplish. And boiling that down to a competition placement doesn’t tell the full story. In my year, a team that successfully travelled the zipline, but didn’t make it to top 4, received immense accolades from everyone and the program director himself. Another team that was knocked out early on still gained the respect of several in our year because they were able to complete a lap <em><em><em>without following any tape</em></em></em>. And the team that finished 4th had one of the nicest bomb avoidance mechanisms, intaking the bomb but then letting it slide out later.</p><p id="8e266727-2162-4b44-8119-59002845a2bb" class="">
+</p><p id="cf40b383-0634-4606-8391-7f09844fa5b1" class="">The concept of anything but first can be pretty foreign to understand, and pre-robot-summer Ebrahim would have probably laughed reading this. But I’m proud that we figured out how to drive around within the first week of the course, and we didn’t stop there. We learned how to pick up blocks, map out the track, detect bombs with compasses, fix noise, put it all together, and make it work over and over again. I have an immense amount of respect for the teams that pushed the limits on what was possible within these 6 weeks. Even if something didn’t work all the time, they were able to show that <em>at</em> <em>least it was possible.</em></p><p id="348aaf2f-076d-4de4-82e5-9b0ba21b62c4" class="">
+</p><p id="485a43c6-a1e4-47b5-b6ed-e5e2ab6dd01a" class="">And I truly believe that’s what ENPH 253 is about. It’s a course where you see new ideas come to life, not plain, boring ones. It’s about imagining something <em><em><em>new</em></em></em> and then actually going out and doing it. To those taking the course in the future, I hope you find such a course like this thrilling, push not to take the easy way out, learn a lot about yourself, and have fun all the way through.</p><p id="c3039738-a6cc-451c-bcaa-4e689394cf69" class="">
+</p></div></article></body></html>

@@ -1,0 +1,805 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>FPGA CIC Development</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="55cbf505-bc97-476c-a2e6-06997894ef0e" class="page sans"><header><h1 class="page-title">FPGA CIC Development</h1><p class="page-description"></p></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fae92947-cb86-4ab7-a851-ea7c731f7d78"><div style="font-size:1.5em"><span class="icon">📃</span></div><div style="width:100%">This is a small tangent into the MATLAB CIC down-sampling tool I designed to help us find appropriate decimator filter configurations.
+
+As mentioned this is a good read: <a href="https://tomverbeure.github.io/2020/09/30/Moving-Average-and-CIC-Filters.html">https://tomverbeure.github.io/2020/09/30/Moving-Average-and-CIC-Filters.html</a>
+… if you care about understanding terminology used here.</div></figure><p id="29228641-0d32-4782-87a1-b0ae073057aa" class="">As described <a href="../FPGAs%20at%20the%20Quantum%20Matter%20Institute%2041493df1699c45de990e25f677882865.html">here</a>, if we decimate a signal to a new sampling frequency, the higher frequencies will alias into lower ones, adding noise into the signal. This aliased noise is greatly reduced by a <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>CIC down-sampling filter</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>. </p><p id="b8757bcc-f48e-4ad2-b875-62ba187f559b" class="">
+</p><p id="063bb1be-d7f3-4f22-bd69-c731efc1da4c" class="">The FPGA (Red Pitaya) samples at 125 MHz. But it’s requires a lot of resources to design a effective digital filter across the entire 0 → 62.5MHz (<a href="https://en.wikipedia.org/wiki/Nyquist_frequency">Nyquist frequency</a> = maximum bandwidth = <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><msub><mi>f</mi><mtext>sampling</mtext></msub><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{f_\text{sampling}}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.344188em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.999188em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.51308em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3487714285714287em;margin-left:-0.10764em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord text mtight"><span class="mord mtight">sampling</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29011428571428566em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><span>﻿</span></span>) range. Say the signals I am interested in only working with have a maximum bandwidth of 1 MHz (1000 kHz). If that’s the case (which it very commonly is), there’s no reason to design a filter for such a large bandwidth. What we can do is <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>down-sample </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>the signal as much as possible <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>before it reaches our filter</em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em>, so that our filter only has to operate on the 0 → 1 MHz range instead.</p><p id="afffcd80-241f-4b0d-8f39-4225c3cbe485" class="">
+</p><div id="b6bed09b-42e2-4cdd-a869-dc2e5a5e60c3" class="column-list"><div id="907e159e-2abc-42f3-8194-8eef53904986" style="width:50%" class="column"><p id="c05073a9-da1b-430b-85c3-d5c19301d5ef" class="">So let’s try that! We can try is just decimation rate of about R=60 (order=1), so that we sample at <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>125</mn><mn>60</mn></mfrac><mo>≈</mo></mrow><annotation encoding="application/x-tex">\frac{125}{60} \approx </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">60</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">125</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">≈</span></span></span></span></span><span>﻿</span></span> 2.083 MHz. Then the Nyquist frequency, which is the <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>maximum filter bandwidth</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> is <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≈</mo></mrow><annotation encoding="application/x-tex">\approx</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.48312em;vertical-align:0em;"></span><span class="mrel">≈</span></span></span></span></span><span>﻿</span></span>1.042 MHz. That’s just above the <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>maximum signal bandwidth </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>of 1 MHz, so we’re in the clear. We plug in important variables into the <code>cic_designer.m</code> (right)</p><p id="b2691400-b26d-4a5f-9037-e9e0b8dcc4d0" class="">
+</p></div><div id="51e90f28-dcd0-417b-889e-18d575340c16" style="width:50%" class="column"><figure id="93713de0-e865-4acf-9120-6996668de8b1" class="image"><a href="FPGA%20CIC%20Development%2055cbf505bc97476ca2e606997894ef0e/Untitled.png"><img style="width:466px" src="FPGA%20CIC%20Development%2055cbf505bc97476ca2e606997894ef0e/Untitled.png"/></a></figure></div></div><p id="2b2c6ac0-6dfe-47bf-8035-ddf2b344df9e" class="">And here’s the response from the program:</p><figure id="c1ccb6b7-244d-4466-9297-c812013387e9" class="image"><a href="FPGA%20CIC%20Development%2055cbf505bc97476ca2e606997894ef0e/Untitled%201.png"><img style="width:688px" src="FPGA%20CIC%20Development%2055cbf505bc97476ca2e606997894ef0e/Untitled%201.png"/></a></figure><pre id="83b37c21-812d-4418-8feb-bc2877008459" class="code"><code>Region 1: 0 kHz -&gt; 1041.6667 kHz  :: -3.5841 (worst)
+Region 2: 1041.6667 kHz -&gt; 2083.3333 :: -4.2791 (worst)
+Region 3: 2083.3333 kHz -&gt; 3125 kHz  :: -13.3568 (worst)
+Region 4: 3125 kHz -&gt; 4166.6667 :: -13.5879 (worst)
+Region 5: 4166.6667 kHz -&gt; 5208.3333 kHz  :: -17.8249 (worst)
+Region 6: 5208.3333 kHz -&gt; 6250 :: -17.963 (worst)
+...
+Region 59: 60416.6667 kHz -&gt; 61458.3333 kHz  :: -35.577 (worst)
+Region 60: 61458.3333 kHz -&gt; 62500 :: -35.5775 (worst)</code></pre><p id="85ad069d-3ea7-454f-9c95-4eb7aca6d34e" class="">
+</p><p id="9269017a-be76-4aba-bf02-9ab66b1c5177" class="">This is telling us something important — if we CIC decimate by a factor of 60, the worst-case attenuation in Region 1 (from 0 → 1.042 MHz) will be -3.581 dB (0.662 gain). This is pretty bad, since <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>the signal we are interested in has been partially filtered out already</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>.</p><p id="9c93974e-f86e-4229-bd42-ce9a704d99b6" class="">
+</p><p id="27952b83-7a03-4b69-8e89-858dc3649889" class="">The following attenuations will be aliased back into Region 1. For example, whatever the frequency components in Region 2 (from 1.042 MHz → 2.083 MHz) will be attenuated by -4.279 dB (0.611 gain), before it aliases itself back into Region 1.</p><p id="7a8a7b76-da04-4f92-812d-e80c70d69aaa" class="">
+</p><p id="c845e524-4433-42d0-8781-58181a3b900e" class="">Overall, this isn’t great. The positive we gained from such a high decimation rate means that our filter that will come after this down-sampler will be cheaper since the frequency range has been reduced … but we’ve tampered with the signal and haven’t fully dealt with aliasing.</p><p id="d3d9146a-f463-41b9-9dbd-119cf1488f97" class="">
+</p><p id="ddfe6bfd-ae3e-44b8-8f61-a199b1b6dd82" class="">So let’s trade off one for another, and <em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em><em>increase the frequency range </em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em></em>which means <em><em><em><em><em><em><em><em><em>reducing </em></em></em></em></em></em></em></em></em>the decimation rate. Plugging in R = 11, N = 1:</p><figure id="675b67c9-1428-46f9-9329-7e05cd9d6eec" class="image"><a href="FPGA%20CIC%20Development%2055cbf505bc97476ca2e606997894ef0e/Untitled%202.png"><img style="width:1115px" src="FPGA%20CIC%20Development%2055cbf505bc97476ca2e606997894ef0e/Untitled%202.png"/></a></figure><pre id="6e1214be-bad3-4210-b482-0bff1a166ab5" class="code"><code>decimation rate (R): 11       order (N):1
+ 
+input sampling frequency: 125000 kHz
+decimated sampling frequency: 11363.6364 kHz
+max decimated bandwidth: 5681.8182 kHz
+max fir bandwidth (interest): 1000 kHz
+ 
+Region 1: 0 kHz -&gt; 5681.8182 kHz  :: -0.11001 (worst)
+Region 2: 5681.8182 kHz -&gt; 11363.6364 :: -20.3228 (worst)
+Region 3: 11363.6364 kHz -&gt; 17045.4545 kHz  :: -21.8137 (worst)
+Region 4: 17045.4545 kHz -&gt; 22727.2727 :: -26.415 (worst)
+Region 5: 22727.2727 kHz -&gt; 28409.0909 kHz  :: -27.0948 (worst)
+Region 6: 28409.0909 kHz -&gt; 34090.9091 :: -29.4797 (worst)
+Region 7: 34090.9091 kHz -&gt; 39772.7273 kHz  :: -29.8582 (worst)
+Region 8: 39772.7273 kHz -&gt; 45454.5455 :: -31.1805 (worst)
+Region 9: 45454.5455 kHz -&gt; 51136.3636 kHz  :: -31.3799 (worst)
+Region 10: 51136.3636 kHz -&gt; 56818.1818 :: -31.9831 (worst)
+Region 11: 56818.1818 kHz -&gt; 62500 kHz  :: -32.0459 (worst)</code></pre><p id="001c716f-86e2-4d1d-937c-eafb3e4acc0f" class="">
+</p><p id="91e709c3-b2a7-4cfc-be84-9a2bd809baf1" class="">And this is a lot better! Now the gain in the passband is at <em><em><em><em><em><em><em><em><em><em>worst </em></em></em></em></em></em></em></em></em></em>-0.1101 dB (0.987 gain), but the attenuation is very strong for the Regions 2 and onwards, and almost no higher-frequency components alias back in.</p><p id="e237c9d6-1f1b-4d8f-9c38-48d2a0e80cd9" class="">
+</p><p id="88d04054-660f-48f1-81d9-f72df8bf6422" class="">Overall, we’ve made our work down the line a little more difficult because any filter after such a decimator now needs to work over the 0 → 11.364 MHz range, but at least we are strongly attenuating everything outside of the <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>signal-of-interest-passband</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>.</p><p id="c696fe13-6f36-4db7-b626-3f4c8a5952ef" class="">
+</p><p id="9f5963b3-5bda-45bb-bdb7-bb5b050c90dc" class="">Here’s another quick plot for a CIC for a signal-of-interest with maximum bandwidth of 100 kHz. It’s important to design such down-samplers ahead of time, because any filters sitting downstream of them will need to know the rate at which they will sample at (to calculate their coefficients):</p><figure id="1e7e6d4d-dc45-4013-807f-ad57b5d05c99" class="image"><a href="FPGA%20CIC%20Development%2055cbf505bc97476ca2e606997894ef0e/Untitled%203.png"><img style="width:331px" src="FPGA%20CIC%20Development%2055cbf505bc97476ca2e606997894ef0e/Untitled%203.png"/></a></figure><p id="320c7c48-53d7-4115-9498-9cfa05a113f5" class="">
+</p><figure id="698d28e3-1a50-49cd-8c79-5a03fc9cd184" class="image"><a href="FPGA%20CIC%20Development%2055cbf505bc97476ca2e606997894ef0e/Untitled%204.png"><img style="width:696px" src="FPGA%20CIC%20Development%2055cbf505bc97476ca2e606997894ef0e/Untitled%204.png"/></a></figure><hr id="55083ae8-23e9-4706-9e6e-89ef2e78fdd5"/><p id="e35b47aa-467b-4c95-b041-10ee23c3d426" class="">
+</p><p id="046bdcd6-8d5d-4f22-a2ee-3e1a33b40a28" class="">Finally, here’s the code:
+</p><pre id="9f567505-9a1c-4d1d-8daa-a010c41c2044" class="code"><code>clear
+plot_db = true;
+plot_gain_interval_db = false;
+v_scale = true;
+
+% sampling and outputs
+fS = 125e6;  % source clock
+max_fir_bandwidth = 100e3;
+
+% parameters
+
+N = 1;
+R = 100;
+Rlimit = 10;
+M = 1;
+disp([&#x27;decimation rate (R): &#x27; num2str(R) &#x27;       order (N):&#x27; num2str(N) ])
+disp(&#x27; &#x27;)
+disp([&#x27;input sampling frequency: &#x27; num2str(fS*10^(-3)) &#x27; kHz&#x27;])
+disp([&#x27;decimated sampling frequency: &#x27; num2str(fS/(R^N)*10^(-3)) &#x27; kHz&#x27;])
+decim_bandwidth = (0.5*fS)/(R^N);
+diff_bandwidth = decim_bandwidth - max_fir_bandwidth;
+disp([&#x27;max decimated bandwidth: &#x27; num2str(decim_bandwidth*10^(-3)) &#x27; kHz&#x27;])
+disp([&#x27;max fir bandwidth (interest): &#x27; num2str(max_fir_bandwidth * 10^-3) &#x27; kHz&#x27;])
+disp(&#x27; &#x27;);
+
+if (diff_bandwidth &lt; 0)
+    disp(&#x27;ERROR: max fir bandwidth must be less than decimated bandwidth&#x27;);
+else
+    cic = dsp.CICDecimator(R,M,N);
+    gains = [];
+    ax1 = subplot(2,1,1); % Create the first subplot for the frequency response
+    ax2 = subplot(2,1,2); % Create the second subplot for gains
+
+    % Plot the frequency response in the first subplot
+    axes(ax1);
+    title(&#x27;cic filter response&#x27;);
+    [H, w] = freqz(cic);
+    X = w/(2*pi) * fS;
+    if (v_scale); Y = 1/R^N * abs(H); else; Y = abs(H); end
+    if (plot_db); Y = 20*log10(Y); end
+    
+    % plotting
+    hold on
+    plot(X, Y, &#x27;Color&#x27;, &#x27;blue&#x27;);
+
+    % folds and lines
+    for n=1:Rlimit
+        bandwidth_fold = decim_bandwidth * n;
+        if (mod(n, 2) == 1)
+    
+            
+            Q = interp1(X,Y,bandwidth_fold-diff_bandwidth);
+            if (isnan(Q))
+                Rlimit = n - 1;
+                break
+            end
+            xline(bandwidth_fold-diff_bandwidth, &#x27;Color&#x27;, &#x27;red&#x27;);
+            disp([&#x27;Region &#x27; num2str(n) &#x27;: &#x27; num2str((bandwidth_fold-decim_bandwidth)*10^-3) &#x27; kHz -&gt; &#x27; ...
+                  num2str(bandwidth_fold * 10^-3) &#x27; kHz  :: &#x27; num2str(Q) &#x27; (worst)&#x27;])
+            if plot_gain_interval_db gains(n) = Q; else gains(n) = 10^(Q/20); end
+            
+            xline(bandwidth_fold);
+           
+            Q = interp1(X,Y,bandwidth_fold+diff_bandwidth);
+            if (isnan(Q))
+                Rlimit = n;
+                break
+            end
+            xline(bandwidth_fold+diff_bandwidth, &#x27;Color&#x27;, &#x27;red&#x27;);
+            disp([&#x27;Region &#x27; num2str(n+1) &#x27;: &#x27; num2str(bandwidth_fold * 10^-3) &#x27; kHz -&gt; &#x27; ...
+                  num2str((bandwidth_fold+decim_bandwidth)*10^-3) &#x27; :: &#x27; num2str(Q) &#x27; (worst)&#x27;])
+            if plot_gain_interval_db gains(n+1) = Q; else gains(n+1) = 10^(Q/20); end            
+            
+        end
+    end
+    
+    hold off
+    
+    % Plot the gains in the second subplot
+    axes(ax2);
+    
+    ngains = 1:Rlimit;
+    plot(ngains, gains, &#x27;b-o&#x27;);
+    if (~plot_gain_interval_db)
+        ylim([0, 1])
+    end
+    xlim([1, inf])
+    title(&#x27;worst-case gain per region&#x27;);
+end</code></pre></div></article></body></html>

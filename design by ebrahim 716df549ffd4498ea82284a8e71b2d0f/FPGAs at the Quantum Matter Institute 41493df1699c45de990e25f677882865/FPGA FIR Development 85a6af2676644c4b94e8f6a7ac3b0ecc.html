@@ -1,0 +1,851 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>FPGA FIR Development </title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="85a6af26-7664-4c4b-94e8-f6a7ac3b0ecc" class="page sans"><header><h1 class="page-title">FPGA FIR Development </h1><p class="page-description"></p></header><div class="page-body"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="08128593-e093-4417-b52e-29d497b96e32"><div style="font-size:1.5em"><span class="icon">📃</span></div><div style="width:100%">This is a copy of the documentation I used to brief my supervisor on our FIR filter progress after it had been completed. Of course this is nothing new, but it was a large stepping stone in our introduction to FPGA and PL-PS interfacing.</div></figure><p id="471ff86d-6593-462f-957d-c871a502247a" class="">
+</p><p id="5cca4d8b-30a3-4172-880d-4630b21f850f" class="">In this documentation post we outline the development and usage of custom, runtime-adjustable FIR filters and their simulation on MATLAB, implemented on the Red Pitaya.</p><hr id="341cf9d5-2f7a-49d7-91e3-08abcaaba62a"/><h2 id="e40f1794-cf27-4309-bfef-4ba6a3f17734" class="block-color-yellow_background">Background </h2><hr id="a71e9cf3-14fe-4adc-99cb-7e76e01c8807"/><p id="2643f2aa-d770-4896-ba82-90ee6d4abf4c" class="">In the previous documentation bit, we made the individual ADC and DAC interfaces. </p><p id="28e1bf8a-cfbe-41ef-931b-c29f1fa021ec" class=""><strong><strong><strong><strong>ADC:</strong></strong></strong></strong></p><p id="054542ab-5553-41ce-878f-c691153ffe11" class="">The ADC interface translates the voltage on the input ports IN1, IN2 on the Red Pitaya to a 15-bit (1-bit MSB sign, 14-bit LSB data) data stream sampled at 125 MHz. IN1 data is provided on M_AXIS_PORT1, and IN2 on M_AXIS_PORT2.</p><p id="c6468766-efb3-4a7c-a865-211ddd8db8d1" class=""><strong><strong><strong><strong>DAC:</strong></strong></strong></strong></p><p id="65b2f1f8-0544-470a-9baa-9ddf53a9ff6f" class="">Inversely, the DAC interface translates a 15-bit signal (1-bit MSB sign, 14-bit LSB data) stream sampled at 125 MHz to an analog voltage. S_AXIS_a corresponds to OUT1, and S_AXIS_b on OUT2.
+
+The following image shows the ports to which we can access the analog/digital interfaces, and the corresponding physical headers they connect to on the Red Pitaya itself.</p><figure id="8d1a6cc9-24fb-45e2-b306-262cd8dc606b" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled.png"><img style="width:1008px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled.png"/></a></figure><p id="d0f194db-3eb0-4098-8cf5-9decca53f89b" class="">Details on this construction are available in the previous post. Any operation we want to implement will be placed within the purple placeholder box shown below:</p><figure id="9868f9c7-b265-4d0b-a6b4-04b084fa7194" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%201.png"><img style="width:1008px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%201.png"/></a></figure><p id="c08c035f-327d-4ff9-8969-be4306582579" class="">If no operation is placed, and we directly short the M_AXIS_PORT1 → S_AXIS_a data streams, the Red Pitaya will act as a glorified wire from IN1 to OUT1. 
+Now, we will look into implementing an FIR filter within this operation box.</p><h2 id="88b3c096-bc75-4c07-a1b4-21ac8fdcb9b8" class="block-color-yellow_background">What to Avoid </h2><hr id="66731ef9-dadc-485b-993c-e63166245875"/><p id="9f57b47d-aae5-4296-9b4a-58015a865f2c" class="">Before we go into what we have created, first we discuss what we tried and why we avoid it going forward.</p><hr id="ecf43dad-7dc3-4bb7-a2da-0a444c9672e6"/><p id="7cb4ce25-7a27-4096-bcf0-f63949e063d9" class="">Xilinx provides their own FIR filter core for which we can enter in FIR coefficients (these coefficients determine the filter’s frequency response). However, it requires some extra cores to work on the Red Pitaya, as shown below:</p><p id="195b744d-c43e-4f12-ab5f-e34e2cf7c67f" class="">
+</p><figure id="00f00c00-7c5a-4ee1-8943-36ca4f4c5e00" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%202.png"><img style="width:1056px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%202.png"/></a><figcaption>Xilinx-premade FIR Filter within “purple operation box”</figcaption></figure><p id="857e4297-bbe5-441e-97b1-9f93cfbf03ef" class="">This entire system should in theory function as a hardware filter on the Red Pitaya. The FIR filter is encapsulated in the center, but after trying nearly everything, here are the best results we could get.</p><p id="58db7fd2-c311-4493-8ed3-19ba03024a24" class="">In this example we are trying to design an FIR filter with the following frequency response. We have already collected the coefficients, and are trying to plug them into the FIR.</p><figure id="7dcf0454-f65b-4a95-874b-be19c037ee55" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%203.png"><img style="width:1269px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%203.png"/></a><figcaption>x-axis: (frequency, Hz), y-axis (dB)</figcaption></figure><p id="d01cbda3-065a-4dab-a91b-b5d57cf0132a" class="">Firstly, the surrounding CIC decimator and CIC interpolator have their own frequency response.</p><figure id="fabbe08e-208f-4c23-8cd1-4f86d30a93c7" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%204.png"><img style="width:1833px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%204.png"/></a></figure><p id="4b32af8d-af45-4cab-b67b-af7caa7aa8a5" class="">When we set the <strong>input</strong> data width of the FIR filter (14-wide, as it comes from the ADC), the FIR automatically suggests an output width of 52 bits .. this is unusable for two reasons:</p><ul id="0b2dbcac-ba4b-4852-953a-f3b457d39551" class="bulleted-list"><li style="list-style-type:disc">the CIC interpolator after the FIR can only handle a maximum of 32 bits as input</li></ul><ul id="220dcf87-d982-43f7-8e53-0f1ee811afdd" class="bulleted-list"><li style="list-style-type:disc">no matter what we choose, the final data sent to the DAC must be 14 bits wide.</li></ul><p id="739436be-cac4-40c2-9abd-b10aa32ace4b" class="">So, we have to select the output rounding mode as <code>Truncate LSBs</code> and forcibly round down within the FIR configurator:</p><figure id="04abacf7-2681-4320-92c4-f4170355bf1e" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%205.png"><img style="width:871px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%205.png"/></a></figure><p id="b4a9c71c-2a56-457f-9a10-7117fe867b95" class="">Placing in our coefficients, Xilinx reports the following frequency response. It suggests that when physically implemented, the gain will have to be corrected by <strong>4dB</strong>.</p><figure id="edb90c8c-d40c-4953-80e2-d7465a37e8f4" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%206.png"><img style="width:540px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%206.png"/></a></figure><p id="deb71fd7-208b-43fa-b882-106187cd1366" class="">This results in the following overall frequency response of our filter setup:</p><figure id="acf03ca3-9637-4249-8d53-7aedfabbd826" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%207.png"><img style="width:1134px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%207.png"/></a></figure><p id="4a23ab66-e197-46e1-b2e1-8ffd35099573" class="">Though the overall characteristic shape follows what we expect, the obvious issue is that the in the passband, the gain asymptotically reaches -10dB rather than the expected 0dB. <strong><strong><strong><strong>The Xilinx FIR IP does NOT report this behavior and can only be obtained experimentally by a network analyzer.</strong></strong></strong></strong> Xilinx’s reported gain is incorrect because we have a CIC filter before it.  Again, two issues arise:</p><ul id="dd1fc927-5c95-4b79-9f7d-a73660880a92" class="bulleted-list"><li style="list-style-type:disc">it is rather abrasive, and the gain is now shrunken to &lt;1 in the passband.</li></ul><ul id="e60d9741-8a81-4dc3-8da4-00b7391d97d2" class="bulleted-list"><li style="list-style-type:disc">we have no way of predicting how bad the rounding + gain adjustment will be due to the hidden code of the Xilinx FIR core.</li></ul><p id="09b673c1-b56e-4415-a476-10fb37e92fee" class="">One workaround which does work is adding a rounding adjustment module, which essentially multiplies the FIR filter output by some constant <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span></span><span>﻿</span></span> such that in the passband, the maximum amplitude is at 0dB, such that we can obtain a curve like this:</p><figure id="7c655504-780a-4af3-abe1-f8eebfe593ab" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%208.png"><img style="width:1281px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%208.png"/></a></figure><p id="b91b3051-9744-440c-a489-a71e118e8c8b" class="">Now, the passband gain is ~0dB as required. So yes, maybe we <em>do</em> have a working FIR filter as of right now, but there is a <strong>lot</strong> of guesswork in finding this constant <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span></span><span>﻿</span></span> to get it working as intended.</p><p id="c69d2355-448c-4deb-b233-43fe523c7d25" class="">What leaves us to eventually abandon this is the concern of flexibility. If we change the constants of the filter, we need to use the network analyzer again to find the discrepancy between the passband gain and 0dB, and then solve for the multiplier constant <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span></span><span>﻿</span></span>. However, the end fact is that, if we use the FIR filter within a locking scheme, it will be enveloped by an array of other hardware. This makes it impossible to test the frequency response of it alone, and so it is impossible to solve for <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi></mrow><annotation encoding="application/x-tex">C </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span></span><span>﻿</span></span> post-bitstream-generation without guessing. </p><p id="536a55c9-53cf-43e4-8d77-7054c5a810a1" class="">
+Even then, hypothetically suppose the gain correction reported by Xilinx was correct:</p><figure id="a24a72b9-22e1-415c-a99f-6b94be3dacf6" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%209.png"><img style="width:394px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%209.png"/></a></figure><p id="30d5adda-756f-4b2c-bd62-8fc01a07323d" class="">Since it only appears in the editor, we have no way of accessing this value post-upload. So, if we ever change the coefficients, we will not know the new correction multiplier.</p><h2 id="62551b46-c0a9-4a31-b27e-2c444ff2154a" class="block-color-yellow_background">Our Implementation </h2><hr id="ad4599c7-4f91-414a-8bfc-d95db1027944"/><p id="c6063017-dc82-4e1e-b697-e6701c2437a4" class="">Clearly the Xilinx core is too finicky and not built for runtime-adjustable changes.</p><p id="92ab5d1b-23c9-454b-89a6-05112834f3a9" class="">After our meeting with Mandana we review and reclarify some design goals. Our final FIR filter should be able to:</p><ol type="1" id="685de070-7ce8-473e-abfe-e7fdaf65b7ed" class="numbered-list" start="1"><li>function with reprogrammable coefficients during runtime (ie. we can change the frequency response at any point post-physical-implementation)</li></ol><ol type="1" id="3395b61a-7f23-461d-9b1e-a98cf460126a" class="numbered-list" start="2"><li>simulate its behaviour in MATLAB (or any external program) and observe the same experimental response (unlike what we experienced with the Xilinx core).</li></ol><p id="d1edf27a-d367-42b5-b57b-c9fa79f110da" class="">We outline how it is made and how to use it below.</p><hr id="58cf0516-4521-4adb-b68a-0f2019ec8593"/><p id="9083dd1e-22de-4669-b3a3-35349d8cfe37" class="">Here is a 3-tap filter on our new FIR implementation:</p><figure id="291903fb-6ba5-4e3a-bfc5-ca46916eee54" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2010.png"><img style="width:1152px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2010.png"/></a></figure><p id="9fd14d76-a6c1-4dde-92cf-d6242e739be9" class="">The modules are a little blurry, but we will zoom in further soon. There are three distinct partitions of this filter: the coefficient loader, the tap chain, and the output adjustor.</p><h2 id="98f3b529-6d38-474f-9cf8-0e1ad559d878" class="block-color-blue_background">Coefficient Selection and Filter Simulation</h2><p id="d34540ee-e73f-4b39-894a-09a48f4d4b86" class="">Let’s step back a little and look at what we use to generate our FIR coefficients to begin with. </p><h3 id="f0730640-ab47-4870-b2ca-4374948f615d" class="">1. Make Full Precision Coefficients</h3><p id="943253e8-01d4-4e63-8398-f4c59182f908" class="">The first step is to obtain a list of <strong>full precision</strong> coefficients, which is the set of FIR coefficients generated if we had theoretically infinite precision and perfect implementation. Since this step is isolated from the actual design of our FIR, we can obtain coefficient sets from websites like <a href="http://t-filter.engineerjs.com/">http://t-filter.engineerjs.com/</a>, or MATLAB.</p><p id="96a493a3-301e-4e00-8c83-03bb70bd7031" class="">
+</p><p id="7e58e4de-b144-42ba-9498-cd77beb47058" class="">For lowpass filters, I had success using <code>fdesign.lowpass</code> (<a href="https://www.mathworks.com/help/dsp/ref/fdesign.html">https://www.mathworks.com/help/dsp/ref/fdesign.html</a>). The full precision coefficient list is <code>c</code>.</p><pre id="3c8fa23e-eac0-4e20-a2d8-e0721d65575f" class="code"><code>N = 19;                  %% number of taps -1     
+Fsample = 100e3;         %% fir sampling frequency
+
+Fpass = 25e3;
+Apass = 0.05;
+Astop = 50;
+coeff_width = 16;
+adc_width = 14;
+
+% obtain quantized coefficients (cq)
+designSpec = fdesign.lowpass(&#x27;N,Fp,Ap,Ast&#x27;, N, Fpass, Apass, Astop, Fsample);
+LPF = design(designSpec,&#x27;equiripple&#x27;,SystemObject = true);
+fvtool(LPF);
+c = coeffs(LPF).Numerator;</code></pre><p id="9985da79-df0f-48ed-8b92-fe51662fbf5f" class="">
+</p><p id="280123a6-2099-4e23-be7f-c6f39ed23edf" class="">For highpass and bandpass filters, I was able to use <code>designfilt</code> (<a href="https://www.mathworks.com/help/signal/ref/digitalfilter.html">https://www.mathworks.com/help/signal/ref/digitalfilter.html</a>)</p><pre id="c9237907-a760-45e8-ba48-bcb9624a4414" class="code"><code>fs = 100e3;          %% fir sampling frequency
+N = 30;              %% number of taps -1
+coeff_width = 16;
+adc_width = 14;
+
+d = designfilt(&#x27;bandpassfir&#x27;, ...
+    &#x27;FilterOrder&#x27;,N, ...
+    &#x27;StopbandFrequency1&#x27;,10e3, ...
+    &#x27;PassbandFrequency1&#x27;,15e3, ...
+    &#x27;PassbandFrequency2&#x27;,20e3, ...
+    &#x27;StopbandFrequency2&#x27;,25e3, ...
+    &#x27;SampleRate&#x27;,fs);
+fvtool(d)
+freqz(d)
+c = d.Coefficients;</code></pre><p id="f84c495b-0e21-4484-b1c5-251b62450464" class="">Overall, <code>designfilt</code> seemed a little less finicky to use, but again we have considerable freedom in how we choose to obtain our coefficients.</p><h3 id="355d58c9-6160-42e2-83b6-f9583721eb8a" class="">2. Quantize Full Precision Coefficients</h3><p id="51287c80-e4a1-4332-afdb-ec63443539ec" class="">Of course, we are not creating an infinitely precise FIR filter on an FPGA. <code>c</code> will be a set of floating point numbers (eg. [-0.134, 0.995, -0.127]), but it is difficult to store these numbers on digital hardware. With our full-precision set <code>c</code>, we will now <strong>quantize</strong> the coefficients, which will turn them into integers, by the following formula:</p><pre id="3f763f27-5677-4c32-be9b-a46e68920908" class="code"><code>cq = floor(c*(2^(coeff_width-1)-1)/max(c));     % quantized coefficients</code></pre><p id="c8049a6a-e291-4e3f-92e5-e4af2923791e" class="">Notice that this formula takes in the width in bits that we have to store our coefficients — for our purposes, we will use 16-bit coefficients. This formula simply linearly scales all floating point values (-1, 1) to integers on the range <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mo>−</mo><msup><mn>2</mn><mn>15</mn></msup><mo separator="true">,</mo><msup><mn>2</mn><mn>15</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(-2^{15},2^{15})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">15</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">15</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span>. Keep in mind that we perform <code>coeff_width-1</code> since one bit is used to hold the sign of the coefficient.</p><div id="444e6957-3d47-43a1-8e71-770518111475" class="column-list"><div id="8b402e26-dd0c-4176-8dab-785eaf1d4bbe" style="width:43.75%" class="column"><figure id="66ba9b33-dac0-48a0-a591-3717f9303677" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2011.png"><img style="width:333px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2011.png"/></a><figcaption>raw coefficients</figcaption></figure></div><div id="eb897143-37f7-43fe-a8cb-6164a93095e3" style="width:56.25%" class="column"><figure id="1229a55a-c5b4-411d-ae1f-ac77ac020bc6" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2012.png"><img style="width:428px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2012.png"/></a><figcaption>quantized coefficients to 16 bits</figcaption></figure></div></div><h3 id="1baee869-3818-4978-adc3-1e705bd957fd" class="">3. Simulate Filter</h3><p id="e95c5609-9dc1-4576-b803-a6b646c4e1d4" class="">With these FPGA implementation-specific coefficients, we simulate our filter using MATLAB. To do this, we pass our quantized coefficient list <code>cq</code> to a digital FIR filter simulator (<code>dffir</code>), and plot the frequency response. For our implementation, <code>coeff_width</code> is 16 (what we used to generate <code>cq</code>), and the Red Pitaya ADC data width is 14 bits wide (15 bit wide for sign).</p><pre id="43ece6b6-75f7-492a-b3e6-4537bca3c1c0" class="code"><code>fir = dfilt.dffir(cq); % &lt;- pass cq we made earlier
+fir.Arithmetic = &#x27;fixed&#x27;;
+fir.CoeffWordLength = coeff_width; % 16
+fir.InputWordLength = adc_width;   % 14
+fir.InputFracLength = 0;
+ss = fir.Numerator;
+regexprep(num2str(ss),&#x27;\s+&#x27;,&#x27; &#x27;) % print out quantized coefficient list
+fvtool(fir, &#x27;Color&#x27;, &#x27;white&#x27;)    % plot frequency response</code></pre><p id="5b1027e9-bc86-48b9-844c-257322680e93" class="">Suppose <code>cq</code> is the coefficient set generated by <code>fdesign.lowpass</code> (two code blocks above). The first plot we see is the frequency response of the FIR on its own:</p><figure id="dd03ef1c-01be-4202-86bf-2623d13418ad" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2013.png"><img style="width:1474px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2013.png"/></a></figure><p id="9b4b28fb-1d74-4d68-82ea-7544bccee933" class="">At first glance, the general shape of the filter curve is right - we specified a cutoff frequency at 25kHz (<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>s</mi></msub><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">f_s/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/2</span></span></span></span></span><span>﻿</span></span> = 50kHz), and indeed the amplitude drops at 25/50 = 0.5. However we notice that the frequency amplitude in the passband is 90dB, which is extremely high. </p><p id="b3843752-65b0-4053-a931-f77aa3d83163" class="">This happens because our quantized coefficients were all multiplied by a factor of at minimum <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>15</mn></msup></mrow><annotation encoding="application/x-tex">2^{15}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">15</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>. Since the frequency response amplitude of the FIR is a discrete convolution:</p><figure id="3ea5d5e0-afea-44dc-bf76-21683a245fba" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2014.png"><img style="width:503px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2014.png"/></a></figure><p id="e5dd0ac6-6778-4be5-b214-05dda71702eb" class="">The output <code>y[n]</code> is multiplied by <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≈</mo><msup><mn>2</mn><mn>15</mn></msup></mrow><annotation encoding="application/x-tex">\approx 2^{15}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.48312em;vertical-align:0em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">15</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span>. However, this is fine - we can scale the output result of the convolution as we wish until the maximum amplitude in the passband is 0dB (gain = 1). This is done with the following script:</p><pre id="eeec0b67-2df9-4a0a-9066-c09b082f70c7" class="code"><code>scale = -coeff_width;
+[H,w] = freqz(fir);                        % characterize the amplified response
+tiledlayout(2,1);
+nexttile
+plot(w/pi, 20*log10(2^(scale)*abs(H)));    % scaled-down magnitude response (db)
+nexttile
+plot(w/pi, 2^(scale)*abs(H));              % scaled-down magnitude response (gain)
+info(fir)</code></pre><p id="322e9839-3c85-4e15-88f8-b92c020bf21f" class="">The scale coefficient will be close to or equal <code>coeff_width</code> to approach 0dB in the passband. Of course, there may not exist an integer for scale which sets the passband amplitude exactly to 0dB, but we can get reasonably close. Returning to our example, setting the scale to be <code>-coeff_width</code>, the output product is multiplied by <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mrow><mo>−</mo><mn>16</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^{-16}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">16</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> and is plotted below by our program (top dB, bottom gain):</p><figure id="e1e7cd0d-9bc0-42cd-901d-76eeb241171e" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2015.png"><img style="width:685px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2015.png"/></a></figure><p id="1fd5af21-650f-4d3a-bba0-db9af939f7a6" class="">This is, for now, satisfactory. Ideally we would like to multiply the output product by an exponent of 2 so that in hardware, it can be represented by a bit shift. Let’s jump to the end for a quick moment and view the output result of the FIR filter with our quantized coefficients and output scaling:</p><figure id="39490444-09ea-4ce1-bb78-b8c5b3535457" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2016.png"><img style="width:1830px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2016.png"/></a></figure><p id="11b2122a-6402-4f07-95cf-a64bf8ac30bd" class="">Much better! Comparing with the theoretical gain curve above, we’re seeing extremely similar results. </p><p id="428d9362-ab0d-46f2-b3fa-b4642c7239f4" class="">What’s important here is not that the max amplitude response is at 0dB, but that whatever we simulate in MATLAB will be directly present on our hardware as well. This means that, if we <em>desperately</em> required a passband gain of 0dB, we can throw in another multiplier after the bit shifter to adjust as necessary. </p><p id="76afc73a-96a7-4f4a-b2b0-9c16e9f4e80f" class="">Just for fun, I’ll jump ahead again and show another example on the completed filter.. almost identical responses!</p><figure id="8eb8f9fd-0225-443c-b623-7a42e5e744d1" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2017.png"><img style="width:978px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2017.png"/></a></figure><p id="e366bb22-8a46-4891-93d7-9f8c2b27f36b" class="">Hopefully now I’ve instilled some trust that we have a MATLAB simulator to accurately generate coefficients and plot the frequency response for a <em>Red-Pitaya specific FIR filter. </em>As discussed above, any more precise tuning we want to do such as adding a multiplier can be added on top of the MATLAB simulation as well. Overall, when we change coefficients on the fly in our final system, we have a guarantee that any transfer function we specify will be modelled exactly in hardware.</p><h2 id="757e4ebf-0909-4e10-af8c-0647bde74907" class="block-color-blue_background">Coefficient Loader </h2><p id="4986c933-10c9-4f86-b757-337d8efa9185" class="">We have just built a scheme to develop quantized coefficients - the next step is to send these to the FIR.</p><p id="d815f129-e838-4bd3-8285-28ff00efc4bd" class="">On a 20-tap filter with 16 bit coefficients, we would require a <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>20</mn><mo>×</mo><mn>16</mn><mo>=</mo><mn>320</mn></mrow><annotation encoding="application/x-tex">20 \times 16 = 320 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">20</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">16</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">320</span></span></span></span></span><span>﻿</span></span> bit input channel to write to all these coefficients at once (which will be stored within 320 registers). A smarter and expandable solution is by cascading tap coefficients through one input channel, as shown below:</p><figure id="ea9ecfd0-a52d-4d68-aea9-b6a7fdf11489" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2018.png"><img style="width:1384px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2018.png"/></a></figure><p id="9b1aabcb-af00-437c-b9b9-be1a7b8e5813" class="">For our N-tap FIR (here, 3), we create a cascading coefficient line. We also establish a tap write signal T_WR. If T_WR is pulled high, tap coefficients will shift down the line on every rising clock edge (CLK). </p><p id="fdb62a97-017d-4754-a059-e1025c1c5d49" class="">Here is an example of how we would feed the coefficients “1, 2, 3” into the system:</p><figure id="a52c3bcd-342b-44d5-8857-95f9cbf00b0d" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2019.png"><img style="width:1359px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2019.png"/></a></figure><figure id="f892a2f7-e08f-4b0b-9205-8ae036fbcc9e" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2020.png"><img style="width:1360px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2020.png"/></a></figure><figure id="a5369493-a618-4b65-bf73-24a87318b190" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2021.png"><img style="width:1359px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2021.png"/></a></figure><p id="27abc4be-08e8-4d62-b47f-4264687ecc82" class="">On every clock rising edge when T_WR is high, the value present on the <code>[n-1]’th</code> input is fed into the <code>[n]’th</code> register. This is a shift register! Notice that we have to set the data line to “3, 2, 1” in reverse such that the first number we send is shifted to the end of the line first.</p><p id="21373596-477a-4223-a495-6bbf96d3e1c0" class=""> This logic is present within each tap to enable this: </p><pre id="7d6333b6-e9c3-42a9-86f6-d5e067293121" class="code"><code>reg	[(TW-1):0]	tap;           // &lt;- this holds the tap value in a register
+initial	tap = INITIAL_VALUE;
+always @(posedge i_clk)
+if (i_tap_wr)                  // &lt;- if tap_wr is enabled ...
+	tap &lt;= i_tap;                //    ... update thecurrent tap 
+assign o_tap = tap;            // set output to current to shift prev. data</code></pre><p id="e5acd6de-e2e7-4b0d-8fe6-af54168ab289" class="">And here is a closer view of the tap structure in Vivado:</p><figure id="8cade089-50a3-48ba-b725-72e8208050d2" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2022.png"><img style="width:1223px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2022.png"/></a></figure><p id="299c4e7b-4765-42e1-a594-38e44136847e" class="">Our input coefficient stream (from the Linux side) feeds into <code>firtap_0</code>&#x27;s <code>i_tap[15:0]</code>, and we set <code>tap_wr</code> high for one clock pulse when we want to shift in a new coefficient. </p><p id="800bf101-9548-4fc7-8972-96279049cde4" class="">To automate this process, we build a <code>fir_loader_register</code> which sits behind the first tap, and toggles the <code>tap_write</code> signal when a new coefficient comes into it.</p><pre id="060438d3-ca9e-45a0-b948-39778542739e" class="code"><code>module fir_loader_register(
+// new_data = GPIO[16]      (17th bit)
+    input  wire            new_data,   
+// coefficient = GPIO[15:0] (0-16th bits)             
+    input  wire  [15:0]    coefficient,             
+    input  wire            clk,
+    output wire [15:0]     write_coefficient,
+    output                 o_tap_write,
+    output                 o_tap_ce
+    );
+    reg new_data_delay;
+    wire data_pulse;
+    always @ (posedge clk) begin
+        new_data_delay &lt;= new_data;
+    end
+    assign data_pulse = new_data &amp;&amp; ~new_data_delay;
+    
+    assign o_tap_write = data_pulse;
+    assign o_tap_ce = ~data_pulse;
+    assign write_coefficient = coefficient;
+endmodule</code></pre><p id="56517b11-816c-4a28-8acd-892dcfd6c0d9" class="">The details for this scheme are 1) tedious to explain and 2) will likely change as coefficients will, in the future be loaded from RAM than from the Linux<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>  </mtext><mo>⟺</mo><mtext>  </mtext></mrow><annotation encoding="application/x-tex">\iff</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.549em;vertical-align:-0.024em;"></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⟺</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span></span></span></span><span>﻿</span></span>FPGA pipeline as we do in this post.</p><p id="c05f761a-790e-4388-9754-840afda93e8c" class="">Here is the final construction:</p><figure id="e6da82a7-a1aa-4609-8367-db07b43c30aa" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2023.png"><img style="width:1008px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2023.png"/></a></figure><p id="ee349dc2-9640-4ea0-b0b5-9aa8ad26c89f" class="">Coefficients come in from the Linux side (accessed remotely) through the <code>axi_gpio</code> block (green). It is split into a <code>new_data</code> and <code>coefficient</code> stream by the <code>fir_splitter</code>, which is sent to the <code>fir_loader</code> (yellow). Any time a new coefficient comes in by Linux, it is shifted into the tap chain located within <code>generic_fir0</code> (blue).</p><hr id="6b82e563-e62e-4821-b57a-324f4dc35118"/><p id="7e02caa6-51e4-47e1-8005-39b1f203a5bd" class="">For a N-tap FIR filter, we can shift in an entire set of FIR coefficients with the following code:</p><pre id="8d3998f2-4ede-44aa-8668-6265cf7a864a" class="code"><code># coeff.py
+from operator import*
+import sys
+import os
+wr=&quot;10000&quot;
+coeffs = sys.argv[1:]                                 # remove the first element (name)
+coeffs.reverse()                                      # reverse the list for shifting
+print(len(coeffs))
+for i in coeffs:
+    os.system(&quot;monitor 0x41200000 0x0&quot;)               # send 0 to prepare for new data
+    hexnum = hex(i &amp; 0xffff)                         
+    coeff = str(hex(add(int(wr,16),int(hexnum,16))))
+	  os.system(&quot;monitor 0x41200000 &quot;+coeff)            # send the hexadecimal coefficient</code></pre><p id="759e33cf-0982-4edf-a7a4-0011835c5541" class="">Coefficients are typed in order after the file name, with spaces in between as such:</p><pre id="eb3a7a9f-8bce-46cd-822b-ffaea241b747" class="code"><code>&gt;&gt; python3 coeff.py 12309 34806 89735 ... 45627</code></pre><p id="9ded01de-7756-40dc-9ba9-ccdcf1276972" class="">With this script, we now have a way to reconfigure our FIR filter to act as a lowpass, bandpass, highpass, etc. type filter as we need.</p><h2 id="92a45e54-8954-496b-9c75-f3ad25fc1c1e" class="block-color-blue_background">Tap Arrangement</h2><p id="08c661d8-6421-4a4e-9528-7f03b914aafc" class="">We use <a href="https://zipcpu.com/dsp/2017/09/15/fastfir.html">https://zipcpu.com/dsp/2017/09/15/fastfir.html</a> (Building a high speed Finite Impulse Response …) and the associated GitHub: <a href="https://github.com/ZipCPU/dspfilters/tree/master/rtl">https://github.com/ZipCPU/dspfilters/tree/master/rtl</a> (<code>firtap.v</code>, <code>genericfir.v</code>).</p><hr id="741da4a2-03b1-48ed-90d7-34d625d85b5e"/><p id="41f6ad25-9b81-42bd-b8b8-dd4171bb2053" class="block-color-gray_background">Our Red-Pitaya specific versions of <code>firtap.v</code> and <code>genericfir.v</code> are on Gitea (<code>~/rtl</code>). </p><p id="ae4fb472-ddc9-4d04-9519-c918ba6d517a" class="">To chain the taps together, we use a <code>generate</code> statement in Verilog to describe the structure — upon synthesis and bitstream generation, Vivado will compile that statement into logic.</p><p id="0df11056-a3b1-4a25-acc1-df0c28dc41f7" class="">Here is our modified version of <code>genericfir.v</code>, taking into account the tap shifting process.</p><pre id="3a0bee3a-1f28-483a-ba5b-4983060b2105" class="code"><code>module	genericfir #(
+		// {{{
+		parameter		NTAPS=3, IW=15, TW=16, OW=31,
+		parameter [0:0]		FIXED_TAPS=0
+		// }}}
+	) (
+		// {{{
+		input	wire			i_clk, i_reset,
+		input	wire			i_tap_wr,	// Ignored if FIXED_TAPS
+		input	wire	[(TW-1):0]	i_tap,		// Ignored if FIXED_TAPS
+		input	wire			i_ce,
+		input	wire	[(IW-1):0]	i_sample,
+		output	wire	[(OW-1):0]	o_result,
+		output  wire    [(TW-1):0]  o_finaltap
+	);
+	wire	[(TW-1):0] tap		[NTAPS:0];
+	wire	[(IW-1):0] sample	[NTAPS:0];
+	wire	[(OW-1):0] result	[NTAPS:0];
+	wire		tap_wr;
+	genvar	k;
+
+	// set inputs:
+	assign	sample[0]	= i_sample;   // set signal input to first sample tap
+	assign	result[0]	= 0;          // set initial sum input to 0
+	assign tap[0] = i_tap;            // set coefficient input to first tap register
+	
+
+	// create tap chain
+	// {{{
+	generate
+        // }}}
+        for(k=0; k&lt;NTAPS; k=k+1) begin: FILTERTAP
+            firtap #(
+                // {{{
+                .FIXED_TAPS(FIXED_TAPS),
+                .IW(IW), .OW(OW), .TW(TW),
+                .INITIAL_VALUE(0)
+                // }}}
+            ) tapk(
+                // {{{
+                i_clk, i_reset,
+                // Tap update circuitry
+                i_tap_wr, tap[k], tap[k+1],
+                // Sample delay line
+                i_ce, sample[k], sample[k+1],
+                // The output accumulator
+                result[k], result[k+1]
+                // }}}
+            );
+        end 
+	endgenerate
+
+    // output products:
+	assign	o_result = result[NTAPS];
+	assign  o_finaltap = tap[NTAPS];
+
+endmodule</code></pre><div id="b0468e5b-fc0d-4636-adad-214e62004b33" class="column-list"><div id="3ef42c64-f1d2-4f05-b8f9-15e4a59e3170" style="width:37.5%" class="column"><figure id="43efe48e-e2b3-414a-9382-dff1f5a76f6b" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2024.png"><img style="width:229px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2024.png"/></a></figure></div><div id="4f99b987-9239-440d-9da8-854b3f5bea74" style="width:62.5%" class="column"><p id="4a8e08da-65c3-4407-899f-d922d5248a54" class="">This section itself describes the cascading of the filter taps - <code>clk</code>, <code>reset</code>, <code>wr</code>, and <code>ce</code> are global, while the tap, sample, and result accumulations are shifted down each tap from start to end.</p></div></div><p id="acf27018-1249-4f7d-8f9f-a0a04f3661ee" class="">
+</p><h2 id="119ab6c9-f0cf-40fe-8f27-7f576496de21" class="block-color-blue_background">Output Adjustment</h2><p id="03445d5c-afc0-42bd-bd7e-c11f3ecaa5fa" class="">Finally, we perform the <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mrow><mo>−</mo><mrow><mi mathvariant="normal">s</mi><mi mathvariant="normal">c</mi><mi mathvariant="normal">a</mi><mi mathvariant="normal">l</mi><mi mathvariant="normal">e</mi></mrow></mrow></msup></mrow><annotation encoding="application/x-tex">2^{-\mathrm{scale}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8491079999999999em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight"><span class="mord mathrm mtight">scale</span></span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> multiplication post-FIR-output to bring the amplitude response down - this is what we simulated in MATLAB earlier! It sits right between the FIR output and the DAC’s data input. Shown in yellow is the operation it performs:</p><figure id="4b979b33-abd5-4264-9537-f2d0d30e8971" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2025.png"><img style="width:1219px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2025.png"/></a></figure><p id="da673c55-35ef-4e79-be1a-ec47f5aa9057" class="">Here is the code, and since we’re multiplying by an exponent of 2, there’s no <em>multiplication</em> but rather we bit shift the data. Here’s a good place we could situate an extra multiplier should we need it in future tuning.</p><pre id="5833e997-7b9a-4c19-b7d9-86829e429b55" class="code"><code>module dac_formatter #
+(
+    parameter ADC_DATA_WIDTH = 14,
+    parameter AXIS_TDATA_WIDTH = 32,
+    parameter FIR_DATA_WIDTH = 31,
+    parameter SCALE = 16 // stored as 16, but shifts to 2^{-16}
+)
+(
+    input  wire [FIR_DATA_WIDTH-1:0]        i_tdata,
+    input  wire                             dac_clk,
+    (* X_INTERFACE_PARAMETER = &quot;FREQ_HZ 125000000&quot; *)
+    output wire [AXIS_TDATA_WIDTH-1:0]      M_AXIS_PORT_tdata,
+    output wire                             M_AXIS_PORT_tvalid
+
+);
+    wire [ADC_DATA_WIDTH-1:0] data_reg;
+    wire                      sign;
+    
+    assign sign = i_tdata[FIR_DATA_WIDTH-1];
+    assign data_reg = i_tdata[SHIFT+ADC_DATA_WIDTH-1:SHIFT];
+    
+    assign M_AXIS_PORT_tdata = {{(18){sign}},data_reg};
+    assign M_AXIS_PORT_tvalid = 1;
+endmodule</code></pre><p id="6a8ea4b3-ef0a-4062-bcba-87ebff651450" class="">
+</p><h2 id="5aab8228-a0d3-41d0-9397-e097b93c31de" class="block-color-blue_background">Final Operation</h2><p id="c9cdee85-37df-45d1-bef1-9ccc5bd8b451" class="">We are finally done… here is a top-down view of the entire filter. The down-sampler / decimator is simply to slow down the sampling rate for the FIR.</p><figure id="b3ef3f1a-f259-48b0-9c92-6ab9cf715b53" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2026.png"><img style="width:960px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2026.png"/></a></figure><p id="4f3018ae-0b99-4d5d-9d08-fae12be4e461" class="">
+</p><h2 id="bb708bb0-6a6a-4c9c-bc48-f3db5335572d" class="block-color-teal_background">Bandpass </h2><hr id="51e73691-0f5c-4096-9de8-3f33e5177168"/><h3 id="48c0b6d7-175d-4dd7-bb20-531e6b74d806" class="">MATLAB:</h3><figure id="d7ae21cb-f1fa-479d-b8ef-80a7ecc60816" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2027.png"><img style="width:985px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2027.png"/></a></figure><h3 id="d0615bea-f11a-48bb-9954-1c3fc3cd67c3" class="">Experimental:</h3><figure id="e4fe6db1-12f4-4155-a0d4-aba3e82fe3e1" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2028.png"><img style="width:1113px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2028.png"/></a></figure><figure id="ec30ad6f-6427-421e-b6f9-cb29a47104eb" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2029.png"><img style="width:1114px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2029.png"/></a></figure><h2 id="e5766559-ca23-4c6f-b6e8-28c31d89e385" class="block-color-teal_background">Highpass (2 attempts)</h2><hr id="49d4a661-0a82-491f-aec5-688c05d56809"/><h3 id="bca8d93e-d0c5-4b4e-8cb9-4a840a574733" class="">MATLAB 1:</h3><figure id="f6d374c2-8b85-4c19-ac65-e21a7e644ad2" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2030.png"><img style="width:682px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2030.png"/></a></figure><h3 id="6f29f342-b1c8-463c-8476-0691fcd198bd" class="">REAL 1:</h3><figure id="e6daae37-0039-4b81-8029-bfcbad124538" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2031.png"><img style="width:1131px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2031.png"/></a></figure><h3 id="6d58b41c-666d-4ea1-bc8c-1c2f1a1814ff" class="">MATLAB 2:</h3><p id="f59d0983-3865-46a0-9924-cd1f90911d94" class="">
+</p><figure id="84a43e9f-0f12-423c-ac8a-98dbb5fc7bdc" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2032.png"><img style="width:613px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2032.png"/></a></figure><h3 id="34b2f3dd-e620-4e19-9138-c9b9ede5f329" class="">REAL 2:</h3><figure id="ab3b11b4-8c14-44c4-b728-da087811bab1" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2033.png"><img style="width:1128px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2033.png"/></a></figure><hr id="bfd6ace0-a87d-4230-ab4d-5e9d7be82fa2"/><p id="11b740a6-171b-4f35-8451-7c9ff35a687d" class="">Our works well with linear phase for the majority of the pass/stop bands, so nothing is wrong with the filter programming or implementation. This issue lies further within digital signal processing itself.</p><p id="72ed4116-614d-4128-86c2-d368bb0bbb3e" class="">Remember, we are down-sampling our input rate for the FIR filter - here is an exaggerated effect showing the effects of this decimation as frequency increases:</p><figure id="c77ae354-4738-434c-a9f1-17b8302a5915" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2034.png"><img style="width:878px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2034.png"/></a></figure><p id="7b124a49-eb48-4b32-bd2d-03e8c9f50434" class="">
+</p><p id="6b4631e1-0249-44ba-bb7b-dbb749c7b51c" class="">This works well across small normalized frequencies (0-0.5), but as we get closer and closer to <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><msub><mi>f</mi><mi>s</mi></msub><mn>2</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{f_s}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.277216em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9322159999999999em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.446108em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:-0.10764em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span><span>﻿</span></span> (0.7 → 0.9), the decimated stream becomes either unreadable or too inaccurate:</p><figure id="cceaf574-0373-4f05-b12e-3e50e73c991f" class="image"><a href="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2035.png"><img style="width:854px" src="FPGA%20FIR%20Development%2085a6af2676644c4b94e8f6a7ac3b0ecc/Untitled%2035.png"/></a></figure><p id="6c6d966a-2324-4c3a-adf5-7fd9e4c9ad55" class="">To solve this, if we want to develop a high-pass filter on the range of 0-50kHz, instead of setting the sampling rate to 100kHz (done above), we set it to upwards of 200kHz, such that the normalized peak operation frequency (originally 1) is now reduced to at max 0.5. Since we are using the Red Pitaya which samples at 125MHz and only need to use a couple filters, this is a change we can make rather freely without it being too costly in terms of LUT/DSP usage.</p><p id="49661be4-f55a-43fa-957b-cf3a67241b0d" class="">
+</p><h2 id="0fa162b8-81d1-4c5f-a6f7-9b3cfabe2c48" class="block-color-pink_background">Final</h2><hr id="9165f89b-a34f-422c-8c0c-e947ed8e1bcf"/><p id="d37cea85-d8d4-4aa3-a42b-8cb3316b4d29" class="">We have developed a general purpose digital FIR filter that :</p><ul id="5381e272-7ba7-4223-b503-eb795723685d" class="bulleted-list"><li style="list-style-type:disc">is simulated and adjustable on MATLAB</li></ul><ul id="a0065921-c523-4fbb-af1c-879abd588724" class="bulleted-list"><li style="list-style-type:disc">features runtime-adjustable coefficients to change filter type (lowpass, bandpass, etc.)</li></ul><ul id="2926ea2f-2eab-44e2-8a91-83cdc7390d31" class="bulleted-list"><li style="list-style-type:disc">can be placed in and around other modules (mixers, PID’s) without requiring individual tuning (unlike the Xilinx IP core)</li></ul><ul id="42dba85c-9868-4d15-b85f-123b014f5637" class="bulleted-list"><li style="list-style-type:disc">stable and precise with theoretical implementations up to normalized frequencies within <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≈</mo></mrow><annotation encoding="application/x-tex">\approx</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.48312em;vertical-align:0em;"></span><span class="mrel">≈</span></span></span></span></span><span>﻿</span></span>(0,0.7) (relative to <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>s</mi></msub><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">f_s/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/2</span></span></span></span></span><span>﻿</span></span>)
+
+… and like we said above, if we need to operate in the (0.7,1) range relative to <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>s</mi></msub><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">f_s/2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/2</span></span></span></span></span><span>﻿</span></span> , simply increase <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.2/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>s</mi></msub></mrow><annotation encoding="application/x-tex">f_s</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span> .</li></ul><p id="7e03a742-823c-447e-8272-34154aa59a37" class="">
+</p><p id="5b70c731-6e0b-4bf3-a532-b5e8efa09c79" class="">Should we need the FIR in a very precise application later on in the project, we should look at our own interpolation scheme as well, which can be placed after the <code>dac_formatter</code>.</p><p id="3b51fefa-9f49-4b2f-b707-62dd326a7fef" class="">
+</p></div></article></body></html>

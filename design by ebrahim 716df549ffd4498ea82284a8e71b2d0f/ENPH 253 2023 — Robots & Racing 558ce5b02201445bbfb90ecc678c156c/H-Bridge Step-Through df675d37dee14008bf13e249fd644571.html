@@ -1,0 +1,704 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>H-Bridge Step-Through</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="df675d37-dee1-4008-bf13-e249fd644571" class="page sans"><header><h1 class="page-title">H-Bridge Step-Through</h1><p class="page-description"></p></header><div class="page-body"><p id="13bad093-9bb9-4f12-90ed-21fc8d5d3754" class="">In this tangent I want to step through the final H-Bridge schematic shown below, for any interested readers or future students of ENPH 253. This “guide” assumes basic knowledge of electrical components + reading schematics.</p><p id="1e0cef4b-d802-4fa2-bf42-1f586388b643" class="">This H-Bridge schematic is the one I used in my motor drivers for ENPH 253: </p><figure id="558ce5b0-2201-445b-bfb9-0ecc678c156c" class="link-to-page"><a href="../ENPH%20253%202023%20%E2%80%94%20Robots%20&amp;%20Racing%20558ce5b02201445bbfb90ecc678c156c.html">ENPH 253 2023 — Robots &amp; Racing</a></figure><hr id="9953cd62-99fc-40ba-a680-728791e4210d"/><p id="a3a17897-3f51-4a7b-8fb1-b1ac6db99de9" class="">All that an H-Bridge does is control the direction of which current flows through a load. In the case of our robot, we need 2 H-Bridges, one for each motor, to control if it goes forward or backwards. Here is the final dual-H-bridge circuit:</p><figure id="e8fe4e03-d5d7-4271-9e20-7e4cc4ead0c3" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/dual-hbridge.png"><img style="width:2279px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/dual-hbridge.png"/></a></figure><hr id="1ef8f22a-33fe-4b20-bb75-e9f628d5faaf"/><div id="4c05bb27-a69a-434b-b916-ef791c808f11" class="column-list"><div id="374c2c42-5263-4028-97ce-3ff78c43bca0" style="width:62.5%" class="column"><p id="68c145fd-33b4-4a7e-9ed1-4aff834480b7" class="">If you search up “H-Bridge” you’ll likely find some image like <a href="https://www.precisionmicrodrives.com/discrete-h-bridge-circuit-enhanced-vibration-motor-control">this</a>, with 4 MOSFETS and a motor sitting in between, creating an H-shape.</p><p id="7b249d28-63f3-4cfd-be30-ccc0281d58c1" class="">
+</p><p id="4720ea97-f88e-45d9-a124-0d1a18e988f9" class="">
+</p><p id="757e1a5b-b406-4b05-9c9b-2c3cb1713074" class="">
+</p></div><div id="68c0ac89-43b1-4bb7-b5f1-4b65b161e326" style="width:37.5%" class="column"><figure id="397805fd-df14-4171-a8f3-9136e7fbbc5d" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/H-Bridge-Configuration.png"><img style="width:726px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/H-Bridge-Configuration.png"/></a></figure></div></div><p id="4f2a0712-7f77-4992-8964-16722af5f8d5" class=""><strong>By selectively toggling on/off certain MOSFETS, the H-Bridge is able to switch the direction of current running through the motor</strong>. In the red case, the current flows from left-to-right, while in the blue case, the current flows from right-to-left. Only two MOSFETS are to be on at a time, one before the motor and one after the motor.</p><figure id="6a3732e9-26a0-4334-a473-924b989e4b6a" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/96E0E50E-9AC3-4EF1-B7C7-DB3E6A8B4299.jpeg"><img style="width:2732px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/96E0E50E-9AC3-4EF1-B7C7-DB3E6A8B4299.jpeg"/></a></figure><p id="37eaeb29-b428-466a-a96f-8e3b2072c34a" class="">If this is all we need, what is the point of all the other circuitry shown originally? Aren’t there already 2 H-Bridges, in the schematic already?</p><figure id="fd8d285e-b73b-41f9-9b13-8a09da95e18f" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/dual-hbridges.png"><img style="width:2532px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/dual-hbridges.png"/></a></figure><p id="caf6638b-25ff-4914-9647-fe310a5814bb" class="">
+</p><p id="b2325655-801c-469b-b688-21ca0f447659" class="">While that is true, there is one immediate difference — on the high-side (meaning the half which sits before the motor), our H-Bridges use N-Channel MOSFETS, while most H-Bridges on a quick google search use P-Channel MOSFETS</p><p id="14ab7ba2-eb6b-4804-b3e6-70ffd3084083" class="">
+</p><figure id="12f22c76-9cd7-429f-9812-177a544c69cc" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled.png"><img style="width:2542px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled.png"/></a></figure><p id="423eecdc-42ad-4f61-96e0-348ae13fc2c4" class="">
+</p><p id="a4b011c2-5c15-4133-bcad-b872c72876ea" class="">Arguments can be made for either P or N, but the primary reason N-MOSFETS were used on the high-side of the H-Bridge was because of their lower ON resistance (less power draw for high-current motor driving) and faster switching speed (required for driving with PWM).</p><p id="edffe4ed-03ec-4f8a-8c7b-573e6eda88ba" class="">
+</p><p id="2f0f1937-5e94-4d05-bf8a-ad6758de2415" class="">However, using N-MOSFETS on the high side means that their gate needs to be driven with a voltage higher than the voltage we want to run on the motor. Bad news is that our motors operate at 12V, which is much higher than what any standard microcontroller can provide on an output.</p><p id="749007a3-722b-4243-bc13-ae8249bf01ad" class="">
+</p><p id="2e6a5b79-0939-46a1-9fe2-ec77265f5d65" class="">This is where we introduce the <a href="https://www.analog.com/media/en/technical-documentation/data-sheets/1161fa.pdf">LT1161 MOSFET Gate Driver</a>, specifically made to drive high-side N-MOSFETS. It sits directly in between of the control stage (the data lines which tell the H-bridge which direction to drive the motor in), and the H-bridges themselves. The orange lines, or gate output lines, show how the gate driver connects to the MOSFETS.</p><figure id="5146b3c0-8b39-4152-b45f-b01b4c3121de" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%201.png"><img style="width:2493px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%201.png"/></a></figure><p id="16976bde-2328-4287-82aa-819650c3307c" class="">This gate driver chip uses internal charge pumps so that if, say INPUT1 is on, then GATE1 will be at the supply voltage (12V), plus another 12V. This puts 24V on the gate of all MOSFETS when needed, which solves our high-side problem.</p><p id="7ffef4dd-dceb-468b-ab22-9e3eb4add25e" class="">
+</p><p id="08cfe535-ed86-4e23-a3ad-825fab444b61" class="">If I only drew out what I’ve explained, we’re currently at this stage. Moving from left to right, we have the input lines controlled by some microprocessor, the gate driver, which step up those control line voltages, and the MOSFETS, arranged in an H-bridge configuration which then go out to CN6/CN7, where motors will connect.</p><figure id="8d84cce1-63a4-4c1d-88df-939a0f3d2069" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%202.png"><img style="width:2223px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%202.png"/></a></figure><p id="c3b89464-20fd-4ae9-a919-043da123e7f6" class="">And this is now back to a fully functioning H-Bridge! All we did was take out the P-MOSFETS, which requires us to add the gate driver to drive the high-side N-MOSFETS. But this still isn’t the full circuit shown originally.</p><figure id="e6f49ad1-6ec9-46e1-9fd4-1eadba88c94a" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%203.png"><img style="width:2496px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%203.png"/></a></figure><p id="f32e00f5-c9a3-4fa8-a6bd-48118be7774b" class="">There are two niceties existing in the final schematic, shoot-through protection and optical isolation.</p><hr id="2dbad512-7612-45bc-85dc-1c1b2ce5cc12"/><p id="4c18d836-40fc-4343-b8a4-cc4abcc8de22" class=""><strong><strong><strong><strong><strong><strong>Shoot-Through Protection:
+</strong></strong></strong></strong></strong></strong>Suppose that, through some microcontroller or programming error, both control lines to one H-Bridge go high. This should never happen anyways since it doesn’t make sense for the microcontroller to tell the motor to go forwards (by setting CONTROL_A on) and backwards (by setting CONTROL_B on) at the same time — it should always be one or the other.</p><figure id="13f9a89a-ff60-46dc-9145-7eb401459285" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%204.png"><img style="width:2479px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%204.png"/></a></figure><p id="85e7ed28-1706-4f17-92da-aac61a1925a6" class="">With CONTROL_A high, the top-left and bottom-right N-MOSFETS turn on. With CONTROL_B high, the top-right and bottom-left N-MOSFETS turn on. All 4 N-MOSFETS are on, and so current can flow directly from power to ground, drawn by the red arrows. This is devastating for both the power electronics and the MOSFETs themselves, so we want some sort of safeguard to avoid this.</p><div id="2d308de9-e82b-4d75-9bba-27615142665c" class="column-list"><div id="3b1d1229-4b6b-42ab-ba99-7f9dd1b0a07b" style="width:50%" class="column"><p id="00838cbb-3f7e-4aef-ab87-8f274191df13" class="">This is where shoot-through protection is added, with two new low-current MOSFETS that sit before the 4 N-MOSFETs themselves. </p></div><div id="07284b2b-14ad-42c2-95ad-30be51b3bfb9" style="width:50%" class="column"><figure id="fb5bb94a-fa9b-4fd9-8f6c-b771f92fed3e" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%205.png"><img style="width:1408px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%205.png"/></a></figure></div></div><p id="7f9a2aed-0d25-4d70-b53b-eb0a057d9980" class="">This time, if both control lines are accidentally enabled:</p><figure id="22a2f8de-9a61-40f2-9dfa-46f7a5bf1443" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%206.png"><img style="width:2522px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%206.png"/></a></figure><p id="6fc668a5-a83e-4ade-9f3a-77940564f7a8" class="">Suppose CONTROL_A and CONTROL_B are both high, which lead to both GATE1 and GATE2 being high. For some brief period of time, perhaps on the microsecond timescale, one of the GATE outputs were on a little earlier than the other. For the sake of example, suppose that GATE 1 goes high before GATE 2. As expected, it will turn on the top-left and bottom-right N-MOSFETs (blue). </p><p id="2522a4a0-18fe-492b-b238-c0492764119e" class="">
+</p><p id="cfb6ae29-ec98-47bd-85e1-e82db958c9fe" class="">However, GATE 1 also drives the gate of U4, one of our new shoot-through protection MOSFETs (<a href="https://www.onsemi.com/pdf/datasheet/vn2222ll-d.pdf">VN2222L</a>), which also turns on. This forcefully pulls GATE2 down to ground (GND), preventing the top-right and bottom-left N-MOSFETS from turning on (orange).</p><p id="2945feb2-75ab-4d3b-b517-1fadf2693879" class="">
+</p><p id="75a5d39e-66fc-439f-801d-1206161b21a0" class="">But wait, isn’t CONTROL_B still on, meaning there’s 24V on GATE2? Doesn’t pulling the pin down to ground still short circuit? Fortunately, the LT1161 has mechanisms to handle this and will not burn if we short one of its pins to ground.</p><p id="b1bc2f05-e1d1-46f3-921b-c9c27efea83b" class="">
+</p><p id="1ca19e23-45b3-4347-b3d8-21b5ae57bb0c" class="">I recommend stepping through the circuit but now assuming that GATE2 goes high before GATE1 does, and you should find the opposite result happens. Overall, this shoot-through mechanism works by implementing that when one output is on, the other output is locked to zero, regardless of what its control pin input says.</p><hr id="d893d494-1ec7-49a2-a4fa-a8c70f79db01"/><p id="5d9d8fd6-0ea3-458c-925a-9d9b0cc861c6" class=""><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Optical Isolation:</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p><p id="f443f78c-4d54-4d16-b9c9-05c9f0fa1fa6" class="">We’ve talked about some microprocessor / MCU writing to the control pins of the H-Bridge (CONTROL_A, CONTROL_B from before). Simply by looking at the full schematic below, we can see that optical isolation divides the control lines from the rest of the H-Bridge circuit:</p><figure id="64e16734-51da-41a3-beaa-e98307c12997" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%203.png"><img style="width:2496px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%203.png"/></a></figure><p id="0c18af26-a6a3-4595-94e4-e21985dd5bbb" class="">But why would we need some sort of isolation, and how does it work? To answer the first question, I need to zoom out briefly.</p><p id="cdb3459f-3085-4969-82e9-915dacfd3d68" class="">
+</p><p id="acecc5c2-fba1-4609-8193-2498c29f1740" class="">Consider the high-level drawing of the microcontroller and H-Bridge, powered by the same battery — this means that they <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>share grounds. </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>The microcontroller writes to CONTROL_A and CONTROL_B on the H-Bridge to change the direction of the motor.</p><figure id="0ff12efb-d305-4b14-927f-0a344b4552bf" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%207.png"><img style="width:1339px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%207.png"/></a></figure><p id="8428ee23-48e3-42d7-a71d-fa78d6653863" class="">
+</p><p id="02c76f2f-8e33-4362-9be6-fbdd7f70c235" class="">Now, suppose we want the motor to spin in some direction — say CONTROL_A is off and CONTROL_B is on. The microcontroller, programmed with such instructions, has an internal MOSFET which pulls the CONTROL_A down to ground (line is now black):</p><figure id="e084d5ce-8c83-4c9c-b624-7adddd6b5a19" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%208.png"><img style="width:1356px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%208.png"/></a></figure><p id="7538d34c-d551-40f4-aacd-f127b2fb41d3" class="">Let’s quickly zoom into the H-Bridge and see what is going on. The motor is spinning, meaning high current flows from the power rail, down through one high-side MOSFET, through the motor, and down through one low-side MOSFET, and down to ground (the triangular GND marker):</p><figure id="8462c085-b56c-4afe-be39-e95235af4260" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Ground_Loops_(1).png"><img style="width:960px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Ground_Loops_(1).png"/></a></figure><p id="12d384e3-445a-4caa-8e40-c08d427d5f2f" class="">But, where <em><em><em><em><em><em>is </em></em></em></em></em></em>ground? Well, it’s all the way back at the battery — so this high current needs some path back to it. It has two possible paths:</p><figure id="4d990e4a-ef26-42f8-8947-ec4cdc7fb5e1" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%209.png"><img style="width:1388px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%209.png"/></a></figure><p id="a1344eb1-0ac6-44fc-9b8a-bf1fcaecb709" class="">The most straightforward is that the high current goes from the H-Bridge board, to the ground line which connects it to the battery (green path). However, there’s nothing stopping this current from going <strong><strong><strong><strong><strong><strong><strong><strong>through </strong></strong></strong></strong></strong></strong></strong></strong>the CONTROL_A line (which is essentially a ground line), and down to battery through the microcontroller’s ground line (orange path).</p><p id="c8c1be82-da6b-4645-9798-9694e1fcbe61" class="">
+</p><p id="00f48cb5-e36e-46ba-bba3-2eba5d295a20" class="">The reason the orange path exists is through something called a <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>ground-loop</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>, and would also occur if CONTROL_A was on and CONTROL_B was off. Now, the microcontroller used in ENPH 253, the STM32 Bluepill (BP), is a very noise-sensitive device. If large current spikes or noise make their way to the ground (GND), the BP can often crash or restart abruptly. With such an existing ground loop, high motor current taking the orange path to ground passes the sensitive Bluepill, leaving it susceptible to erratic behavior, and could even damage it. Moreover, regardless of ground loops, motor grounds also tend to be noisy <em><em><em><em><em><em><em>anyways</em></em></em></em></em></em></em>, and so it is ideal if we can keep it away from the Bluepill.</p><p id="31a15549-18d2-4c77-ab3c-2ea2c93237a3" class="">
+</p><p id="9531f961-b6bd-4a4c-b4fb-6697d6535e97" class="">Now that I have clarified the <em><em><em>why</em></em></em>, we can get into the <em><em><em>how</em></em></em>. We need some way to isolate these grounds and get rid of the orange path — this can easily be done with two batteries:</p><figure id="4e4a58ce-c897-48bd-967f-2ec6148ab663" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%2010.png"><img style="width:1336px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%2010.png"/></a></figure><p id="2ff286c7-bbe4-41d5-ad28-352c3ffad6e0" class="">Now there are two grounds, colored by grey and black, and we can see that there is no more ground loop! However, there is a new issue: When the microcontroller tries to turn say, CONTROL_A on, it will raise the line to 3.3V <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>referenced to BATTERY 1’s ground </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>(gray). To the H-Bridge, which is <strong><strong><strong><strong><strong>referenced to BATTERY 2’s ground </strong></strong></strong></strong></strong>(black), this 3.3V relative to ground 1 will not be 3.3V relative to ground 2. In other words, the H-Bridge has no idea what the microcontroller is trying to instruct because they are referenced differently.</p><p id="1790141c-0fe1-40a6-8860-e60ced1159e1" class="">
+</p><p id="f4e3072e-720f-402a-b9c7-62c08105a5f2" class="">Fortunately, this new referencing issue is easier to solve than the ground loop problem — the solution is to introduce something called an <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>optocoupler</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>.</p><p id="457c791c-13fa-4fd5-affe-d5fc0feaf6bd" class="">
+</p><p id="a650a3f5-c897-4e0f-a6a0-c6619abd3de3" class="">An optocoupler is a LED + phototransistor pair, neatly fit into an IC package:</p><figure id="9a0dc46c-df20-49d5-b9be-07f2ae780895" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%2011.png"><img style="width:965px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/Untitled%2011.png"/></a></figure><p id="a06c04b3-e2ba-49d4-954b-2fdf2db56d37" class="">The LED’s inside these optocouplers emit IR, so don’t except cutting one open and seeing bright lights inside. </p><p id="c600e5b1-5178-49c0-9ed7-3d48c554d7cf" class="">With an optocoupler, the more current you pass through the IR LED, the more IR light is emitted, which means more IR light is absorbed by the phototransistor, and more current can pass through the phototransistor. Overall, this device couples currents by IR light without any electrical contact, which is why it is a method of <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>optical isolation</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>. Now, let’s look at how it is added to the H-Bridge circuit:</p><p id="cfb07f80-10ae-4631-a5e2-51c35b4da191" class="">We have one optocoupler LED per control pin, and the corresponding phototransistor’s emitter connected to each LT1161 input, with a 1 kilo-ohm pull-down resistor to the <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>motor ground</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>. The collector of the phototransistor is connected to the motor driver power supply (12V):</p><figure id="6c1cf180-fe1f-40bd-9dd6-c9512c6bae6b" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/isolation_(2).png"><img style="width:960px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/isolation_(2).png"/></a></figure><p id="36cc5983-16c9-4da2-a734-753111f30640" class="">The “off” case is quite simple — suppose Line 2 on MOTOR2 CONROL is off. Then, the bottom LED is off, no IR light is emitted, and so no current flows through the phototransistor. The emitter is now floating, but with the pull-down resistor to ground (R1), INPUT4 is grounded. Notice that it is grounded to the <strong><strong><strong><strong><strong><strong>motor’s ground</strong></strong></strong></strong></strong></strong>, <em>not </em>the microcontroller ground, and so the gate driver will read “off”.</p><p id="26d41bdf-34bf-40f2-b764-31a4b186d6a4" class="">
+</p><p id="e7e07bf0-489c-462a-81fa-30e9dcc2ddc8" class="">The “on” case is pretty simple too — suppose Line 2 on MOTOR CONTROL is on (3.3V, with respect to the BLUEPILL GND). Then, current flows through the LED as indicated by the pink path:</p><figure id="ef2bccdb-be22-42db-999b-ae3717ad2a61" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/isolation_(3).png"><img style="width:960px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/isolation_(3).png"/></a></figure><p id="23049b71-f128-4aa4-8043-038f01bf3dd0" class="">Every optocoupler (we use the <a href="https://www.vishay.com/docs/83645/mct6.pdf">MCT6</a>) has a specified <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>current transfer ratio (CTR)</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>, which is the ratio between LED current and phototransistor current. Say that the current through the LED is 20 mA.  If the CTR is 50%, then 10 mA will flow through the phototransistor, and down through R1 to the motor ground (blue path). With 10 mA across the 1 kilo-ohm resistor, we know that 10V will be present on the INPUT4 line, and so the gate driver will read “on”.</p><p id="c00e3497-ec61-4e0d-b021-f2970b95e547" class="">
+</p><p id="ceef67b3-980d-4551-83dc-0246b2eaacc7" class="">10V is a lot different than the 3.3V output given by the microcontroller, but these are both above the “on” threshold for the gate driver, so they have the same effect.</p><hr id="aa5e61b8-43b6-4ee1-a1cb-129c6b66feac"/><p id="8ab9c889-75f0-4c72-8299-20615df089f9" class="">
+</p><p id="bfaca9c0-7ac5-4685-8bcb-f86aac062141" class="">Finally, we have arrived at the final dual motor driver schematic shown originally. I hope this guide helped simplify the H-Bridge and best of luck to any future ENPH 253 students!</p><figure id="14f315de-c80c-4e0f-8257-49dd57288287" class="image"><a href="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/dual-hbridge.png"><img style="width:2279px" src="H-Bridge%20Step-Through%20df675d37dee14008bf13e249fd644571/dual-hbridge.png"/></a></figure><p id="fa25902b-c288-42ce-b54a-1e1136affed5" class="">
+</p><p id="97b9c50e-f28a-4c36-9d2e-00067fc69e73" class="">
+</p><p id="dc8b9e4a-fc7e-4835-8b02-8420d0e0001c" class="">
+</p><p id="a4c2f641-771f-4ef0-8ba0-741b471b4523" class="">
+</p><p id="e616c4e5-7280-40dc-b9a8-6e8fb6f2eaa1" class="">
+</p><p id="1c2d3c44-40e6-4baf-99d5-b1e243de7189" class="">
+</p></div></article></body></html>
