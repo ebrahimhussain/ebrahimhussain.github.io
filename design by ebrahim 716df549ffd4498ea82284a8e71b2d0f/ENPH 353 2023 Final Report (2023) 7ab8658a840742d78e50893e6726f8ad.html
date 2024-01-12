@@ -1,0 +1,683 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ENPH 353 2023 Final Report (2023)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7ab8658a-8407-42d7-8e50-893e6726f8ad" class="page sans"><header><h1 class="page-title">ENPH 353 2023 Final Report (2023)</h1><a href="../index.html"><p id="ee44fa6d-f9ee-49d8-8782-1f4550ba95dc" class="block-color-pink"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>&lt;&lt; click to return to front page</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p></a><a href="../main.html"><p id="ee44fa6d-f9ee-49d8-8782-1f4550ba95dd" class="block-color-blue"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>&lt;&lt; click to return to content page</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></p></a><p class="page-description"></p></header><div class="page-body"><p id="b66db181-6c90-41e4-a8f2-a39b1238bb9f" class="block-color-yellow_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>Project Photos:</mtext></mrow><annotation encoding="application/x-tex">\text{Project Photos:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Project Photos:</span></span></span></span></span></span><span>﻿</span></span> </p><hr id="0de5efcf-c410-42b2-b532-f3eb40e9a94f"/><figure id="d4c3a305-5698-4d27-b5a1-eac9f0d76e55" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/Untitled.png"><img style="width:2533px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/Untitled.png"/></a></figure><hr id="4123c316-f30f-469e-8a4f-b34d26a24d3c"/><figure id="d37ba5ba-4c69-477d-98b3-60c1ccd6f1a5" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/Untitled%201.png"><img style="width:2555px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/Untitled%201.png"/></a></figure><hr id="00bac5f8-8e3c-4efb-839f-f703845e94a0"/><p id="2c4d0099-88a7-4e28-95ad-b6d0f60139d3" class="block-color-yellow_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>Practicing:</mtext></mrow><annotation encoding="application/x-tex">\text{Practicing:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Practicing:</span></span></span></span></span></span><span>﻿</span></span> </p><ol type="1" id="6c64a97f-be7f-446a-bfb4-50ec932c0f1f" class="numbered-list" start="1"><li>Project Management + Advanced Problem Solving</li></ol><ol type="1" id="af727e4a-cbc6-4228-8e80-09d5177b5581" class="numbered-list" start="2"><li>ROS (Robot Operating System) + Gazebo Simulation </li></ol><ol type="1" id="ab69abc1-a3fe-4093-ab69-644af8e3473c" class="numbered-list" start="3"><li>Data Classification and Dataset Generation (Python)</li></ol><ol type="1" id="814fba15-91bf-4e2c-91cd-0511abcc87fc" class="numbered-list" start="4"><li>Machine Learning (Deep Learning, Convolutional Neural Networks) with Keras</li></ol><p id="f6d22cf0-dcbe-431e-b8a5-acab09a1a745" class="">
+</p><p id="46c16853-5f9d-42f7-96e2-24d9eccfbfca" class="block-color-yellow_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>Project:</mtext></mrow><annotation encoding="application/x-tex">\text{Project:}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">Project:</span></span></span></span></span></span><span>﻿</span></span> </p><hr id="8b76144c-6f0f-43b8-828a-c92f184dfccd"/><div id="d1143707-6e9a-4012-95d2-080ceba146ed" class="column-list"><div id="06134486-5551-43d7-a5f3-18f2375d69e9" style="width:50%" class="column"><p id="140356b5-f045-48bd-b0ae-e051eada9872" class=""><a href="https://projectlab.engphys.ubc.ca/enph-353/">ENPH 353</a> is Engineering Physics’ second project course + competition, focused on practicing some recent techniques in machine learning and data classification. In this year’s competition, our task was to control a robot (using ROS/<code>rospy</code>) within the Gazebo simulation environment. </p><p id="324a9267-d99d-4baa-821c-4b538f26c1e9" class="">
+</p><p id="9522c4cc-f584-40f2-ba1f-764f3f21c41d" class="">Using only information from the incoming camera feed, the robot had to <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>autonomously</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong> drive within course limits, read the blue signs around the track, and avoid all moving obstacles.</p><p id="8780260c-ad70-415b-b9eb-75d05568de01" class="">
+</p><p id="07361d0a-29fe-4376-864a-df7895cdd1ac" class="">A video of our robot was graciously posted by the UBC Engineering Physics <a href="https://twitter.com/UBCEngPhys/status/1735206605472350400">Twitter</a> (right). In the competition, we obtained maximum points and came <strong><strong><strong><strong>3rd </strong></strong></strong></strong>overall due to time.<figure id="d4c3a305-5698-4d27-b5a1-eac9f0d76e55" class="image"><a href="../images/353run.gif"><img style="width:2533px" src="../images/353run.gif"/></a></figure></p><p id="6a17eb69-2663-451f-95db-a77347902630" class="">
+</p></div><div id="2270a8e9-a906-43a0-9615-4792a260c3c2" style="width:50%" class="column"><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Team 13: &quot;SIGMATRON pogus wagon&quot;, graciously provided a clip from their ENPH 353 final exam - a competition built using <a href="https://twitter.com/OpenRoboticsOrg?ref_src=twsrc%5Etfw">@OpenRoboticsOrg</a>&#39;s ROS/Gazebo with a lot of help from <a href="https://twitter.com/Blender?ref_src=twsrc%5Etfw">@Blender</a>&#39;s assets. This term we added <a href="https://twitter.com/OpenAI?ref_src=twsrc%5Etfw">@OpenAI</a>&#39;s <a href="https://twitter.com/hashtag/ChatGPT?src=hash&amp;ref_src=twsrc%5Etfw">#ChatGPT</a> for more fun. What can we do for next term? <a href="https://t.co/D1R05AsRsB">pic.twitter.com/D1R05AsRsB</a></p>&mdash; UBC Engineering Physics (@UBCEngPhys) <a href="https://twitter.com/UBCEngPhys/status/1735206605472350400?ref_src=twsrc%5Etfw">December 14, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div></div><p id="ef3c6cdf-cecd-43f1-a664-ecb23c197a2b" class="">In the course, I:</p><ol type="1" id="e97439df-fefd-4456-8bc0-05f19d9fe7a9" class="numbered-list" start="1"><li>Learned how to use ROS and Gazebo<ol type="a" id="ca8bea55-4169-43b3-8af8-e5066f5be669" class="numbered-list" start="1"><li>configured <code>.urdf</code> (unified robot descriptor format) to</li></ol></li></ol><ol type="1" id="766930b9-0a18-4d24-a129-d696c5a3b92b" class="numbered-list" start="2"><li>Built a simple neural network from scratch, trained with gradient descent.</li></ol><ol type="1" id="5d692772-db37-47fa-8f4c-3d1d97e1b3d6" class="numbered-list" start="3"><li>Assembled a character dataset and trained a CNN to recognize license plate characters</li></ol><ol type="1" id="34ec114e-4eaa-4d91-9753-d1830f21c982" class="numbered-list" start="4"><li>Taught a robot how to follow a line with Q-Learning (reinforcement learning)</li></ol><ol type="1" id="977f1f6f-fafb-44ba-ab09-3e37fbf6809c" class="numbered-list" start="5"><li>Taught a cart how to balance a pole with Deep Q-Learning</li></ol><p id="d56678fc-af1e-40e1-ac6a-65f9e9e32f3c" class="">
+</p><p id="142e23a4-b8aa-4282-86e0-9187dca7d958" class="">Then, for the competition, my partner <a href="https://www.linkedin.com/in/howard-ubceng26/">Howard</a> and I:</p><ol type="1" id="ecbf1227-72e1-4257-ac34-98d490dab7ff" class="numbered-list" start="1"><li>Implemented specific masking and filtering algorithms to obtain road lines from a variety of terrain.</li></ol><ol type="1" id="fafc22f5-a412-4182-a149-d391a2f8b039" class="numbered-list" start="2"><li>Added motion and object detection to understand recognize when it is safe for the robot to cross the road</li></ol><ol type="1" id="ed5c3df4-d8ad-498d-a208-5c0dd8211086" class="numbered-list" start="3"><li>Created a network of ROS nodes to read incoming camera data, track robot state, run CNN inference, and publish to a score tracker.</li></ol><ol type="1" id="3f93a6bd-c3d2-40ef-be7f-2f863478279d" class="numbered-list" start="4"><li>Generated thousands of character samples with a high degree of augmentation to train a robust letter-recognition CNN</li></ol><ol type="1" id="1d9ccdfb-89ae-4edc-be7c-dd7b3234264d" class="numbered-list" start="5"><li>Utilized homography and perspective transforms to obtain sign photos for inference.</li></ol><ol type="1" id="8ff7a093-45d8-4c83-8768-9b8fe85d63a1" class="numbered-list" start="6"><li>Built a debugging GUI in PyQt5 to view all robot sign captures, different camera frames, etc.</li></ol><p id="88792f39-fbc5-4ce9-b473-cde9fab9c91b" class="">
+</p><p id="20451338-ca51-4301-9511-45c457141dff" class="">Here is our final report we submitted that outlines our design and architecture in detail:</p><figure id="29e53312-febf-45c7-9900-d57a36a5329c" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0001.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0001.jpg"/></a></figure><hr id="eac9678c-e447-41d8-b314-f22a616f44e0"/><figure id="55087948-570f-45ac-ab41-7f13d9d6f8a7" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0002.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0002.jpg"/></a></figure><hr id="c475f3d4-0c27-43bb-bd81-03088204aa67"/><figure id="d49e203a-9f7f-40ac-92c4-f7c918ef2242" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0003.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0003.jpg"/></a></figure><hr id="3d37587b-da4a-4630-9a60-7f87d0e8d23b"/><figure id="77c8228c-8244-484e-972e-28a69192b848" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0004.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0004.jpg"/></a></figure><hr id="c3f43c47-b84c-40f4-b9f2-521b977a2cfe"/><figure id="03563c6b-40c6-477a-bcf0-30bac5b631ec" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0005.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0005.jpg"/></a></figure><hr id="54a4b00a-cbb6-44db-be1f-5b3f19257377"/><figure id="9037d7b6-9f76-44e5-80a6-7e2a45f4e833" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0006.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0006.jpg"/></a></figure><hr id="a7ff9732-ed11-48ae-a60d-92d7b0fb70b2"/><figure id="751a02c2-d6da-41f2-bf91-c52bdf836349" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0007.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0007.jpg"/></a></figure><hr id="004897e4-cfbf-4173-a81b-b817e6dd3e1a"/><figure id="0aad981a-5d63-489e-b058-e021c9b229c6" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0008.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0008.jpg"/></a></figure><hr id="c45f11dc-d262-478e-9f96-0c1da20ee53f"/><figure id="254048b5-cae6-4f79-bb7d-384d84cc6bbf" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0009.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0009.jpg"/></a></figure><hr id="56b2811a-60ef-441b-a043-6b3e7dabc0d7"/><figure id="3e9b4463-41ba-44ca-ad88-c5901ca9f388" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0010.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0010.jpg"/></a></figure><hr id="22f93888-2b58-4245-878f-1296f6421d60"/><figure id="36d305b3-3ae2-44bb-96ab-076da3d4fd3a" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0011.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0011.jpg"/></a></figure><hr id="78bc6284-33f7-4023-b2da-7bdee30313a3"/><figure id="f5f632e7-df56-4090-8867-0d65262cb0bc" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0012.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0012.jpg"/></a></figure><hr id="26db7eaa-a0ac-4d4e-b4f7-e810528440a8"/><figure id="33ac8963-6dec-4074-9e3c-5242bd968f42" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0013.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0013.jpg"/></a></figure><hr id="36daaffb-8a3d-4b29-8ce7-939412fd8fe4"/><figure id="04fd31b3-9017-4a32-8ff1-480741cc14c4" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0014.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0014.jpg"/></a></figure><hr id="7bcad536-b91a-4dc1-8685-e1be264a0fb0"/><figure id="fbe32274-ef67-4d6b-a406-4863161e2b9e" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0015.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0015.jpg"/></a></figure><hr id="62b52b31-a31c-4823-a084-7ed2b450915a"/><figure id="6da6cbff-272d-4b14-a47a-07ac19d2c0ff" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0016.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0016.jpg"/></a></figure><hr id="49db0949-96d7-4523-91d1-81eab3658fff"/><figure id="618f6915-71d6-478d-b1d1-b72f2ed59693" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0017.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0017.jpg"/></a></figure><hr id="162bdebf-1036-46cf-aacd-0612ad85fa80"/><figure id="fd4cd347-a2f2-4a17-95fb-2148183953cb" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0018.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0018.jpg"/></a></figure><hr id="952ba764-db05-439a-9bbf-f3db7c0783c6"/><figure id="3aaf14e8-bae0-431c-80fa-dee81baf8681" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0019.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0019.jpg"/></a></figure><hr id="2eefb2b4-7996-4191-8630-0f64b1caf3bf"/><figure id="1bc715a5-7b96-48be-b87f-b8a01567e2ec" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0020.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0020.jpg"/></a></figure><hr id="ca3d08b2-69c1-484a-a573-be373ded7069"/><figure id="335937d0-334e-4c6e-99f8-f78e8edd1e81" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0021.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0021.jpg"/></a></figure><hr id="a47b7a7d-8a2e-4434-a1a1-1b70b09cee6f"/><figure id="54d2b45e-7b91-4894-928f-0100fee19be5" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0022.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0022.jpg"/></a></figure><hr id="8921b355-8f29-455d-8b8a-4d72a02ba2bd"/><figure id="3f39abc8-e66a-4909-877f-90654599ec62" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0023.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0023.jpg"/></a></figure><hr id="0d41bb31-5994-4735-b4fc-a8c9b9937f4f"/><figure id="444a2f28-a01c-43bb-a3b6-a628655fa909" class="image"><a href="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0024.jpg"><img style="width:2550px" src="ENPH%20353%202023%20Final%20Report%20(2023)%207ab8658a840742d78e50893e6726f8ad/0024.jpg"/></a></figure><p id="356f60cf-1f31-4874-b838-2c4c2d159907" class="">
+</p><p id="e5fce0f3-7c42-4488-87a3-cdf3bb556a81" class="">Best,</p><p id="c3293c5c-8689-4af8-8c54-b569f8b7af7d" class="">Ebrahim</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
