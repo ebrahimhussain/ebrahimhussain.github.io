@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3cf84a1-5f79-47a8-95b4-61195ff4d9c3" name="Changes" comment="353 added">
+    <list default="true" id="b3cf84a1-5f79-47a8-95b4-61195ff4d9c3" name="Changes" comment="fixed slide-track2 push">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +54,11 @@
       <workItem from="1695169767972" duration="99000" />
       <workItem from="1695881709074" duration="31000" />
       <workItem from="1705018616715" duration="9738000" />
+      <workItem from="1705290504089" duration="703000" />
+      <workItem from="1705537619616" duration="17000" />
+      <workItem from="1705788272939" duration="13000" />
+      <workItem from="1708562578065" duration="319000" />
+      <workItem from="1708850847040" duration="291000" />
     </task>
     <task id="LOCAL-00001" summary="added first push">
       <created>1695031779489</created>
@@ -117,7 +123,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705040768625</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fixed slide-track2 push">
+      <created>1705290608346</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1705290608346</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,6 +152,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="untabbed slider" />
     <MESSAGE value="353 added" />
-    <option name="LAST_COMMIT_MESSAGE" value="353 added" />
+    <MESSAGE value="fixed slide-track2 push" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed slide-track2 push" />
   </component>
 </project>
