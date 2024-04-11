@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3cf84a1-5f79-47a8-95b4-61195ff4d9c3" name="Changes" comment="fixed slide-track2 push">
+    <list default="true" id="b3cf84a1-5f79-47a8-95b4-61195ff4d9c3" name="Changes" comment="ADC photo added">
+      <change afterPath="$PROJECT_DIR$/images/title.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vanilla-tilt.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/main.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -29,11 +41,13 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/Users/ehussain/Desktop/webexports/build6",
+    "list.type.of.created.stylesheet": "CSS",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ehussain\Desktop\webexports\build6\images" />
       <recent name="C:\Users\ehussain\Desktop\webexports\build6\design by ebrahim 716df549ffd4498ea82284a8e71b2d0f" />
     </key>
   </component>
@@ -58,7 +72,11 @@
       <workItem from="1705537619616" duration="17000" />
       <workItem from="1705788272939" duration="13000" />
       <workItem from="1708562578065" duration="319000" />
-      <workItem from="1708850847040" duration="291000" />
+      <workItem from="1708850847040" duration="1071000" />
+      <workItem from="1709069227133" duration="211000" />
+      <workItem from="1709426217187" duration="22000" />
+      <workItem from="1709426403836" duration="6522000" />
+      <workItem from="1712862087492" duration="1498000" />
     </task>
     <task id="LOCAL-00001" summary="added first push">
       <created>1695031779489</created>
@@ -130,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705290608346</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="ADC photo added">
+      <created>1708851314586</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1708851314586</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,6 +178,7 @@
     <MESSAGE value="untabbed slider" />
     <MESSAGE value="353 added" />
     <MESSAGE value="fixed slide-track2 push" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed slide-track2 push" />
+    <MESSAGE value="ADC photo added" />
+    <option name="LAST_COMMIT_MESSAGE" value="ADC photo added" />
   </component>
 </project>
