@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3cf84a1-5f79-47a8-95b4-61195ff4d9c3" name="Changes" comment="ADC photo added">
-      <change afterPath="$PROJECT_DIR$/images/title.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vanilla-tilt.min.js" afterDir="false" />
+    <list default="true" id="b3cf84a1-5f79-47a8-95b4-61195ff4d9c3" name="Changes" comment="first version of title page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/main.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +71,7 @@
       <workItem from="1709069227133" duration="211000" />
       <workItem from="1709426217187" duration="22000" />
       <workItem from="1709426403836" duration="6522000" />
-      <workItem from="1712862087492" duration="1498000" />
+      <workItem from="1712862087492" duration="2542000" />
     </task>
     <task id="LOCAL-00001" summary="added first push">
       <created>1695031779489</created>
@@ -155,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708851314586</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="first version of title page">
+      <created>1712864039706</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1712864039706</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,6 +181,7 @@
     <MESSAGE value="353 added" />
     <MESSAGE value="fixed slide-track2 push" />
     <MESSAGE value="ADC photo added" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADC photo added" />
+    <MESSAGE value="first version of title page" />
+    <option name="LAST_COMMIT_MESSAGE" value="first version of title page" />
   </component>
 </project>
