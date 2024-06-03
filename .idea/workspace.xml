@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3cf84a1-5f79-47a8-95b4-61195ff4d9c3" name="Changes" comment="title page loop fixed">
+    <list default="true" id="b3cf84a1-5f79-47a8-95b4-61195ff4d9c3" name="Changes" comment="title pge size fized GOATED">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +35,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/ehussain/Desktop/webexports/build6/images",
+    "last_opened_file_path": "C:/Users/ehussain/Desktop/UBC/Python/grades",
     "list.type.of.created.stylesheet": "CSS",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
@@ -74,7 +74,8 @@
       <workItem from="1709069227133" duration="211000" />
       <workItem from="1709426217187" duration="22000" />
       <workItem from="1709426403836" duration="6522000" />
-      <workItem from="1712862087492" duration="3823000" />
+      <workItem from="1712862087492" duration="4666000" />
+      <workItem from="1713342959912" duration="28000" />
     </task>
     <task id="LOCAL-00001" summary="added first push">
       <created>1695031779489</created>
@@ -167,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1712864706086</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="title pge size fized GOATED">
+      <created>1712876942691</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1712876942691</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,6 +201,7 @@
     <MESSAGE value="ADC photo added" />
     <MESSAGE value="first version of title page" />
     <MESSAGE value="title page loop fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="title page loop fixed" />
+    <MESSAGE value="title pge size fized GOATED" />
+    <option name="LAST_COMMIT_MESSAGE" value="title pge size fized GOATED" />
   </component>
 </project>
