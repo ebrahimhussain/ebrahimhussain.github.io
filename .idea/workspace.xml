@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b3cf84a1-5f79-47a8-95b4-61195ff4d9c3" name="Changes" comment="title pge size fized GOATED">
+      <change afterPath="$PROJECT_DIR$/images/resume_img.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +37,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/ehussain/Desktop/UBC/Python/grades",
+    "last_opened_file_path": "C:/Users/ehussain/Desktop/webexports/build6/images",
     "list.type.of.created.stylesheet": "CSS",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
@@ -76,6 +78,7 @@
       <workItem from="1709426403836" duration="6522000" />
       <workItem from="1712862087492" duration="4666000" />
       <workItem from="1713342959912" duration="28000" />
+      <workItem from="1717809887309" duration="2111000" />
     </task>
     <task id="LOCAL-00001" summary="added first push">
       <created>1695031779489</created>
