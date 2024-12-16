@@ -18,24 +18,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "ebrahimhussain"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;ebrahimhussain&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:ebrahimhussain/ebrahimhussain.github.io.git",
-    "accountId": "c46e4b11-bf7d-4372-b3dc-b634f1d1c65e"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:ebrahimhussain/ebrahimhussain.github.io.git&quot;,
+    &quot;accountId&quot;: &quot;c46e4b11-bf7d-4372-b3dc-b634f1d1c65e&quot;
   }
-}]]></component>
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2VZ60KUt6ptpNhJeY2KVN1h8rat" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -49,7 +49,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "/home/ehussain/ebrahimhussain.github.io",
+    "last_opened_file_path": "/home/ehussain/irix/ixutil",
     "list.type.of.created.stylesheet": "CSS",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
@@ -110,6 +110,7 @@
       <workItem from="1729402703459" duration="230000" />
       <workItem from="1729502077082" duration="47000" />
       <workItem from="1732917671623" duration="100000" />
+      <workItem from="1733258280743" duration="30000" />
     </task>
     <task id="LOCAL-00001" summary="added first push">
       <created>1695031779489</created>
